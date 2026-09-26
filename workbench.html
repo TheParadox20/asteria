@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Originals Workbench</title>
+    <!-- moves to style.css with the section -->
+    <style>
+      @keyframes progress-fill {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+    </style>
+  </head>
+  <body class="text-white">
+    <main class="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 lg:px-10">
+      <!-- Asteria originals + creator spotlight
+           < lg : everything stacked
+             lg : featured + spotlight list side by side, creator full width below
+             xl : three columns, creator on the right -->
+      <section
+        id="originals"
+        aria-labelledby="originals-heading"
+        class="grid gap-5 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,1.05fr)]"
+      >
+        <!-- header -->
+        <header class="flex flex-wrap items-end justify-between gap-4 lg:col-span-2">
+          <div class="flex items-start gap-3 sm:gap-4">
+            <span class="mt-1 icon-[ph--sparkle-fill] size-7 shrink-0 text-gold sm:size-9"></span>
+            <div>
+              <h2 id="originals-heading" class="font-display text-3xl sm:text-4xl">Asteria Originals</h2>
+              <p class="mt-1 text-sm text-gold/90">Original stories. Fresh voices. Infinite worlds.</p>
+            </div>
+          </div>
+          <a href="#" class="inline-flex items-center gap-1 text-xs font-semibold text-gold transition hover:text-gold/70">
+            View All Originals
+            <span class="icon-[basil--arrow-right-outline] size-5"></span>
+          </a>
+        </header>
+
+        <!-- featured original: content swapped from `originals` in the script -->
+        <article
+          data-featured
+          aria-roledescription="carousel"
+          aria-label="Featured original"
+          class="@container relative isolate flex flex-col overflow-hidden rounded-2xl border border-gold/30 bg-panel p-4 sm:p-5 lg:row-start-2"
+        >
+          <!-- blurred cover as a soft backdrop, like the leaves in the mockup -->
+          <img data-backdrop alt="" class="absolute inset-0 -z-10 size-full scale-110 object-cover opacity-20 blur-2xl" />
+          <div class="absolute inset-0 -z-10 bg-linear-to-r from-panel via-panel/85 to-panel/50"></div>
+
+          <div
+            data-swap
+            aria-live="polite"
+            class="grid flex-1 gap-5 transition-opacity duration-200 @[28rem]:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] @[28rem]:gap-7"
+          >
+            <img
+              data-cover
+              alt=""
+              class="aspect-[4/3] w-full rounded-xl object-cover object-top @[28rem]:aspect-auto @[28rem]:h-full @[28rem]:min-h-80"
+            />
+
+            <div class="flex flex-col justify-center">
+              <p class="w-fit rounded-md border border-gold/50 px-2 py-1 text-[0.625rem] font-bold tracking-wider text-gold uppercase">
+                Asteria Originals
+              </p>
+              <h3 data-title class="mt-4 font-display text-4xl leading-[1.05] @md:text-5xl"></h3>
+              <p data-tagline class="mt-4 max-w-xs text-sm leading-relaxed text-gold/75"></p>
+              <ul data-genres aria-label="Genres" class="mt-5 flex flex-wrap gap-2"></ul>
+
+              <a data-author-link href="#" class="mt-5 flex w-fit items-center gap-2 text-xs text-muted transition hover:text-gold">
+                <img data-avatar alt="" class="size-7 rounded-full object-cover object-top ring-1 ring-gold/40" />
+                <span>By <span data-author></span></span>
+                <span class="icon-[basil--arrow-right-outline] size-4"></span>
+              </a>
+
+              <div class="mt-6 flex items-center gap-3">
+                <a
+                  data-read
+                  href="#"
+                  class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-6 py-3 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110"
+                >
+                  <span class="mr-2 icon-[at-icons--play] size-5"></span>
+                  <span>Read Now</span>
+                </a>
+                <button
+                  type="button"
+                  aria-label="Bookmark"
+                  class="flex size-11 shrink-0 items-center justify-center rounded-lg border border-gold/50 text-gold transition hover:bg-gold/10"
+                >
+                  <span class="icon-[basil--bookmark-outline] size-5"></span>
+                </button>
+                <button
+                  type="button"
+                  aria-label="Add to library"
+                  class="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/40 transition hover:border-white hover:bg-white/10"
+                >
+                  <span class="icon-[codicon--add] size-5"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <footer class="mt-auto flex items-center gap-4 pt-5">
+            <p class="text-xs text-muted tabular-nums">
+              <span data-count class="text-white">01</span> / <span data-total></span>
+            </p>
+            <!-- one segment per original; the active one fills up and advances when done -->
+            <div data-progress aria-hidden="true" class="flex w-full max-w-40 gap-1.5"></div>
+            <div class="ml-auto flex gap-2">
+              <button
+                data-prev
+                type="button"
+                aria-label="Previous original"
+                class="flex size-9 items-center justify-center rounded-full border border-white/25 transition hover:border-gold hover:text-gold"
+              >
+                <span class="icon-[codicon--chevron-left] size-4"></span>
+              </button>
+              <button
+                data-next
+                type="button"
+                aria-label="Next original"
+                class="flex size-9 items-center justify-center rounded-full border border-white/25 transition hover:border-gold hover:text-gold"
+              >
+                <span class="icon-[codicon--chevron-right] size-4"></span>
+              </button>
+            </div>
+          </footer>
+        </article>
+
+        <!-- originals spotlight: picking one shows it in the featured card -->
+        <aside aria-labelledby="spotlight-heading" class="rounded-2xl border border-gold/30 bg-panel p-4 sm:p-5 lg:row-start-2">
+          <h3 id="spotlight-heading" class="flex items-center gap-2 font-display text-xl">
+            <span class="icon-[ph--sparkle-fill] size-5 text-gold"></span>
+            Originals Spotlight
+          </h3>
+          <ol data-spotlight class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1"></ol>
+        </aside>
+
+        <!-- creator spotlight -->
+        <article
+          aria-labelledby="creator-heading"
+          class="@container relative isolate overflow-hidden rounded-2xl border border-gold/30 bg-panel p-5 sm:p-6 lg:col-span-2 xl:col-span-1 xl:col-start-3 xl:row-start-2"
+        >
+          <img
+            src="/assets/tatsuki_fujimoto.png"
+            alt=""
+            class="absolute top-0 right-0 -z-10 h-[62%] w-[80%] object-cover object-[center_20%] mask-b-from-40% mask-l-from-55% @3xl:h-full @3xl:w-1/2"
+          />
+
+          <p class="flex items-center gap-2 text-[0.6rem] font-semibold tracking-[0.25em] text-gold uppercase">
+            <span class="icon-[ph--sparkle-fill] size-4"></span>
+            Creator Spotlight
+            <span class="h-px max-w-24 flex-1 bg-gold/40"></span>
+          </p>
+
+          <h3 id="creator-heading" class="mt-4 font-display text-3xl leading-tight font-bold @sm:text-4xl">Tatsuki Fujimoto</h3>
+          <p class="mt-2 text-sm">Mind-bending stories. <span class="text-gold">Unforgettable characters.</span></p>
+          <p class="mt-3 max-w-xs text-xs leading-relaxed text-muted">
+            Explore the works of Tatsuki Fujimoto — the visionary behind Chainsaw Man, Fire Punch and more. A creator who
+            turns chaos into something beautiful.
+          </p>
+
+          <dl class="mt-5 flex divide-x divide-white/15">
+            <div class="flex flex-col-reverse pr-4">
+              <dt class="text-[0.6rem] tracking-widest text-muted uppercase">Works</dt>
+              <dd class="font-display text-2xl font-bold">6</dd>
+            </div>
+            <div class="flex flex-col-reverse px-4">
+              <dt class="text-[0.6rem] tracking-widest text-muted uppercase">Followers</dt>
+              <dd class="font-display text-2xl font-bold">24.5K</dd>
+            </div>
+            <div class="flex flex-col-reverse pl-4">
+              <dt class="text-[0.6rem] tracking-widest text-muted uppercase">Avg Views</dt>
+              <dd class="font-display text-2xl font-bold">4.8</dd>
+            </div>
+          </dl>
+
+          <div class="mt-5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              class="inline-flex items-center gap-2 rounded-full border border-white/25 px-4 py-2 text-xs font-semibold transition hover:border-gold hover:text-gold"
+            >
+              <span class="icon-[basil--user-plus-outline] size-4"></span>
+              Follow Creator
+            </button>
+            <a
+              href="#"
+              class="inline-flex items-center gap-2 rounded-full border border-white/25 px-4 py-2 text-xs font-semibold transition hover:border-gold hover:text-gold"
+            >
+              View Portfolio
+              <span class="icon-[basil--arrow-right-outline] size-4"></span>
+            </a>
+          </div>
+
+          <!-- works: slanted manga panels cut with clip-path.
+               --panel is the shape; the gold "border" is the outer layer showing 1px around the inner one.
+               Cards overlap by 0.5rem so neighbouring slants nest into each other. -->
+          <ul
+            data-works
+            aria-label="Works by Tatsuki Fujimoto"
+            class="mt-6 flex snap-x snap-mandatory overflow-x-auto pt-1 pb-1 [--panel:polygon(8%_0,100%_0,92%_100%,0_100%)] [scrollbar-width:none] @xl:max-w-md [&::-webkit-scrollbar]:hidden"
+          >
+            <li class="-ml-2 shrink-0 basis-[46%] snap-start first:ml-0 @xs:basis-[calc((100%+1rem)/3)]">
+              <a href="#" class="group/work block h-full bg-gold/40 p-px transition duration-300 [clip-path:var(--panel)] hover:-translate-y-1 hover:bg-gold">
+                <div class="h-full bg-panel-soft [clip-path:var(--panel)]">
+                  <div class="overflow-hidden">
+                    <img src="/assets/chainsawman.png" alt="" class="aspect-square w-full object-cover transition duration-500 group-hover/work:scale-105" />
+                  </div>
+                  <div class="px-[11%] pt-2 pb-3">
+                    <p class="text-[0.7rem] leading-tight font-bold tracking-wide uppercase">Chainsaw Man</p>
+                    <ul aria-label="Genres" class="mt-1.5 flex flex-wrap gap-1">
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Action</li>
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Supernatural</li>
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Comedy</li>
+                    </ul>
+                    <p class="mt-2 flex items-center gap-1 text-[0.65rem] text-muted">
+                      <span class="icon-[basil--eye-outline] size-3.5"></span>125.4K
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="-ml-2 shrink-0 basis-[46%] snap-start first:ml-0 @xs:basis-[calc((100%+1rem)/3)]">
+              <a href="#" class="group/work block h-full bg-gold/40 p-px transition duration-300 [clip-path:var(--panel)] hover:-translate-y-1 hover:bg-gold">
+                <div class="h-full bg-panel-soft [clip-path:var(--panel)]">
+                  <div class="overflow-hidden">
+                    <img src="/assets/fire-punch.png" alt="" class="aspect-square w-full object-cover transition duration-500 group-hover/work:scale-105" />
+                  </div>
+                  <div class="px-[11%] pt-2 pb-3">
+                    <p class="text-[0.7rem] leading-tight font-bold tracking-wide uppercase">Fire Punch</p>
+                    <ul aria-label="Genres" class="mt-1.5 flex flex-wrap gap-1">
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Action</li>
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Drama</li>
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Supernatural</li>
+                    </ul>
+                    <p class="mt-2 flex items-center gap-1 text-[0.65rem] text-muted">
+                      <span class="icon-[basil--eye-outline] size-3.5"></span>98.7K
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="-ml-2 shrink-0 basis-[46%] snap-start first:ml-0 @xs:basis-[calc((100%+1rem)/3)]">
+              <a href="#" class="group/work block h-full bg-gold/40 p-px transition duration-300 [clip-path:var(--panel)] hover:-translate-y-1 hover:bg-gold">
+                <div class="h-full bg-panel-soft [clip-path:var(--panel)]">
+                  <div class="overflow-hidden">
+                    <img src="/assets/look-back-fixed.png" alt="" class="aspect-square w-full object-cover transition duration-500 group-hover/work:scale-105" />
+                  </div>
+                  <div class="px-[11%] pt-2 pb-3">
+                    <p class="text-[0.7rem] leading-tight font-bold tracking-wide uppercase">Look Back</p>
+                    <ul aria-label="Genres" class="mt-1.5 flex flex-wrap gap-1">
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Drama</li>
+                      <li class="rounded-full bg-white/10 px-1.5 py-0.5 text-[0.55rem] text-white/75">Slice of Life</li>
+                    </ul>
+                    <p class="mt-2 flex items-center gap-1 text-[0.65rem] text-muted">
+                      <span class="icon-[basil--eye-outline] size-3.5"></span>76.3K
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+
+          <!-- only shown when the works row overflows (phones / narrow cards) -->
+          <div data-works-controls class="mt-4 flex items-center">
+            <div data-works-dots aria-hidden="true" class="flex items-center gap-1.5"></div>
+            <button
+              data-works-next
+              type="button"
+              aria-label="Scroll works"
+              class="ml-auto flex size-9 items-center justify-center rounded-full border border-white/25 transition hover:border-gold hover:text-gold"
+            >
+              <span class="icon-[basil--arrow-right-outline] size-5"></span>
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- one row in the originals spotlight; cloned per entry in `originals` -->
+    <template id="spotlight-item">
+      <li>
+        <button
+          type="button"
+          class="group/item flex w-full items-center gap-3 rounded-xl border border-white/5 p-2 text-left transition hover:border-white/15 hover:bg-white/3 aria-[current=true]:border-gold/70 aria-[current=true]:bg-gold/5"
+        >
+          <img data-thumb alt="" class="aspect-[3/4] w-14 shrink-0 rounded-md object-cover" />
+          <span class="min-w-0">
+            <span class="mb-1 hidden w-fit rounded-md border border-gold/50 px-1.5 py-0.5 text-[0.55rem] font-bold tracking-wider text-gold uppercase group-aria-[current=true]/item:block">
+              Featured
+            </span>
+            <span data-title class="block truncate font-display text-base"></span>
+            <span data-genres class="mt-1.5 flex flex-wrap gap-1"></span>
+            <span data-meta class="mt-1.5 block text-[0.7rem] text-muted"></span>
+          </span>
+        </button>
+      </li>
+    </template>
+
+    <script type="module">
+      import '/src/style.css'
+
+      // Placeholder data: only the titles/genres/chapters come from the mockup.
+      const originals = [
+        {
+          title: 'The Last Bloom',
+          tagline: 'Some flowers only bloom once — and some stories are worth waiting for.',
+          genres: ['Romance', 'Fantasy', 'Drama'],
+          author: 'Mira Kade',
+          cover: '/assets/last-bloom-fixed.png',
+          chapter: 12,
+          updated: '2d ago',
+          href: '#',
+        },
+        {
+          title: 'Ashes of the Forgotten',
+          tagline: 'What the fire took, the shadows still remember.',
+          genres: ['Action', 'Mystery', 'Supernatural'],
+          author: 'Riven Hale',
+          cover: '/assets/ashes.png',
+          chapter: 8,
+          updated: '4d ago',
+          href: '#',
+        },
+        {
+          title: 'The Painter’s Daughter',
+          tagline: 'Every portrait hides a secret — hers most of all.',
+          genres: ['Slice of Life', 'Romance', 'Drama'],
+          author: 'Ines Moreau',
+          cover: '/assets/sono-bisque.png',
+          chapter: 15,
+          updated: '6d ago',
+          href: '#',
+        },
+        {
+          title: 'Between Two Suns',
+          tagline: 'Two worlds, one sky, and a choice nobody should have to make.',
+          genres: ['Fantasy', 'Adventure', 'Drama'],
+          author: 'Kaito Ren',
+          cover: '/assets/between-two-suns.png',
+          chapter: 9,
+          updated: '1w ago',
+          href: '#',
+        },
+      ]
+
+      const CHIP = 'rounded-full border border-white/20 px-3 py-1 text-[0.7rem] text-white/80'
+      const CHIP_SM = 'rounded-full border border-white/15 px-2 py-0.5 text-[0.6rem] text-white/70'
+      // the fill animation is the autoplay timer: when it ends, the next original shows
+      const PROGRESS_FILL =
+        'absolute inset-y-0 left-0 w-0 rounded-full bg-gold data-[state=done]:w-full data-[state=done]:bg-gold/40 data-[state=active]:animate-[progress-fill_7s_linear_forwards] motion-reduce:data-[state=active]:w-full motion-reduce:data-[state=active]:animate-none'
+
+      const $ = (parent, sel) => parent.querySelector(sel)
+      const pad = (n) => String(n).padStart(2, '0')
+      const chip = (tag, text, className) => {
+        const el = document.createElement(tag)
+        el.className = className
+        el.textContent = text
+        return el
+      }
+
+      // --- originals: featured card + spotlight list -------------------------
+      function initOriginals(root, itemTemplate, originals) {
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+        const featured = $(root, '[data-featured]')
+        const list = $(root, '[data-spotlight]')
+        const swap = $(featured, '[data-swap]')
+        const n = originals.length
+
+        originals.forEach((o) => (new Image().src = o.cover)) // no flash when swapping
+
+        const items = originals.map((o, i) => {
+          const li = itemTemplate.content.firstElementChild.cloneNode(true)
+          $(li, '[data-thumb]').src = o.cover
+          $(li, '[data-title]').textContent = o.title
+          $(li, '[data-meta]').textContent = `Ch. ${pad(o.chapter)} · ${o.updated}`
+          $(li, '[data-genres]').append(...o.genres.map((g) => chip('span', g, CHIP_SM)))
+          const button = $(li, 'button')
+          button.addEventListener('click', () => show(i))
+          list.append(li)
+          return button
+        })
+
+        const fills = originals.map(() => {
+          const segment = document.createElement('span')
+          segment.className = 'relative h-1 flex-1 overflow-hidden rounded-full bg-white/10'
+          const fill = document.createElement('span')
+          fill.className = PROGRESS_FILL
+          fill.addEventListener('animationend', () => show(current + 1))
+          segment.append(fill)
+          $(featured, '[data-progress]').append(segment)
+          return fill
+        })
+        $(featured, '[data-total]').textContent = pad(n)
+
+        function render(o) {
+          $(featured, '[data-backdrop]').src = o.cover
+          const cover = $(featured, '[data-cover]')
+          cover.src = o.cover
+          cover.alt = `${o.title} cover`
+          $(featured, '[data-title]').textContent = o.title
+          $(featured, '[data-tagline]').textContent = o.tagline
+          $(featured, '[data-genres]').replaceChildren(...o.genres.map((g) => chip('li', g, CHIP)))
+          $(featured, '[data-author]').textContent = o.author
+          $(featured, '[data-avatar]').src = o.cover // placeholder until authors have avatars
+          $(featured, '[data-read]').href = o.href
+        }
+
+        let current = -1
+        let swapTimer
+        function show(i) {
+          i = ((i % n) + n) % n
+          if (i === current) return
+          const first = current === -1
+          current = i
+
+          items.forEach((b, j) => b.setAttribute('aria-current', String(j === i)))
+          $(featured, '[data-count]').textContent = pad(i + 1)
+          fills.forEach((f, j) => (f.dataset.state = j < i ? 'done' : ''))
+          void fills[i].offsetWidth // restart the fill animation
+          fills[i].dataset.state = 'active'
+
+          clearTimeout(swapTimer)
+          if (first || reduceMotion) return render(originals[i])
+          swap.style.opacity = '0'
+          swapTimer = setTimeout(() => {
+            render(originals[i])
+            swap.style.opacity = ''
+          }, 200)
+        }
+
+        // autoplay pauses while hovered, focused or scrolled out of view
+        const pauses = new Set()
+        const setPaused = (reason, on) => {
+          on ? pauses.add(reason) : pauses.delete(reason)
+          fills.forEach((f) => (f.style.animationPlayState = pauses.size ? 'paused' : ''))
+        }
+        for (const el of [featured, list]) {
+          el.addEventListener('mouseenter', () => setPaused(el, true))
+          el.addEventListener('mouseleave', () => setPaused(el, false))
+        }
+        root.addEventListener('focusin', () => setPaused('focus', true))
+        root.addEventListener('focusout', () => setPaused('focus', false))
+        new IntersectionObserver(([e]) => setPaused('offscreen', !e.isIntersecting)).observe(featured)
+
+        $(featured, '[data-prev]').addEventListener('click', () => show(current - 1))
+        $(featured, '[data-next]').addEventListener('click', () => show(current + 1))
+
+        show(0)
+      }
+
+      // --- creator works row: dots + arrow only when it overflows -------------
+      function initWorks(card) {
+        const row = $(card, '[data-works]')
+        const controls = $(card, '[data-works-controls]')
+        const dotsEl = $(card, '[data-works-dots]')
+        let dots = []
+
+        function sync() {
+          const max = row.scrollWidth - row.clientWidth
+          const page = max <= 0 ? 0 : Math.round((row.scrollLeft / max) * (dots.length - 1))
+          dots.forEach((d, j) => d.toggleAttribute('data-active', j === page))
+        }
+
+        function layout() {
+          const pages = Math.ceil(row.scrollWidth / row.clientWidth - 0.05)
+          controls.hidden = pages <= 1
+          dots = Array.from({ length: pages }, () =>
+            chip('span', '', 'h-1 w-1.5 rounded-full bg-white/25 transition-all duration-300 data-active:w-6 data-active:bg-gold'),
+          )
+          dotsEl.replaceChildren(...dots)
+          sync()
+        }
+
+        $(card, '[data-works-next]').addEventListener('click', () => {
+          const atEnd = row.scrollLeft >= row.scrollWidth - row.clientWidth - 2
+          const step = row.children[1].offsetLeft - row.children[0].offsetLeft
+          atEnd ? row.scrollTo({ left: 0, behavior: 'smooth' }) : row.scrollBy({ left: step, behavior: 'smooth' })
+        })
+        row.addEventListener('scroll', sync, { passive: true })
+        new ResizeObserver(layout).observe(row)
+      }
+
+      const originalsRoot = document.getElementById('originals')
+      initOriginals(originalsRoot, document.getElementById('spotlight-item'), originals)
+      initWorks($(originalsRoot, '[data-works]').closest('article'))
+    </script>
+  </body>
+</html>

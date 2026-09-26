@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@plugin "@iconify/tailwind4" {}
+
+@theme {
+  --color-ink: #03050c;
+  --color-panel: #080b13;
+  --color-panel-soft: #0c101a;
+  --color-gold: #f2c14e;
+  --color-gold-deep: #9b6b12;
+  --color-muted: #9aa0af;
+  --font-display: Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    background: var(--color-ink);
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    overflow-x: hidden;
+    background: var(--color-ink);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
