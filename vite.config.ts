@@ -5,4 +5,17 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
+  build: {
+    rolldownOptions: {
+      input: {
+        main: 'index.html',
+        workbench: 'workbench.html',
+      },
+    },
+  },
+  server: {
+    allowedHosts: [
+      '24bb-105-163-156-123.ngrok-free.app',
+    ],
+  },
 })
