@@ -10,17 +10,16 @@
     <!-- carousel -->
     <section
       id="hero-carousel"
-      class="mt-7 lg:mt-4 2xl:mt-7"
+      class="hero-carousel-3d mt-7 lg:mt-4 2xl:mt-7 [--hero-gutter:7%] md:[--hero-gutter:10%]"
       aria-roledescription="carousel"
       aria-label="Trending series"
     >
       <!-- frame: full-bleed band; clips the peeking neighbours at the screen edges -->
       <div class="relative overflow-hidden bg-panel py-6">
-        <!-- track: every slide in one row, scroll-snapped to the centre.
-             The side padding is what lets the first/last slide sit in the middle. -->
+        <!-- Shared stage: cards overlap and rotate around the centred slide. -->
         <div
           data-track
-          class="relative flex snap-x snap-mandatory gap-4 overflow-x-auto px-[7%] scrollbar-none md:px-[10%] [&::-webkit-scrollbar]:hidden"
+          class="hero-carousel-track"
         ></div>
 
         <!-- arrows sit over the peek areas -->
@@ -41,12 +40,12 @@
           <span class="icon-[codicon--chevron-right] size-5 lg:size-4 2xl:size-5"></span>
         </button>
 
-        <!-- dots stay fixed over the active slide while the track moves underneath -->
+        <!-- Dots stay fixed over the active slide as the cards rotate. -->
         <div
           data-dots
-          role="tablist"
+          role="group"
           aria-label="Choose slide"
-          class="absolute bottom-14 left-[calc(7%+2rem)] z-20 flex gap-2 md:bottom-16 md:left-[calc(10%+3rem)]"
+          class="absolute bottom-14 left-[calc(7%+2rem)] z-20 flex gap-2 max-[400px]:left-[calc(7%+1.25rem)] md:bottom-16 md:left-[calc(10%+3rem)]"
         ></div>
       </div>
     </section>
@@ -55,24 +54,24 @@
     <template id="slide-template">
       <article
         aria-roledescription="slide"
-        class="group relative h-110 md:h-180 lg:h-100 2xl:h-180 shrink-0 basis-full cursor-pointer snap-center overflow-hidden rounded-2xl border border-white/10 opacity-40 transition-all duration-500 ease-out scale-y-90 data-active:cursor-default data-active:opacity-100 data-active:scale-y-100"
+        class="hero-carousel-slide group relative h-110 md:h-180 lg:h-100 2xl:h-180 overflow-hidden rounded-2xl border border-white/10"
       >
         <!-- layer 1: full-bleed artwork -->
         <img data-img alt="" class="absolute inset-0 h-full w-full object-cover object-right" />
 
         <!-- layer 2: gradient so the text stays readable -->
-        <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:bg-linear-to-r md:via-black/60"></div>
+        <div class="hero-carousel-shade absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent md:bg-linear-to-r md:via-black/60"></div>
 
         <!-- layer 3: copy (hidden on the peeking slides) -->
         <div
           data-content
-          class="relative z-10 flex h-full max-w-md lg:max-w-sm 2xl:max-w-md flex-col justify-end p-8 pb-24 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:justify-center md:p-12 md:pb-24"
+          class="hero-carousel-copy relative z-10 flex h-full max-w-md lg:max-w-sm 2xl:max-w-md flex-col justify-end p-8 pb-24 max-[400px]:px-5 md:justify-center md:p-12 md:pb-24"
         >
           <p data-eyebrow class="text-xs lg:text-[0.5rem] 2xl:text-xs font-semibold tracking-wider text-gold uppercase"></p>
-          <h2 data-title class="mt-3 font-display text-5xl leading-[1.05] md:text-6xl lg:text-5xl 2xl:text-6xl"></h2>
+          <h2 data-title class="mt-3 font-display text-5xl leading-[1.05] max-[400px]:mt-2 max-[400px]:text-4xl md:text-6xl lg:text-5xl 2xl:text-6xl"></h2>
           <p data-tagline class="mt-4 max-w-xs text-sm leading-relaxed text-muted md:text-base lg:text-sm 2xl:text-base"></p>
 
-          <div class="mt-6 flex items-center gap-5">
+          <div class="mt-6 flex items-center gap-5 max-[400px]:mt-4 max-[400px]:gap-3">
             <a
               data-link
               href="#"

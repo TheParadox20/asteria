@@ -1,0 +1,97 @@
+.hero-carousel-3d {
+  --carousel-duration: 600ms;
+  --carousel-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-carousel-3d .hero-carousel-track {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-items: center;
+  perspective: 1200px;
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+}
+
+/* Sharing a grid cell reserves the cards' natural height at every breakpoint. */
+.hero-carousel-3d .hero-carousel-slide {
+  grid-area: 1 / 1;
+  width: calc(100% - var(--hero-gutter) * 2);
+  min-width: 0;
+  z-index: 1;
+  opacity: 0;
+  transform: scale(0.7);
+  transform-origin: center;
+  backface-visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 12px 32px rgb(3 5 12 / 50%);
+  transition:
+    transform var(--carousel-duration) var(--carousel-easing),
+    opacity var(--carousel-duration) var(--carousel-easing),
+    border-color var(--carousel-duration) var(--carousel-easing);
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="active"] {
+  z-index: 3;
+  opacity: 1;
+  transform: translateX(0) scale(1) rotateY(0deg);
+  border-color: rgb(242 193 78 / 45%);
+  cursor: default;
+  pointer-events: auto;
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="prev"],
+.hero-carousel-3d .hero-carousel-slide[data-position="next"] {
+  z-index: 2;
+  opacity: 0.4;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="prev"] {
+  transform: translateX(-45%) scale(0.85) rotateY(15deg);
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="next"] {
+  transform: translateX(45%) scale(0.85) rotateY(-15deg);
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="before"] {
+  transform: translateX(-90%) scale(0.7) rotateY(25deg);
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="after"] {
+  transform: translateX(90%) scale(0.7) rotateY(-25deg);
+}
+
+.hero-carousel-3d .hero-carousel-copy,
+.hero-carousel-3d .hero-carousel-shade {
+  opacity: 0;
+  transition: opacity var(--carousel-duration) var(--carousel-easing);
+}
+
+.hero-carousel-3d .hero-carousel-slide[data-position="active"] .hero-carousel-copy,
+.hero-carousel-3d .hero-carousel-slide[data-position="active"] .hero-carousel-shade {
+  opacity: 1;
+}
+
+.hero-carousel-3d .hero-carousel-slide img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Render the initial arrangement immediately, then animate later changes. */
+.hero-carousel-3d:not([data-ready]) *,
+.hero-carousel-3d:not([data-ready]) *::before,
+.hero-carousel-3d:not([data-ready]) *::after {
+  transition-duration: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel-3d *,
+  .hero-carousel-3d *::before,
+  .hero-carousel-3d *::after {
+    transition-duration: 0s;
+  }
+}

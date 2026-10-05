@@ -48,152 +48,201 @@ const slides: Slide[] = [
 ]
 
 const AUTOPLAY_MS = 6000
+const SWIPE_PX = 40
 
 function initCarousel(root: HTMLElement, template: HTMLTemplateElement, slides: Slide[]) {
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
-  const $ = <T extends Element>(parent: ParentNode, sel: string) => parent.querySelector<T>(sel)!
+  if (!slides.length) return
 
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
+  const $ = <T extends Element>(parent: ParentNode, sel: string) => parent.querySelector<T>(sel)!
   const track = $<HTMLElement>(root, '[data-track]')
   const dotsEl = $<HTMLElement>(root, '[data-dots]')
+  const count = slides.length
+  let current = 0
+  let hovered = false
+  let timer: number | undefined
+  let suppressClickUntil = 0
+  let gesture: { id: number; x: number; y: number; dragging: boolean } | null = null
 
-  // --- render ---------------------------------------------------------------
-  // Infinite loop: a copy of the last slide sits before the first and a copy of
-  // the first after the last, so both ends always have a neighbour peeking in.
-  // Landing on a copy instantly jumps to its real twin (see `settle`).
-  //   [ copy of n-1 ] [ 0 ] [ 1 ] … [ n-1 ] [ copy of 0 ]
-  const n = slides.length
+  root.tabIndex = 0
 
-  function renderSlide(s: Slide, i: number, isClone = false) {
+  // Each series has one card. Position changes animate together, including
+  // wrapping from the last series to the first, without scrolling or clones.
+  const slideEls = slides.map((slide, index) => {
     const el = template.content.firstElementChild!.cloneNode(true) as HTMLElement
-    $<HTMLImageElement>(el, '[data-img]').src = s.image
-    $(el, '[data-eyebrow]').textContent = s.eyebrow
-    $(el, '[data-title]').textContent = s.title
-    $(el, '[data-tagline]').textContent = s.tagline
-    $<HTMLAnchorElement>(el, '[data-link]').href = s.href
-    el.dataset.index = String(i)
-    if (isClone) el.setAttribute('aria-hidden', 'true')
-    else el.setAttribute('aria-label', `${i + 1} of ${n}: ${s.title}`)
-    // clicking a peeking slide brings it to the centre
-    el.addEventListener('click', () => el !== slideEls[centred] && scrollToSlide(el))
+    const image = $<HTMLImageElement>(el, '[data-img]')
+    image.src = slide.image
+    image.draggable = false
+    $(el, '[data-eyebrow]').textContent = slide.eyebrow
+    $(el, '[data-title]').textContent = slide.title
+    $(el, '[data-tagline]').textContent = slide.tagline
+    $<HTMLAnchorElement>(el, '[data-link]').href = slide.href
+    el.dataset.index = String(index)
+    el.setAttribute('role', 'group')
+    el.setAttribute('aria-label', `${index + 1} of ${count}: ${slide.title}`)
+    el.addEventListener('click', () => {
+      if (index !== current) goTo(index)
+    })
     track.append(el)
     return el
-  }
+  })
 
-  const slideEls = [
-    renderSlide(slides[n - 1], n - 1, true),
-    ...slides.map((s, i) => renderSlide(s, i)),
-    renderSlide(slides[0], 0, true),
-  ]
-
-  const dotEls = slides.map((s, i) => {
+  const dotEls = slides.map((slide, index) => {
     const dot = document.createElement('button')
     dot.type = 'button'
-    dot.setAttribute('role', 'tab')
-    dot.setAttribute('aria-label', `Go to ${s.title}`)
+    dot.setAttribute('aria-label', `Go to ${slide.title}`)
     dot.className =
-      'h-1.5 w-6 lg:h-0.75 lg:w-4 2xl:h-1.5 2xl:w-6 rounded-full bg-white/20 transition-all duration-300 hover:bg-white/40 aria-selected:w-8 aria-selected:lg:w-6 aria-selected:2xl:w-8 aria-selected:bg-gold'
-    dot.addEventListener('click', () => goTo(i))
+      'h-1.5 w-6 lg:h-0.75 lg:w-4 2xl:h-1.5 2xl:w-6 rounded-full bg-white/20 transition-all duration-300 hover:bg-white/40 aria-pressed:w-8 aria-pressed:lg:w-6 aria-pressed:2xl:w-8 aria-pressed:bg-gold'
+    dot.addEventListener('click', () => goTo(index))
     dotsEl.append(dot)
     return dot
   })
 
-  // --- state ----------------------------------------------------------------
-  let current = -1 // real slide index (0…n-1): drives dots and styling
-  let centred = 1 // position in slideEls of the slide in the middle (copies included)
-
-  // Marks every element showing slide `i` — a copy and its twin look identical,
-  // so the jump between them is invisible (no opacity/scale transition).
-  function setActive(i: number) {
-    if (i === current) return
-    current = i
-    slideEls.forEach((el) => {
-      const active = Number(el.dataset.index) === i
-      el.toggleAttribute('data-active', active)
-      // keeps keyboard/screen-reader users out of the peeking slides' buttons
-      // (and out of the copies entirely), while the slide itself stays clickable
-      $<HTMLElement>(el, '[data-content]').inert = !active || el.hasAttribute('aria-hidden')
+  function render() {
+    slideEls.forEach((el, index) => {
+      let offset = (index - current + count) % count
+      if (offset > count / 2) offset -= count
+      el.dataset.position = offset === 0 ? 'active'
+        : offset === -1 ? 'prev'
+        : offset === 1 ? 'next'
+        : offset < 0 ? 'before' : 'after'
+      el.toggleAttribute('data-active', offset === 0)
+      el.setAttribute('aria-hidden', String(offset !== 0))
+      $<HTMLElement>(el, '[data-content]').inert = offset !== 0
     })
-    dotEls.forEach((d, j) => d.setAttribute('aria-selected', String(j === i)))
+    dotEls.forEach((dot, index) => dot.setAttribute('aria-pressed', String(index === current)))
   }
 
-  function scrollToSlide(el: HTMLElement, behavior: ScrollBehavior = reduceMotion ? 'auto' : 'smooth') {
-    track.scrollTo({ left: el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2, behavior })
+  // All pause conditions are checked together, so leaving with the mouse
+  // cannot restart playback while keyboard focus is still inside the hero.
+  function scheduleAutoplay() {
+    clearTimeout(timer)
+    const paused = reducedMotion.matches || hovered || root.matches(':focus-within')
+      || gesture !== null || document.hidden || count < 2
+    track.setAttribute('aria-live', paused ? 'polite' : 'off')
+    if (!paused) timer = window.setTimeout(() => goTo(current + 1), AUTOPLAY_MS)
   }
 
-  // Arrows/keys/autoplay step from whatever is centred, so "next" on the last
-  // slide goes to the copy of the first rather than rewinding across the track.
-  const step = (delta: number) => scrollToSlide(slideEls[Math.max(0, Math.min(n + 1, centred + delta))])
-  // Dots jump straight to a real slide.
-  const goTo = (i: number) => scrollToSlide(slideEls[i + 1])
-
-  // Whichever slide is closest to the track's centre is the active one.
-  // Driven by scroll so swipes, trackpads, arrows and dots all stay in sync.
-  function syncFromScroll() {
-    const centre = track.scrollLeft + track.clientWidth / 2
-    let bestDist = Infinity
-    slideEls.forEach((el, j) => {
-      const dist = Math.abs(el.offsetLeft + el.offsetWidth / 2 - centre)
-      if (dist < bestDist) [centred, bestDist] = [j, dist]
-    })
-    setActive(Number(slideEls[centred].dataset.index))
+  function goTo(index: number) {
+    const next = (index + count) % count
+    if (next !== current) {
+      // Move focus before hiding a card that contains the focused control.
+      if (slideEls[current].contains(document.activeElement)) root.focus({ preventScroll: true })
+      current = next
+      render()
+    }
+    scheduleAutoplay()
   }
 
-  // Once scrolling stops on a copy, swap to its real twin without animating.
-  function settle() {
-    syncFromScroll()
-    if (centred === 0) scrollToSlide(slideEls[n], 'instant')
-    else if (centred === n + 1) scrollToSlide(slideEls[1], 'instant')
-  }
-
-  let ticking = false
-  let settleTimer: number | undefined
-  track.addEventListener(
-    'scroll',
-    () => {
-      if (!('onscrollend' in window)) {
-        // older Safari has no `scrollend`: settle once scrolling goes quiet
-        clearTimeout(settleTimer)
-        settleTimer = setTimeout(settle, 120)
-      }
-      if (ticking) return
-      ticking = true
-      requestAnimationFrame(() => {
-        syncFromScroll()
-        ticking = false
-      })
-    },
-    { passive: true },
-  )
-  track.addEventListener('scrollend', settle)
-  addEventListener('resize', () => scrollToSlide(slideEls[current + 1], 'instant'))
-
-  // --- controls -------------------------------------------------------------
-  $(root, '[data-prev]').addEventListener('click', () => step(-1))
-  $(root, '[data-next]').addEventListener('click', () => step(1))
-
-  root.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') step(-1)
-    if (e.key === 'ArrowRight') step(1)
+  $(root, '[data-prev]').addEventListener('click', () => goTo(current - 1))
+  $(root, '[data-next]').addEventListener('click', () => goTo(current + 1))
+  root.addEventListener('keydown', (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
+    const target = event.target as HTMLElement
+    if (target.closest('input, textarea, select, [contenteditable="true"]')) return
+    let next: number
+    if (event.key === 'ArrowLeft') next = current - 1
+    else if (event.key === 'ArrowRight') next = current + 1
+    else if (event.key === 'Home') next = 0
+    else if (event.key === 'End') next = count - 1
+    else return
+    event.preventDefault()
+    goTo(next)
+    if (dotsEl.contains(target)) dotEls[current].focus({ preventScroll: true })
   })
 
-  // --- autoplay (pauses on hover/focus, off for reduced motion) --------------
-  let timer: number | undefined
-  const play = () => {
-    if (reduceMotion) return
-    clearInterval(timer)
-    timer = setInterval(() => step(1), AUTOPLAY_MS)
-  }
-  const pause = () => clearInterval(timer)
-  root.addEventListener('mouseenter', pause)
-  root.addEventListener('mouseleave', play)
-  root.addEventListener('focusin', pause)
-  root.addEventListener('focusout', play)
-  track.addEventListener('pointerdown', pause)
+  // Horizontal swipes and mouse drags change cards on release. CSS preserves
+  // native vertical scrolling and pinch zoom over the hero.
+  track.addEventListener('pointerdown', (event) => {
+    if (!event.isPrimary || event.button !== 0) return
+    gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, dragging: false }
+    scheduleAutoplay()
+  })
+  window.addEventListener('pointermove', (event) => {
+    if (!gesture || event.pointerId !== gesture.id) return
+    const dx = event.clientX - gesture.x
+    const dy = event.clientY - gesture.y
+    if (!gesture.dragging && Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+      gesture = null
+      scheduleAutoplay()
+      return
+    }
+    if (!gesture.dragging && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+      gesture.dragging = true
+      track.setPointerCapture(event.pointerId)
+      root.setAttribute('data-dragging', '')
+    }
+  })
 
-  // start on the real first slide, with the copy of the last peeking on the left
-  scrollToSlide(slideEls[1], 'instant')
-  syncFromScroll()
-  play()
+  function finishGesture(event: PointerEvent) {
+    if (!gesture || event.pointerId !== gesture.id) return
+    const dx = event.clientX - gesture.x
+    const dragged = gesture.dragging
+    gesture = null
+    root.removeAttribute('data-dragging')
+    if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId)
+    if (dragged) suppressClickUntil = performance.now() + 500
+    if (event.type === 'pointerup' && dragged && Math.abs(dx) >= SWIPE_PX) {
+      goTo(current + (dx < 0 ? 1 : -1))
+    } else scheduleAutoplay()
+  }
+  window.addEventListener('pointerup', finishGesture)
+  window.addEventListener('pointercancel', finishGesture)
+  track.addEventListener('lostpointercapture', (event) => {
+    // Touch initially captures the child under the finger; transferring that
+    // capture to the track must not cancel the gesture as the event bubbles.
+    if (event.target === track) finishGesture(event)
+  })
+  track.addEventListener('dragstart', (event) => event.preventDefault())
+  track.addEventListener('click', (event) => {
+    if (performance.now() < suppressClickUntil) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }, true)
+
+  // A trackpad gesture selects one card, rather than racing through the
+  // carousel with every momentum event. Vertical wheel scrolling passes through.
+  let wheelDistance = 0
+  let wheelHandled = false
+  let wheelTimer: number | undefined
+  track.addEventListener('wheel', (event) => {
+    const dx = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX
+    if (!dx || (!event.shiftKey && Math.abs(dx) <= Math.abs(event.deltaY))) return
+    event.preventDefault()
+    clearTimeout(wheelTimer)
+    wheelTimer = window.setTimeout(() => {
+      wheelDistance = 0
+      wheelHandled = false
+    }, 200)
+    if (wheelHandled) return
+    wheelDistance += dx * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? track.clientWidth : 1)
+    if (Math.abs(wheelDistance) >= SWIPE_PX) {
+      wheelHandled = true
+      goTo(current + (wheelDistance > 0 ? 1 : -1))
+    }
+  }, { passive: false })
+
+  root.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'mouse' || event.pointerType === 'pen') {
+      hovered = true
+      scheduleAutoplay()
+    }
+  })
+  root.addEventListener('pointerleave', () => {
+    hovered = false
+    scheduleAutoplay()
+  })
+  root.addEventListener('focusin', scheduleAutoplay)
+  root.addEventListener('focusout', () => queueMicrotask(scheduleAutoplay))
+  document.addEventListener('visibilitychange', scheduleAutoplay)
+  reducedMotion.addEventListener('change', scheduleAutoplay)
+
+  render()
+  // Commit the initial layout before enabling transitions to avoid an entrance flash.
+  track.getBoundingClientRect()
+  root.setAttribute('data-ready', '')
+  scheduleAutoplay()
 }
 
 const carousel = document.getElementById('hero-carousel')

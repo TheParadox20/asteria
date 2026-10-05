@@ -1,4 +1,5 @@
 import './style.css'
+import './carousel.css'
 import './carousel'
 import './originals-spotlight'
 import './creator-spotlight'
