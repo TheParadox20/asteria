@@ -20,7 +20,7 @@ const latestUpdates: LatestUpdate[] = [
     image: '/assets/iruma-kun-fixed.png',
     updatedAt: '5 Jun',
     description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-    href: '#',
+    href: '/read.html',
   },
   {
     title: 'D-Frag!',
@@ -41,7 +41,7 @@ const latestUpdates: LatestUpdate[] = [
     image: '/assets/iruma-kun-fixed.png',
     updatedAt: '5 Jun',
     description: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-    href: '#',
+    href: '/read.html',
   },
   {
     title: 'D-Frag!',

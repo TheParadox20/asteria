@@ -10,6 +10,8 @@ export default defineConfig({
       input: {
         main: 'index.html',
         workbench: 'workbench.html',
+        originals: 'originals.html',
+        read: 'read.html',
       },
     },
   },
