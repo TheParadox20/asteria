@@ -4,351 +4,548 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Discover Asteria Originals, find your next favorite series, and pick up where you left off." />
-    <title>Asteria — Discover your next story</title>
+    <title>landing</title>
   </head>
-  <body class="workbench text-white">
-    <a class="skip-link" href="#discover">Skip to stories</a>
-    <h1 class="sr-only">Discover stories on Asteria</h1>
+  <body class="text-white my-[clamp(1.25rem,2vw,2.5rem)]">
+    <!-- carousel -->
+    <section
+      id="hero-carousel"
+      class="mt-[clamp(1rem,1.4vw,1.75rem)] [--hero-gutter:7%] md:[--hero-gutter:10%] [--hero-copy:clamp(1.25rem,2.5vw,3rem)] [--hero-control:clamp(2rem,2.3vw,2.75rem)]"
+      aria-roledescription="carousel"
+      aria-label="Trending series"
+    >
+      <!-- frame: full-bleed band; clips the peeking neighbours at the screen edges -->
+      <div class="relative overflow-hidden bg-panel py-[clamp(1rem,1.25vw,1.5rem)]">
+        <!-- track: every slide in one row, scroll-snapped to the centre.
+             The side padding is what lets the first/last slide sit in the middle. -->
+        <div
+          data-track
+          class="relative flex snap-x snap-mandatory gap-[clamp(0.75rem,1vw,1rem)] overflow-x-auto px-[var(--hero-gutter)] scrollbar-none [&::-webkit-scrollbar]:hidden"
+        ></div>
 
-    <!-- The shared carousel script uses these templates and data attributes. -->
-    <section id="hero-carousel" class="hero-carousel" aria-roledescription="carousel" aria-label="Trending series">
-      <div class="hero-frame relative overflow-hidden bg-panel">
-        <div data-track class="hero-track relative flex snap-x snap-mandatory gap-3 overflow-x-auto md:gap-5"></div>
-        <button data-prev type="button" aria-label="Previous slide" class="hero-prev icon-button absolute top-1/2 z-20 hidden -translate-y-1/2 rounded-full bg-black/50 backdrop-blur md:flex">
-          <span class="icon-[codicon--chevron-left] size-5" aria-hidden="true"></span>
+        <!-- arrows sit over the peek areas -->
+        <button
+          data-prev
+          type="button"
+          aria-label="Previous slide"
+          class="absolute top-1/2 left-[calc(var(--hero-gutter)/2-var(--hero-control)/2)] z-20 hidden size-[var(--hero-control)] shrink-0 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
+        >
+          <span class="icon-[codicon--chevron-left] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
         </button>
-        <button data-next type="button" aria-label="Next slide" class="hero-next icon-button absolute top-1/2 z-20 hidden -translate-y-1/2 rounded-full bg-black/50 backdrop-blur md:flex">
-          <span class="icon-[codicon--chevron-right] size-5" aria-hidden="true"></span>
+        <button
+          data-next
+          type="button"
+          aria-label="Next slide"
+          class="absolute top-1/2 right-[calc(var(--hero-gutter)/2-var(--hero-control)/2)] z-20 hidden size-[var(--hero-control)] shrink-0 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
+        >
+          <span class="icon-[codicon--chevron-right] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
         </button>
-        <div data-dots role="tablist" aria-label="Choose slide" class="hero-dots absolute z-20 flex items-center gap-1"></div>
+
+        <!-- dots stay fixed over the active slide while the track moves underneath -->
+        <div
+          data-dots
+          role="tablist"
+          aria-label="Choose slide"
+          class="absolute bottom-[clamp(2.5rem,3vw,4rem)] left-[calc(var(--hero-gutter)+var(--hero-copy)+1px)] z-20 flex gap-[clamp(0.375rem,0.5vw,0.5rem)] [&>button]:h-[clamp(0.1875rem,0.3vw,0.375rem)] [&>button]:w-[clamp(1rem,1.25vw,1.5rem)] [&>button[aria-selected=true]]:w-[clamp(1.5rem,1.67vw,2rem)]"
+        ></div>
       </div>
     </section>
 
+    <!-- carousel template -->
     <template id="slide-template">
-      <article aria-roledescription="slide" class="hero-slide group relative min-w-0 shrink-0 basis-full cursor-pointer snap-center overflow-hidden rounded-2xl border border-white/10 opacity-40 transition-[opacity,transform] duration-500 scale-y-90 data-active:cursor-default data-active:opacity-100 data-active:scale-y-100">
+      <article
+        aria-roledescription="slide"
+        class="group relative min-h-[clamp(27.5rem,37.5vw,45rem)] shrink-0 basis-full cursor-pointer snap-center overflow-hidden rounded-2xl border border-white/10 opacity-40 transition-[opacity,transform] duration-500 ease-out scale-y-90 data-active:cursor-default data-active:opacity-100 data-active:scale-y-100"
+      >
+        <!-- layer 1: full-bleed artwork -->
         <img data-img alt="" class="absolute inset-0 h-full w-full object-cover object-right" />
-        <div class="absolute inset-0 bg-linear-to-t from-black via-black/75 to-black/10 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:bg-linear-to-r md:via-black/65 md:to-transparent"></div>
-        <div data-content class="hero-copy relative z-10 flex h-full flex-col justify-end opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:justify-center">
-          <p data-eyebrow class="text-xs font-semibold tracking-wider text-gold uppercase"></p>
-          <h2 data-title class="hero-title mt-3 font-display leading-[1.05]"></h2>
-          <p data-tagline class="mt-4 max-w-sm text-sm leading-relaxed text-gray-300 md:text-base"></p>
-          <div class="mt-6 flex flex-wrap items-center gap-3">
-            <a data-link href="#" class="gold-button"><span class="icon-[at-icons--play] size-5" aria-hidden="true"></span>Read Now</a>
-            <button type="button" aria-label="Add to library" class="icon-button rounded-full border-white/40 text-white"><span class="icon-[codicon--add] size-5" aria-hidden="true"></span></button>
+
+        <!-- layer 2: gradient so the text stays readable -->
+        <div class="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:bg-linear-to-r md:via-black/60"></div>
+
+        <!-- layer 3: copy (hidden on the peeking slides) -->
+        <div
+          data-content
+          class="relative z-10 flex h-full min-h-[inherit] max-w-[clamp(20rem,32vw,28rem)] flex-col justify-end p-[var(--hero-copy)] pb-[clamp(5rem,6vw,6rem)] opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:justify-center"
+        >
+          <p data-eyebrow class="text-[clamp(0.625rem,0.7vw,0.75rem)] font-semibold tracking-wider text-gold uppercase"></p>
+          <h2 data-title class="mt-[clamp(0.5rem,0.8vw,0.75rem)] font-display text-[clamp(2rem,3.2vw,3.75rem)] leading-[1.05]"></h2>
+          <p data-tagline class="mt-[clamp(0.75rem,1vw,1rem)] max-w-xs text-[clamp(0.875rem,1vw,1rem)] leading-relaxed text-muted"></p>
+
+          <div class="mt-[clamp(1rem,1.5vw,1.5rem)] flex flex-wrap items-center gap-[clamp(0.75rem,1.25vw,1.25rem)]">
+            <a
+              data-link
+              href="#"
+              class="flex shrink-0 items-center justify-center text-[clamp(0.75rem,0.9vw,1rem)] whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-[clamp(0.75rem,1.25vw,1.5rem)] py-[clamp(0.5rem,0.65vw,0.75rem)] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110"
+            >
+              <span class="mr-2 icon-[at-icons--play] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
+              <span>Read Now</span>
+            </a>
+            <button
+              type="button"
+              aria-label="Add to library"
+              class="flex size-[var(--hero-control)] shrink-0 items-center justify-center rounded-full border border-white/40 transition hover:border-white hover:bg-white/10"
+            >
+              <span class="icon-[codicon--add] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
+            </button>
           </div>
         </div>
       </article>
     </template>
 
-    <main id="discover" class="page-shell">
-      <aside class="sponsor overflow-hidden rounded-2xl border border-white/10 bg-panel" aria-label="Sponsored spotlight">
-        <div class="grid md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-          <div class="min-w-0 px-5 py-6 sm:px-7">
-            <p class="text-[0.625rem] font-bold uppercase tracking-[0.22em] text-gold">Sponsored spotlight</p>
-            <p class="mt-1 text-[0.625rem] uppercase tracking-widest text-white/45">Promoted</p>
-            <h2 class="mt-2 text-lg font-semibold sm:text-xl">Nightforge - limited spring collectibles for devoted readers</h2>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
-            <a href="#" class="outline-button mt-4 text-xs">Learn more <span class="icon-[basil--arrow-right-outline] size-5" aria-hidden="true"></span></a>
-          </div>
-          <div class="relative min-h-40 md:min-h-52">
-            <img class="absolute inset-0 h-full w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="Nightforge collectible editions" loading="lazy" />
-            <div class="absolute bottom-5 right-6 flex gap-1.5" aria-hidden="true"><span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span></div>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Keep secondary panels below the stories until the full composition fits. -->
-      <section class="section-space grid min-w-0 items-start gap-6 2xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" aria-labelledby="originals-heading">
-        <div class="min-w-0">
-          <div class="section-heading">
-            <div class="flex min-w-0 items-start gap-3">
-              <span class="shrink-0 text-3xl text-gold" aria-hidden="true">✦</span>
-              <div class="min-w-0 space-y-2">
-                <h2 id="originals-heading" class="section-title font-display">Asteria Originals</h2>
-                <p class="text-sm leading-relaxed text-gold">Original stories. Fresh voices. Infinite worlds.</p>
-              </div>
+    <section class="mx-[clamp(0.5rem,2vw,2.5rem)]">
+        <!-- sponsored content -->
+        <aside class="mt-[clamp(1rem,1.5vw,1.75rem)] overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
+            <div class="grid md:grid-cols-[1.5fr_1fr] relative">
+                <div class="flex flex-col justify-center px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(1.25rem,1.5vw,1.75rem)]">
+                    <p class="text-[clamp(0.625rem,0.65vw,0.68rem)] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
+                    <span class="mt-1 text-[clamp(0.625rem,0.65vw,0.68rem)] uppercase tracking-widest text-white/45">Promoted</span>
+                    <h2 class="mt-2 text-[clamp(1rem,1.2vw,1.25rem)] font-semibold">Nightforge - limited spring collectibles for devoted readers</h2>
+                    <p class="mt-1 text-[clamp(0.8125rem,0.9vw,0.875rem)] text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
+                    <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.375rem,0.5vw,0.5rem)] text-[clamp(0.625rem,0.7vw,0.75rem)] capitalize font-semibold transition hover:border-gold hover:text-gold">
+                        Learn more <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
+                    </a>
+                </div>
+                <div class="relative min-h-[clamp(10rem,12vw,13rem)] overflow-hidden">
+                    <img class="absolute inset-0 h-full w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                </div>
+                <div class="absolute -right-10 -top-24 size-72 rounded-full bg-violet-400/20 blur-3xl"></div>
+                <div class="absolute bottom-5 right-6 flex gap-1.5">
+                    <span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span>
+                </div>
             </div>
-            <a href="#" class="text-action">View all originals <span class="icon-[basil--arrow-right-outline] size-5" aria-hidden="true"></span></a>
-          </div>
+        </aside>
 
-          <div class="mt-6 grid min-w-0 gap-4 md:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
-            <article class="@container/feature min-w-0 rounded-2xl border border-gold/20 p-3 sm:p-4">
-              <div class="grid min-w-0 gap-5 @min-[24rem]/feature:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-                <img class="aspect-[4/3] w-full rounded-xl object-cover object-[50%_30%] @min-[24rem]/feature:aspect-[2/3] @min-[24rem]/feature:h-full @min-[32rem]/feature:row-span-2" src="/assets/last-bloom-fixed.png" alt="The Last Bloom cover" loading="lazy" />
-                <div class="flex min-w-0 flex-col items-start">
-                  <p class="genre-badge border-gold/40 bg-gold/10 text-gold uppercase">Asteria Originals</p>
-                  <h3 class="mt-3 font-display text-3xl leading-tight lg:text-4xl">The Last Bloom</h3>
-                  <p class="mt-3 text-sm leading-relaxed text-gold/70">Some flowers only bloom once - and some stories are worth waiting for.</p>
-                  <div class="mt-4 flex flex-wrap gap-2 text-gold">
-                    <span class="genre-badge">Romance</span><span class="genre-badge">Fantasy</span><span class="genre-badge">Drama</span>
-                  </div>
-                  <a href="#" class="mt-4 flex min-h-11 flex-wrap items-center gap-2 text-xs text-gold">
-                    <img class="size-8 shrink-0 rounded-full object-cover" src="/assets/last-bloom-fixed.png" alt="" loading="lazy" />
-                    <span>By Mira Kade</span><span class="icon-[basil--arrow-right-outline] size-5" aria-hidden="true"></span>
-                  </a>
+        <!-- Asteria originals & creator spotlight: fluid sizes; breakpoints change layout. -->
+        <section class="mt-[clamp(1.75rem,2.1vw,2.5rem)] flex flex-col lg:flex-row gap-[clamp(1.25rem,2.1vw,2.5rem)]">
+            <!-- Asteria originals -->
+            <div class="min-w-0 lg:shrink-0">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                    <div class="flex items-start gap-[clamp(0.5rem,1.2vw,1.25rem)]">
+                        <span class="text-[clamp(1.125rem,2vw,2.25rem)] text-gold">✦</span>
+                        <div class="space-y-[clamp(0.25rem,0.45vw,0.5rem)]">
+                            <h2 class="text-[clamp(1.5rem,2.35vw,2.25rem)] font-display">Asteria Originals</h2>
+                            <p class="text-[clamp(0.8125rem,0.9vw,0.875rem)] text-gold hidden md:block">Original stories. Fresh voices. Infinite worlds.</p>
+                        </div>
+                    </div>
+                    <button class="text-[clamp(0.625rem,0.7vw,0.75rem)] font-semibold capitalize flex shrink-0 items-center gap-1 text-gold transition hover:text-gold/70">
+                        View all originals
+                        <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.25vw,1.5rem)] shrink-0"></span>
+                    </button>
                 </div>
-                <div class="flex flex-wrap items-center gap-2 self-end @min-[24rem]/feature:col-span-2 @min-[32rem]/feature:col-span-1 @min-[32rem]/feature:col-start-2">
-                  <a href="#" class="gold-button px-3 text-sm"><span class="icon-[at-icons--play] size-4" aria-hidden="true"></span>Read Now</a>
-                  <button type="button" aria-label="Bookmark The Last Bloom" class="icon-button rounded-xl"><span class="icon-[circum--bookmark] size-5" aria-hidden="true"></span></button>
-                  <button type="button" aria-label="Add The Last Bloom to a list" class="icon-button rounded-full"><span class="icon-[stash--list-add-light] size-5" aria-hidden="true"></span></button>
-                </div>
-              </div>
-              <div class="mt-6 flex items-center gap-4 text-xs text-gold" aria-label="Featured original 1 of 4">
-                <span class="shrink-0">01 / 04</span>
-                <div class="flex w-full max-w-52 gap-2" aria-hidden="true"><span class="h-1 flex-1 rounded-full bg-gold"></span><span class="h-1 flex-1 rounded-full bg-gray-600"></span><span class="h-1 flex-1 rounded-full bg-gray-600"></span><span class="h-1 flex-1 rounded-full bg-gray-600"></span></div>
-              </div>
-            </article>
+                <p class="text-sm text-gold block md:hidden mt-2">Original stories. Fresh voices. Infinite worlds.</p>
 
-            <section id="originals-spotlight" class="min-w-0 rounded-2xl border border-gold/40 p-3" aria-labelledby="spotlight-heading">
-              <h3 id="spotlight-heading" class="mb-3 flex items-center gap-2 font-display text-lg"><span class="text-xl text-gold" aria-hidden="true">✦</span>Originals Spotlight</h3>
-              <div data-originals-list class="originals-list space-y-2 md:max-h-104 md:overflow-y-auto" tabindex="0" role="region" aria-label="Original stories"></div>
+                <div class="flex flex-col lg:flex-row mt-[clamp(1rem,1.5vw,1.75rem)] gap-[clamp(0.5rem,0.65vw,0.75rem)]">
+                    <div class="border border-gold/20 w-full lg:w-[37.55vw] min-w-0 min-h-[clamp(16rem,20vw,24rem)] rounded-lg p-[clamp(0.375rem,0.5vw,0.5rem)]">
+                        <div class="flex items-stretch gap-[clamp(0.5rem,1.2vw,1.75rem)]">
+                            <div class="w-[52%] max-w-[clamp(10rem,12.5vw,15rem)] shrink-0">
+                                <img class="rounded-xl w-full" src="/assets/last-bloom-fixed.png" alt="">
+                                <div class="flex md:hidden flex-wrap items-center gap-1 mt-3">
+                                    <a
+                                        data-link
+                                        href="#"
+                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-[clamp(0.5rem,0.65vw,0.75rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
+                                    >
+                                        <span class="mr-[clamp(0.25rem,0.4vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.625rem,0.8vw,0.75rem)]"></span>
+                                        <span>Read Now</span>
+                                    </a>
+                                    <button class="flex items-center justify-center size-[clamp(1.5rem,2.1vw,2.5rem)] shrink-0 rounded-xl border border-gold/40 text-gold">
+                                        <span class="icon-[circum--bookmark] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
+                                    </button>
+                                    <button class="flex items-center justify-center size-[clamp(1.5rem,2.1vw,2.5rem)] shrink-0 rounded-full border border-gold/40 text-gold">
+                                        <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="w-full md:w-2/3 lg:w-full 2xl:w-2/3 space-y-[clamp(0.5rem,0.65vw,0.75rem)]">
+                                    <p class="text-[0.625rem] uppercase font-bold text-gold rounded-full bg-gold/10 border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">asteria originals</p>
+                                    <p class="text-[clamp(1.25rem,2.35vw,2.25rem)] leading-tight font-display">The Last Bloom</p>
+                                    <p class="text-[clamp(0.8125rem,0.9vw,0.875rem)] leading-relaxed text-gold/70">Some flowers only bloom once - and some stories are worth waiting for </p>
+
+                                    <div class="flex flex-wrap gap-[clamp(0.25rem,0.6vw,0.75rem)]">
+                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">Romace</p>
+                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">Fantasy</p>
+                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">Drama</p>
+                                    </div>
+
+                                    <div class="flex flex-wrap items-center gap-1 text-xs text-gold">
+                                        <img class="size-[clamp(1.5rem,1.9vw,2.25rem)] shrink-0 rounded-full block mr-[clamp(0.25rem,0.4vw,0.5rem)]" src="/assets/last-bloom-fixed.png" alt="">
+                                        <span>By Mira Kade</span>
+                                        <span class="icon-[basil--arrow-right-outline] size-[clamp(0.75rem,1vw,1.25rem)] shrink-0"></span>
+                                    </div>
+                                </div>
+
+                                <div class="hidden md:flex flex-wrap items-center gap-[clamp(0.375rem,0.65vw,0.75rem)] mt-auto pt-[clamp(0.5rem,0.65vw,0.75rem)]">
+                                    <a
+                                        data-link
+                                        href="#"
+                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-[clamp(0.5rem,0.65vw,0.75rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
+                                    >
+                                        <span class="mr-[clamp(0.25rem,0.4vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.625rem,0.8vw,0.75rem)]"></span>
+                                        <span>Read Now</span>
+                                    </a>
+                                    <button class="flex items-center justify-center size-[clamp(1.5rem,2.1vw,2.5rem)] shrink-0 rounded-xl border border-gold/40 text-gold">
+                                        <span class="icon-[circum--bookmark] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
+                                    </button>
+                                    <button class="flex items-center justify-center size-[clamp(1.5rem,2.1vw,2.5rem)] shrink-0 rounded-full border border-gold/40 text-gold">
+                                        <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-[clamp(1rem,1.5vw,1.75rem)]">
+                            <div class="text-[clamp(0.75rem,0.8vw,0.875rem)] text-gold flex min-w-0 items-center gap-[clamp(0.75rem,1.1vw,1.25rem)]">
+                                <span class="shrink-0">01 / 04</span>
+                                <div class="flex min-w-0 gap-[clamp(0.375rem,0.45vw,0.5rem)]">
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gold rounded-full"></div>
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gray-500 rounded-full"></div>
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gray-500 rounded-full"></div>
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gray-500 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Originals Spotlight -->
+                    <div id="originals-spotlight" class="border border-gold/40 w-full lg:w-[20vw] min-w-0 min-h-[clamp(16rem,20vw,24rem)] rounded-lg p-[clamp(0.375rem,0.5vw,0.5rem)] space-y-[clamp(0.5rem,0.65vw,0.75rem)]">
+                        <h5 class="flex items-center gap-[clamp(0.375rem,0.45vw,0.5rem)]">
+                            <span class="text-[clamp(0.875rem,1.1vw,1.25rem)] text-gold">✦</span>
+                            <span class="text-[clamp(0.8125rem,0.85vw,1rem)] font-semibold font-display">Originals Spotlight</span>
+                        </h5>
+
+                        <div data-originals-list class="max-h-[clamp(15rem,20vw,24rem)] overflow-y-auto space-y-[clamp(0.375rem,0.45vw,0.5rem)] scrollbar-none [&::-webkit-scrollbar]:hidden"></div>
+                    </div>
+
+                    <!-- original spotlight card template -->
+                    <template id="original-spotlight-template">
+                        <div class="p-[clamp(0.25rem,0.4vw,0.5rem)] w-full min-w-0 flex gap-[clamp(0.5rem,0.65vw,0.75rem)]">
+                            <img class="w-[clamp(2.5rem,3.35vw,4rem)] shrink-0 self-start aspect-[2/3] object-cover rounded-lg" data-img alt="">
+                            <div class="min-w-0 space-y-[clamp(0.125rem,0.2vw,0.25rem)]">
+                                <p data-featured-badge hidden class="bg-gold/10 border border-gold/40 rounded-lg px-[clamp(0.25rem,0.4vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)] text-[clamp(0.5625rem,0.6vw,0.625rem)] uppercase font-bold text-gold w-fit">featured</p>
+                                <p data-title class="font-display text-[clamp(0.8125rem,0.85vw,1rem)] leading-snug"></p>
+                                <div data-genres class="flex flex-wrap gap-[clamp(0.125rem,0.2vw,0.25rem)]">
+                                    <template data-genre-template>
+                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]"></p>
+                                    </template>
+                                </div>
+                                <div class="flex flex-wrap gap-[clamp(0.25rem,0.3vw,0.375rem)] text-[clamp(0.5625rem,0.6vw,0.625rem)] text-gold font-semibold">
+                                    <p data-chapter></p>
+                                    <p>-</p>
+                                    <p data-updated></p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- creator spotlight -->
+            <div data-creator-spotlight="tatsuki-fujimoto" class="w-full min-w-0 lg:w-auto lg:flex-1"></div>
+        </section>
+
+        <!-- Latest Updates & Weekly Standouts -->
+        <section class="mt-[clamp(1.75rem,2.1vw,2.5rem)] grid grid-cols-1 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] gap-[clamp(1.25rem,2.1vw,2.5rem)]">
+            <!-- new chapters -->
+            <section id="latest-updates" class="min-w-0">
+                <div class="flex flex-wrap justify-between items-end gap-2 w-full">
+                    <div class="min-w-0 space-y-1">
+                        <p class="text-gold text-[clamp(0.625rem,0.8vw,0.875rem)] uppercase tracking-wider">fresh drops</p>
+                        <h2 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Latest Updates</h2>
+                        <p class="text-gray-400 text-[clamp(0.8125rem,0.9vw,0.875rem)] mt-2">New chapters. New Worlds. Stay up to date.</p>
+                    </div>
+                    <button class="font-semibold capitalize flex shrink-0 items-center text-[clamp(0.75rem,0.85vw,0.875rem)] text-gold transition hover:text-gold/70">
+                        View all
+                        <span class="icon-[basil--arrow-right-outline] size-[clamp(1.25rem,1.7vw,2rem)] shrink-0"></span>
+                    </button>
+                </div>
+
+                <div data-updates-grid class="grid grid-cols-1 sm:grid-cols-2 gap-[clamp(0.75rem,0.85vw,1rem)] mt-[clamp(1rem,1.5vw,1.75rem)]"></div>
+
+                <!-- latest update card template -->
+                <template id="latest-update-template">
+                    <div class="min-w-0 px-[clamp(0.5rem,0.6vw,0.75rem)] py-[clamp(0.75rem,0.85vw,1rem)] border border-gold/40 rounded-[clamp(1rem,1.25vw,1.5rem)] flex gap-[clamp(0.75rem,1.05vw,1.25rem)]">
+                        <img class="rounded-[clamp(0.75rem,0.85vw,1rem)] w-[clamp(5rem,8.35vw,10rem)] max-w-[34%] shrink-0 self-start aspect-[2/3] object-cover" data-img alt="">
+                        <div class="min-w-0 flex-1 flex flex-col py-[clamp(0.125rem,0.3vw,0.375rem)]">
+                            <p data-title class="font-display text-[clamp(1rem,1.25vw,1.5rem)] leading-snug"></p>
+                            <p data-updated class="text-gray-400 mt-1 mb-[clamp(0.5rem,0.8vw,1rem)] text-[clamp(0.6875rem,0.8vw,0.875rem)]"></p>
+                            <p data-description class="text-gray-400 text-[clamp(0.75rem,0.7vw,0.8125rem)] leading-relaxed"></p>
+                            <div class="flex flex-wrap items-center gap-[clamp(0.375rem,0.65vw,0.75rem)] mt-auto pt-[clamp(0.75rem,1.2vw,1.5rem)]">
+                                <a
+                                    data-link
+                                    href="#"
+                                    class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.5rem,0.85vw,1rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] font-semibold border border-gold/40 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
+                                >
+                                    <span class="mr-[clamp(0.25rem,0.4vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.875rem,1.05vw,1.25rem)] text-gold"></span>
+                                    <span>Read</span>
+                                </a>
+                                <button type="button" aria-label="Bookmark" class="flex shrink-0 items-center justify-center size-[clamp(1.875rem,2.1vw,2.5rem)] rounded-xl border border-gold/40 text-white">
+                                    <span class="icon-[circum--bookmark] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
+                                </button>
+                                <button type="button" aria-label="Add to list" class="flex shrink-0 items-center justify-center size-[clamp(1.875rem,2.1vw,2.5rem)] rounded-xl border border-gold/40 text-white">
+                                    <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </section>
-          </div>
-        </div>
-        <div data-creator-spotlight="tatsuki-fujimoto" class="min-w-0"></div>
-      </section>
 
-      <template id="original-spotlight-template">
-        <article class="flex min-w-0 items-start gap-3 p-2">
-          <img class="aspect-[2/3] w-14 shrink-0 rounded-lg object-cover lg:w-16" data-img alt="" loading="lazy" />
-          <div class="min-w-0 space-y-2">
-            <p data-featured-badge hidden class="w-fit rounded-full border border-gold/40 bg-gold/10 px-2 py-1 text-[0.625rem] font-bold text-gold uppercase">Featured</p>
-            <h4 data-title class="font-display text-base leading-snug"></h4>
-            <div data-genres class="flex flex-wrap gap-1 text-gold">
-              <template data-genre-template><span class="genre-badge"></span></template>
-            </div>
-            <div class="flex flex-wrap gap-x-1.5 gap-y-1 text-xs text-gold/80"><span data-chapter></span><span aria-hidden="true">·</span><span data-updated></span></div>
-          </div>
-        </article>
-      </template>
+            <!-- weekly standouts -->
+            <section id="weekly-standouts" class="min-w-0 w-full">
+                <div class="flex flex-wrap justify-between items-end gap-2 w-full">
+                    <div class="min-w-0 space-y-1">
+                        <p class="text-gold text-[clamp(0.625rem,0.8vw,0.875rem)] uppercase tracking-wider">top performers</p>
+                        <h2 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Weekly Standouts</h2>
+                        <p class="text-gray-400 text-[clamp(0.8125rem,0.9vw,0.875rem)] mt-2">Top performers of the week. Updated weekly.</p>
+                    </div>
+                    <button class="font-semibold capitalize flex shrink-0 items-center text-[clamp(0.75rem,0.85vw,0.875rem)] text-gold transition hover:text-gold/70">
+                        View all
+                        <span class="icon-[basil--arrow-right-outline] size-[clamp(1.25rem,1.7vw,2rem)] shrink-0"></span>
+                    </button>
+                </div>
 
-      <div class="section-space grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <section id="latest-updates" class="min-w-0" aria-labelledby="updates-heading">
-          <div class="section-heading">
-            <div class="min-w-0 space-y-2">
-              <p class="text-xs tracking-wider text-gold uppercase">Fresh drops</p>
-              <h2 id="updates-heading" class="section-title font-display">Latest Updates</h2>
-              <p class="text-sm leading-relaxed text-muted">New chapters. New worlds. Stay up to date.</p>
-            </div>
-            <a href="#" class="text-action">View all <span class="icon-[basil--arrow-right-outline] size-5" aria-hidden="true"></span></a>
-          </div>
-          <div data-updates-grid class="mt-6 grid min-w-0 gap-4 md:grid-cols-2"></div>
+                <div data-standouts-list class="space-y-[clamp(0.75rem,1.05vw,1.25rem)] mt-[clamp(1rem,1.5vw,1.75rem)]"></div>
+            </section>
+
+            <!-- weekly standout card template -->
+            <template id="weekly-standout-template">
+                <div class="border border-gold/40 rounded-[clamp(1rem,1.25vw,1.5rem)] relative overflow-hidden">
+                    <div class="relative z-10 flex items-center gap-[clamp(0.5rem,1.05vw,1.25rem)] bg-gold/3 py-[clamp(0.75rem,1.05vw,1.25rem)] px-[clamp(0.5rem,0.85vw,1rem)]">
+                        <p data-rank class="shrink-0 font-display text-[clamp(1.5rem,1.9vw,2.25rem)] font-semibold text-gold"></p>
+                        <img class="rounded-[clamp(0.75rem,0.85vw,1rem)] w-[clamp(4rem,6.65vw,8rem)] shrink-0 self-start aspect-[2/3] object-cover border-2 border-gold/40" data-img alt="">
+                        <div class="min-w-0 flex-1 space-y-[clamp(0.375rem,0.45vw,0.5rem)]">
+                            <div class="space-y-1">
+                                <p data-title class="font-display text-[clamp(1rem,1.05vw,1.25rem)] leading-snug font-semibold"></p>
+                                <p data-description class="text-gray-300 text-[clamp(0.6875rem,0.65vw,0.75rem)] leading-relaxed"></p>
+                            </div>
+                            <div>
+                                <div data-genres class="flex gap-x-1 gap-y-[clamp(0.25rem,0.4vw,0.5rem)] flex-wrap text-[clamp(0.5625rem,0.55vw,0.625rem)] text-gray-300"></div>
+                                <template data-genre-template>
+                                    <p class="font-semibold rounded-full border w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-0.5"></p>
+                                </template>
+                            </div>
+                            <div class="flex flex-wrap gap-[clamp(0.375rem,0.65vw,0.75rem)] mt-[clamp(0.75rem,0.85vw,1rem)] items-center">
+                                <a
+                                    data-link
+                                    href="#"
+                                    class="flex shrink-0 items-center justify-center whitespace-nowrap bg-linear-to-b from-[#f8d36d] to-[#d89a20] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 size-[clamp(1.75rem,1.7vw,2rem)] rounded-full"
+                                >
+                                    <span class="icon-[at-icons--play] size-[clamp(0.75rem,0.8vw,0.875rem)]"></span>
+                                </a>
+                                <button type="button" aria-label="Bookmark" class="flex shrink-0 items-center justify-center size-[clamp(1.75rem,1.7vw,2rem)] rounded-xl border border-gold/40 text-white">
+                                    <span class="icon-[circum--bookmark] size-[clamp(1rem,1.05vw,1.25rem)]"></span>
+                                </button>
+                                <button type="button" aria-label="Add to list" class="flex shrink-0 items-center justify-center size-[clamp(1.75rem,1.7vw,2rem)] rounded-full border border-gold/40 text-white">
+                                    <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.05vw,1.25rem)]"></span>
+                                </button>
+                                <div class="flex flex-wrap items-center gap-x-1 gap-y-0.5 text-[clamp(0.625rem,0.65vw,0.75rem)] text-gray-300">
+                                    <span data-chapter class="border-l pl-2 border-gold/70 whitespace-nowrap"></span>
+                                    <span class="icon-[ph--line-vertical] text-gold"></span>
+                                    <span data-readers></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
         </section>
 
-        <section id="weekly-standouts" class="min-w-0" aria-labelledby="standouts-heading">
-          <div class="section-heading">
-            <div class="min-w-0 space-y-2">
-              <p class="text-xs tracking-wider text-gold uppercase">Top performers</p>
-              <h2 id="standouts-heading" class="section-title font-display">Weekly Standouts</h2>
-              <p class="text-sm leading-relaxed text-muted">Top performers of the week. Updated weekly.</p>
+        <!-- sponsored content 2 -->
+        <aside class="mt-[clamp(1.75rem,2.1vw,2.5rem)] overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
+            <div class="grid md:grid-cols-[1.5fr_1fr] relative">
+                <div class="flex flex-col justify-center px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(1.25rem,1.5vw,1.75rem)]">
+                    <p class="text-[clamp(0.625rem,0.65vw,0.68rem)] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
+                    <span class="mt-1 text-[clamp(0.625rem,0.65vw,0.68rem)] uppercase tracking-widest text-white/45">Promoted</span>
+                    <h2 class="mt-2 text-[clamp(1rem,1.2vw,1.25rem)] font-semibold">Nightforge - limited spring collectibles for devoted readers</h2>
+                    <p class="mt-1 text-[clamp(0.8125rem,0.9vw,0.875rem)] text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
+                    <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.375rem,0.5vw,0.5rem)] text-[clamp(0.625rem,0.7vw,0.75rem)] capitalize font-semibold transition hover:border-gold hover:text-gold">
+                        Learn more <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
+                    </a>
+                </div>
+                <div class="relative min-h-[clamp(10rem,12vw,13rem)] overflow-hidden">
+                    <img class="absolute inset-0 h-full w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                </div>
+                <div class="absolute -right-10 -top-24 size-72 rounded-full bg-violet-400/20 blur-3xl"></div>
+                <div class="absolute bottom-5 right-6 flex gap-1.5">
+                    <span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span>
+                </div>
             </div>
-            <a href="#" class="text-action">View all <span class="icon-[basil--arrow-right-outline] size-5" aria-hidden="true"></span></a>
-          </div>
-          <div data-standouts-list class="mt-6 grid gap-4 lg:grid-cols-3 xl:grid-cols-1"></div>
+        </aside>
+
+        <!-- Recommended For You -->
+        <section id="recommended-for-you" data-shelf class="mt-[clamp(1.75rem,2.5vw,2.5rem)] min-w-0">
+            <div class="flex items-center justify-between gap-[clamp(0.75rem,1.25vw,1.5rem)] mb-[clamp(1rem,1.5vw,1.75rem)]">
+                <div class="min-w-0 flex-1 space-y-1">
+                    <h3 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Recommended For You</h3>
+                    <p class="text-[clamp(0.8125rem,0.9vw,1rem)] text-gray-300 tracking-wide">Based on your likes and reading activity</p>
+                </div>
+
+                <div data-shelf-controls class="hidden:hidden flex shrink-0 gap-[clamp(0.375rem,0.6vw,0.75rem)]">
+                    <button data-shelf-prev type="button" aria-label="Previous recommendations" class="flex items-center justify-center size-[clamp(2rem,2.5vw,3rem)] rounded-full border border-gold/40 text-gold transition hover:bg-gold/10 disabled:cursor-default disabled:opacity-35">
+                        <span class="icon-[codicon--chevron-left] size-[clamp(1rem,1.5vw,1.75rem)]"></span>
+                    </button>
+                    <button data-shelf-next type="button" aria-label="Next recommendations" class="flex items-center justify-center size-[clamp(2rem,2.5vw,3rem)] rounded-full border border-gold/40 text-gold transition hover:bg-gold/10 disabled:cursor-default disabled:opacity-35">
+                        <span class="icon-[codicon--chevron-right] size-[clamp(1rem,1.5vw,1.75rem)]"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div data-recommendations-list data-shelf-track aria-label="Recommended titles" class="grid grid-flow-col auto-cols-[clamp(11rem,58vw,18rem)] lg:auto-cols-[minmax(0,1fr)] gap-[clamp(0.75rem,1vw,1rem)] overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
+
+            <template id="recommendation-template">
+                <article class="min-w-0 snap-start p-[clamp(0.375rem,0.5vw,0.5rem)] border border-gold/40 rounded-2xl space-y-[clamp(0.5rem,0.65vw,0.75rem)] relative group overflow-hidden">
+                    <div class="relative">
+                        <img data-img class="w-full h-[clamp(16rem,22vw,24rem)] object-cover rounded-xl" alt="" loading="lazy">
+                        <div data-new class="bg-black absolute top-[clamp(0.375rem,0.5vw,0.5rem)] right-[clamp(0.375rem,0.5vw,0.5rem)] rounded-full hidden">
+                            <span class="block bg-gold/50 text-white font-bold py-1 px-[clamp(0.5rem,0.65vw,0.75rem)] rounded-full text-[clamp(0.625rem,0.65vw,0.75rem)] uppercase">new</span>
+                        </div>
+                    </div>
+                    <p data-title class="font-semibold text-[clamp(0.875rem,1vw,1rem)] leading-snug"></p>
+                    <p data-chapter class="text-[clamp(0.75rem,0.8vw,0.875rem)] text-gray-300 font-semibold"></p>
+                    <div class="pointer-events-none absolute bg-black/30 inset-0 hidden group-hover:block"></div>
+                </article>
+            </template>
         </section>
-      </div>
 
-      <template id="latest-update-template">
-        <article class="flex min-w-0 flex-col rounded-2xl border border-gold/30 p-3 sm:p-4">
-          <div class="grid min-w-0 grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] items-start gap-3">
-            <img class="aspect-[2/3] w-full rounded-xl object-cover" data-img alt="" loading="lazy" />
-            <div class="min-w-0">
-              <h3 data-title class="font-display text-xl leading-tight"></h3>
-              <p data-updated class="mt-2 text-xs text-muted"></p>
-              <p data-description class="mt-3 text-xs leading-relaxed text-gray-400"></p>
-            </div>
-          </div>
-          <div class="mt-auto flex flex-wrap items-center gap-2 pt-4">
-            <a data-link href="#" class="outline-button rounded-lg px-4 text-sm"><span class="icon-[at-icons--play] size-4" aria-hidden="true"></span>Read</a>
-            <button type="button" aria-label="Bookmark" class="icon-button rounded-xl"><span class="icon-[circum--bookmark] size-5" aria-hidden="true"></span></button>
-            <button type="button" aria-label="Add to list" class="icon-button rounded-xl"><span class="icon-[stash--list-add-light] size-5" aria-hidden="true"></span></button>
-          </div>
-        </article>
-      </template>
+        <!-- Continue Reading & creator spotlight -->
+        <section class="flex flex-col lg:flex-row gap-[clamp(1.25rem,2.1vw,2.5rem)] mt-[clamp(1.75rem,2.5vw,2.5rem)]">
+            <section id="continue-reading" data-shelf class="w-full min-w-0 lg:w-auto lg:flex-1">
+                <div class="flex flex-wrap items-center justify-between gap-[clamp(0.5rem,0.8vw,1rem)] mb-[clamp(1rem,1.5vw,1.75rem)]">
+                    <div class="min-w-0 space-y-1">
+                        <h3 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Continue Reading</h3>
+                        <p class="text-[clamp(0.8125rem,0.9vw,1rem)] text-gray-300 tracking-wide">Pick up where you left off</p>
+                    </div>
 
-      <template id="weekly-standout-template">
-        <article class="min-w-0 rounded-2xl border border-gold/30 bg-gold/3 p-3 sm:p-4">
-          <div class="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-3">
-            <div class="relative self-start">
-              <img class="aspect-[2/3] w-full rounded-xl border border-gold/40 object-cover" data-img alt="" loading="lazy" />
-              <span data-rank class="absolute -left-2 -top-2 flex size-7 items-center justify-center rounded-full border border-gold/40 bg-ink font-display text-lg text-gold"></span>
-            </div>
-            <div class="min-w-0">
-              <h3 data-title class="font-display text-lg leading-snug font-semibold"></h3>
-              <p data-description class="mt-2 text-xs leading-relaxed text-gray-300"></p>
-              <div data-genres class="mt-3 flex flex-wrap gap-1 text-gray-300"></div>
-              <template data-genre-template><span class="genre-badge"></span></template>
-            </div>
-          </div>
-          <div class="mt-4 flex flex-wrap items-center justify-between gap-3">
-            <div class="flex gap-2">
-              <a data-link href="#" class="icon-button rounded-full border-gold bg-gold text-ink"><span class="icon-[at-icons--play] size-4" aria-hidden="true"></span></a>
-              <button type="button" aria-label="Bookmark" class="icon-button rounded-xl"><span class="icon-[circum--bookmark] size-5" aria-hidden="true"></span></button>
-              <button type="button" aria-label="Add to list" class="icon-button rounded-full"><span class="icon-[stash--list-add-light] size-5" aria-hidden="true"></span></button>
-            </div>
-            <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-300"><span data-chapter></span><span data-readers></span></div>
-          </div>
-        </article>
-      </template>
+                    <a href="#" class="rounded-full px-[clamp(0.625rem,0.85vw,1rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] border border-gold h-fit flex shrink-0 gap-[clamp(0.375rem,0.45vw,0.5rem)] text-gold font-semibold text-[clamp(0.625rem,0.7vw,0.75rem)] items-center justify-center">
+                        <span>View Library</span>
+                        <span class="icon-[ant-design--right-outlined] size-[clamp(0.75rem,0.85vw,1rem)] shrink-0"></span>
+                    </a>
+                </div>
 
-      <aside class="sponsor section-space overflow-hidden rounded-2xl border border-white/10 bg-panel" aria-label="Sponsored spotlight">
-        <div class="grid md:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-          <div class="min-w-0 px-5 py-6 sm:px-7">
-            <p class="text-[0.625rem] font-bold uppercase tracking-[0.22em] text-gold">Sponsored spotlight</p>
-            <p class="mt-1 text-[0.625rem] uppercase tracking-widest text-white/45">Promoted</p>
-            <h2 class="mt-2 text-lg font-semibold sm:text-xl">Nightforge - limited spring collectibles for devoted readers</h2>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
-            <a href="#" class="outline-button mt-4 text-xs">Learn more <span class="icon-[basil--arrow-right-outline] size-5" aria-hidden="true"></span></a>
-          </div>
-          <div class="relative min-h-40 md:min-h-52">
-            <img class="absolute inset-0 h-full w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="Nightforge collectible editions" loading="lazy" />
-            <div class="absolute bottom-5 right-6 flex gap-1.5" aria-hidden="true"><span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span></div>
-          </div>
-        </div>
-      </aside>
+                <div data-reading-list data-shelf-track aria-label="Continue reading titles" class="grid grid-flow-col auto-cols-[clamp(12rem,65vw,18rem)] md:auto-cols-[minmax(11rem,1fr)] gap-[clamp(0.75rem,1vw,1rem)] overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
 
-      <section id="recommended-for-you" data-shelf class="section-space min-w-0" aria-labelledby="recommended-heading">
-        <div class="section-heading">
-          <div class="min-w-0 space-y-2">
-            <h2 id="recommended-heading" class="section-title font-display">Recommended For You</h2>
-            <p class="text-sm leading-relaxed text-gray-300">Based on your likes and reading activity</p>
-          </div>
-          <div data-shelf-controls class="flex gap-2">
-            <button data-shelf-prev type="button" aria-label="Previous recommendations" aria-controls="recommendations-track" class="icon-button rounded-full"><span class="icon-[codicon--chevron-left] size-6" aria-hidden="true"></span></button>
-            <button data-shelf-next type="button" aria-label="Next recommendations" aria-controls="recommendations-track" class="icon-button rounded-full"><span class="icon-[codicon--chevron-right] size-6" aria-hidden="true"></span></button>
-          </div>
-        </div>
-        <div id="recommendations-track" data-recommendations-list data-shelf-track class="shelf recommendations-shelf mt-6" role="region" aria-label="Recommended stories"></div>
-      </section>
+                <template id="continue-reading-template">
+                    <article class="min-w-0 snap-start p-[clamp(0.5rem,0.65vw,0.75rem)] border border-gold/40 rounded-2xl space-y-[clamp(0.5rem,0.65vw,0.75rem)]">
+                        <div class="relative">
+                            <img class="w-full h-[clamp(14rem,20vw,24rem)] object-cover rounded-xl" data-img alt="" loading="lazy">
+                            <div data-new-chapter class="bg-black absolute top-[clamp(0.375rem,0.5vw,0.5rem)] left-[clamp(0.375rem,0.5vw,0.5rem)] rounded-full hidden">
+                                <span class="block bg-gold/50 text-white font-bold py-1 px-[clamp(0.5rem,0.65vw,0.75rem)] rounded-full text-[clamp(0.625rem,0.65vw,0.75rem)]">New Chapter</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-[clamp(0.5rem,0.65vw,0.75rem)] items-center">
+                            <div data-progress role="progressbar" aria-valuemin="0" aria-valuemax="100" class="flex-1 bg-gray-50/10 rounded-full h-fit">
+                                <div data-progress-fill class="h-[clamp(0.375rem,0.45vw,0.5rem)] bg-gold rounded-full"></div>
+                            </div>
+                            <p data-progress-label class="text-[clamp(0.75rem,0.8vw,0.875rem)]"></p>
+                        </div>
+                        <p data-title class="font-semibold text-[clamp(0.875rem,1vw,1rem)] leading-snug"></p>
+                        <p data-chapter class="text-gray-300 text-[clamp(0.6875rem,0.7vw,0.75rem)] tracking-wide leading-relaxed"></p>
+                        <p class="flex gap-[clamp(0.375rem,0.45vw,0.5rem)] items-center text-gold text-[clamp(0.6875rem,0.7vw,0.75rem)]"><span class="icon-[akar-icons--clock] size-[clamp(0.75rem,0.85vw,1rem)] shrink-0"></span><span data-updated></span></p>
+                        <div class="flex flex-wrap gap-[clamp(0.5rem,0.65vw,0.75rem)] text-gold">
+                            <a
+                                data-link
+                                href="#"
+                                class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.5rem,0.85vw,1rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] border border-gold/40 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
+                            >
+                                <span class="mr-[clamp(0.375rem,0.45vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.875rem,1.05vw,1.25rem)]"></span>
+                                <span>Continue</span>
+                            </a>
+                            <button type="button" aria-label="More options" class="flex shrink-0 items-center justify-center size-[clamp(2rem,2.1vw,2.5rem)] rounded-xl border border-gold/40">
+                                <span class="icon-[ant-design--ellipsis-outlined] size-[clamp(1.125rem,1.25vw,1.5rem)]"></span>
+                            </button>
+                        </div>
+                    </article>
+                </template>
+            </section>
 
-      <template id="recommendation-template">
-        <article class="group relative min-w-0 snap-start rounded-2xl border border-gold/30 p-2 transition-colors hover:border-gold/70">
-          <div class="relative">
-            <img data-img class="aspect-[2/3] w-full rounded-xl object-cover" alt="" loading="lazy" />
-            <div data-new class="absolute top-2 right-2 hidden rounded-full bg-ink"><span class="block rounded-full bg-gold/20 px-3 py-1 text-xs font-bold text-gold uppercase">New</span></div>
-          </div>
-          <h3 data-title class="mt-3 px-1 text-base leading-snug font-semibold"></h3>
-          <p data-chapter class="mt-2 px-1 pb-2 text-sm text-gray-300"></p>
-        </article>
-      </template>
-
-      <div class="section-space grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
-        <section id="continue-reading" data-shelf class="min-w-0" aria-labelledby="reading-heading">
-          <div class="section-heading">
-            <div class="min-w-0 space-y-2">
-              <h2 id="reading-heading" class="section-title font-display">Continue Reading</h2>
-              <p class="text-sm leading-relaxed text-gray-300">Pick up where you left off</p>
-            </div>
-            <a href="#" class="outline-button text-xs">View Library <span class="icon-[ant-design--right-outlined] size-4" aria-hidden="true"></span></a>
-          </div>
-          <div data-shelf-controls class="mt-4 flex gap-2">
-            <button data-shelf-prev type="button" aria-label="Previous reading history" aria-controls="reading-track" class="icon-button rounded-full"><span class="icon-[codicon--chevron-left] size-6" aria-hidden="true"></span></button>
-            <button data-shelf-next type="button" aria-label="Next reading history" aria-controls="reading-track" class="icon-button rounded-full"><span class="icon-[codicon--chevron-right] size-6" aria-hidden="true"></span></button>
-          </div>
-          <div id="reading-track" data-reading-list data-shelf-track class="shelf reading-shelf mt-6" role="region" aria-label="Continue reading stories"></div>
+            <div data-creator-spotlight="tatsuki-fujimoto" class="w-full min-w-0 lg:w-[40%] lg:shrink-0"></div>
         </section>
-        <div data-creator-spotlight="tatsuki-fujimoto" class="min-w-0"></div>
-      </div>
 
-      <template id="continue-reading-template">
-        <article class="flex min-w-0 snap-start flex-col rounded-2xl border border-gold/30 p-3">
-          <div class="relative">
-            <img class="aspect-[2/3] w-full rounded-xl object-cover" data-img alt="" loading="lazy" />
-            <div data-new-chapter class="absolute top-2 left-2 hidden max-w-[calc(100%-1rem)] rounded-full bg-ink"><span class="block rounded-full bg-gold/20 px-3 py-1 text-xs text-gold">New Chapter</span></div>
-          </div>
-          <div class="mt-4 flex items-center gap-3">
-            <div data-progress role="progressbar" aria-valuemin="0" aria-valuemax="100" class="min-w-0 flex-1 rounded-full bg-white/10"><div data-progress-fill class="h-1.5 rounded-full bg-gold"></div></div>
-            <p data-progress-label class="shrink-0 text-xs text-gold"></p>
-          </div>
-          <h3 data-title class="mt-3 font-semibold leading-snug"></h3>
-          <p data-chapter class="mt-2 text-xs leading-relaxed text-gray-300"></p>
-          <p class="mt-2 flex items-center gap-2 text-xs text-gold"><span class="icon-[akar-icons--clock] size-4 shrink-0" aria-hidden="true"></span><span data-updated></span></p>
-          <div class="mt-auto flex flex-wrap gap-2 pt-4">
-            <a data-link href="#" class="outline-button rounded-lg px-3 text-sm"><span class="icon-[at-icons--play] size-4" aria-hidden="true"></span>Continue</a>
-            <button type="button" aria-label="More options" class="icon-button rounded-xl"><span class="icon-[ant-design--ellipsis-outlined] size-6" aria-hidden="true"></span></button>
-          </div>
-        </article>
-      </template>
-    </main>
+    </section>
 
+    <!-- shared creator spotlight template -->
     <template id="creator-spotlight-template">
-      <article class="@container/creator relative isolate h-full min-w-0 rounded-xl border border-gold/40 bg-ink p-4 sm:p-5">
-          <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit]" aria-hidden="true">
-              <div class="absolute right-0 top-0 w-3/4 max-w-xl opacity-40 @min-[36rem]/creator:opacity-75">
-                  <img loading="lazy" data-creator-image class="block h-auto w-full" alt="">
-                  <div class="absolute inset-0 bg-linear-to-r from-ink via-ink/40 to-transparent"></div>
+      <div class="border border-gold/40 w-full h-full min-h-[clamp(20rem,20vw,24rem)] rounded-lg p-[clamp(0.75rem,1.05vw,1.25rem)] relative bg-ink">
+          <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit]" aria-hidden="true">
+              <div class="absolute top-0 right-0 w-2/3">
+                  <img data-creator-image class="block w-full h-auto" alt="">
+                  <div class="absolute inset-0 bg-linear-to-r from-ink via-ink/30 to-transparent"></div>
                   <div class="absolute inset-0 bg-linear-to-t from-ink via-transparent to-transparent"></div>
               </div>
           </div>
-          <div class="relative">
-              <div class="mb-4 flex items-center gap-3">
-                  <span class="text-3xl text-gold" aria-hidden="true">✦</span>
-                  <p class="text-[0.65rem] uppercase tracking-[0.15em] text-gold @min-[24rem]/creator:text-xs">creator spotlight</p>
+          <div class="relative z-10">
+              <div class="flex items-center gap-[clamp(0.5rem,0.625vw,0.75rem)] mb-[clamp(0.75rem,1.05vw,1.25rem)]">
+                  <span class="text-[clamp(1.5rem,1.875vw,2.25rem)] text-gold">✦</span>
+                  <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] text-gold tracking-[clamp(0.12rem,0.167vw,0.2rem)] uppercase">creator spotlight</p>
               </div>
-              <h3 data-creator-name class="mb-3 max-w-xl font-display text-3xl font-semibold leading-tight tracking-wide @min-[24rem]/creator:text-4xl @min-[36rem]/creator:text-5xl"></h3>
-              <p class="mb-4 max-w-md text-sm leading-relaxed @min-[36rem]/creator:max-w-[65%] @min-[36rem]/creator:text-base"><span data-tagline></span> <span data-tagline-highlight class="text-gold"></span></p>
-              <p data-bio class="mb-6 max-w-xl text-sm leading-relaxed text-gray-300 @min-[36rem]/creator:max-w-[60%]"></p>
-              <div class="mb-6 grid max-w-md grid-cols-3 divide-x divide-gold/40">
-                  <div class="space-y-1 pr-2 @min-[24rem]/creator:pr-4">
-                      <p data-work-count class="font-display text-2xl text-gold"></p>
-                      <p class="text-[0.6rem] uppercase tracking-wider text-gray-300 @min-[24rem]/creator:text-xs">works</p>
+              <p data-creator-name class="text-[clamp(1.875rem,2.5vw,3rem)] tracking-wide font-semibold font-display mb-[clamp(0.5rem,0.625vw,0.75rem)]"></p>
+              <p class="text-[clamp(0.75rem,calc(0.5rem_+_0.417vw),1rem)] mb-[clamp(0.75rem,0.834vw,1rem)]"><span data-tagline></span> <span data-tagline-highlight class="text-gold"></span></p>
+              <p data-bio class="text-xs text-gray-300 leading-relaxed max-w-2/3 2xl:max-w-1/2 mb-[clamp(1rem,1.46vw,1.75rem)]"></p>
+              <div class="flex mb-[clamp(1rem,1.46vw,1.75rem)]">
+                  <div class="pr-[clamp(0.5rem,0.9vw,1.125rem)] border-r border-gold/40 space-y-1">
+                      <p data-work-count class="text-[clamp(1.25rem,1.25vw,1.5rem)] font-display text-gold"></p>
+                      <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-[clamp(0.04rem,0.067vw,0.08rem)] uppercase text-gray-300">works</p>
                   </div>
-                  <div class="space-y-1 px-2 @min-[24rem]/creator:px-4">
-                      <p data-followers class="font-display text-2xl text-gold"></p>
-                      <p class="text-[0.6rem] uppercase tracking-wider text-gray-300 @min-[24rem]/creator:text-xs">followers</p>
+                  <div class="px-[clamp(0.5rem,0.9vw,1.125rem)] border-r border-gold/40 space-y-1">
+                      <p data-followers class="text-[clamp(1.25rem,1.25vw,1.5rem)] font-display text-gold"></p>
+                      <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-[clamp(0.04rem,0.067vw,0.08rem)] uppercase text-gray-300">followers</p>
                   </div>
-                  <div class="space-y-1 pl-2 @min-[24rem]/creator:pl-4">
-                      <p data-average-views class="font-display text-2xl text-gold"></p>
-                      <p class="text-[0.6rem] uppercase tracking-wider text-gray-300 @min-[24rem]/creator:text-xs">avg. views</p>
+                  <div class="px-[clamp(0.5rem,0.9vw,1.125rem)] space-y-1">
+                      <p data-average-views class="text-[clamp(1.25rem,1.25vw,1.5rem)] font-display text-gold"></p>
+                      <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-[clamp(0.04rem,0.067vw,0.08rem)] uppercase text-gray-300">avg. views</p>
                   </div>
               </div>
 
-              <div class="mb-6 grid max-w-md grid-cols-1 gap-3 @min-[24rem]/creator:grid-cols-2">
-                  <button type="button" class="flex min-h-11 items-center justify-center gap-2 rounded-full border border-gold/70 px-4 py-2.5 text-sm text-gold transition hover:bg-gold/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
-                      <span class="icon-[basil--user-plus-outline] size-5 shrink-0" aria-hidden="true"></span>
+              <div class="flex flex-wrap gap-[clamp(0.5rem,1.05vw,1.25rem)] mb-[clamp(1rem,1.46vw,1.75rem)]">
+                  <button type="button" class="flex gap-[clamp(0.375rem,0.417vw,0.5rem)] items-center rounded-full px-[clamp(0.75rem,1.05vw,1.25rem)] py-[clamp(0.5rem,0.625vw,0.75rem)] text-[clamp(0.75rem,0.73vw,0.875rem)] text-gold border border-gold/70">
+                      <span class="icon-[basil--user-plus-outline] size-[clamp(1rem,1.05vw,1.25rem)] shrink-0"></span>
                       <span>Follow Creator</span>
                   </button>
-                  <button type="button" class="flex min-h-11 items-center justify-center gap-2 rounded-full border border-gold/70 px-4 py-2.5 text-sm text-gold transition hover:bg-gold/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
+                  <button type="button" class="flex gap-[clamp(0.375rem,0.417vw,0.5rem)] items-center rounded-full px-[clamp(0.75rem,1.05vw,1.25rem)] py-[clamp(0.5rem,0.625vw,0.75rem)] text-[clamp(0.75rem,0.73vw,0.875rem)] text-gold border border-gold/70">
                       <span>View Portfolio</span>
-                      <span class="icon-[basil--arrow-right-outline] size-5 shrink-0" aria-hidden="true"></span>
+                      <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.05vw,1.25rem)] shrink-0"></span>
                   </button>
               </div>
 
-              <div class="max-w-3xl">
-                  <div data-works class="grid min-w-0 snap-x snap-proximity auto-cols-[9rem] grid-flow-col gap-4 overflow-x-auto overscroll-x-contain px-3 py-3 @min-[24rem]/creator:auto-cols-auto @min-[24rem]/creator:grid-flow-row @min-[24rem]/creator:grid-cols-3" tabindex="0" role="region" aria-label="Featured creator works; scroll to see more"></div>
+              <div class="relative @container">
+                  <!-- Leave room for the skew and, on wider panels, the bottom-right controls. -->
+                  <div data-works class="grid min-w-0 grid-cols-3 gap-[clamp(0.5rem,0.834vw,1rem)] px-[clamp(0.75rem,0.834vw,1rem)] pb-[clamp(0.5rem,0.834vw,1rem)] @min-[36rem]:mr-28"></div>
                   <template data-work-template>
-                      <div class="min-w-0 -skew-x-3 snap-start overflow-hidden rounded-xl border border-gold/70 bg-ink">
-                          <div class="aspect-square overflow-hidden">
-                              <img class="-ml-2 h-full w-[calc(100%+1rem)] max-w-none skew-x-3 object-cover" data-img alt="" loading="lazy">
+                      <div class="min-w-0 -skew-x-6 border border-gold/70 rounded-xl overflow-hidden bg-ink">
+                          <div class="aspect-square">
+                              <img class="w-[calc(100%+2rem)] max-w-none -ml-4 h-full skew-x-6 object-cover" data-img alt="">
                           </div>
-                          <div class="skew-x-3 px-3 py-3">
-                              <p data-title class="mb-2 break-words text-xs font-semibold uppercase leading-relaxed tracking-wide"></p>
-                              <div data-genres class="mb-2 flex flex-wrap gap-1 text-[0.625rem]">
+                          <div class="skew-x-6 px-[clamp(0.375rem,0.5vw,0.625rem)] py-[clamp(0.5rem,0.521vw,0.625rem)]">
+                              <p data-title class="uppercase text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-wide break-words mb-[clamp(0.25rem,0.417vw,0.5rem)]"></p>
+                              <div data-genres class="flex gap-[clamp(0.125rem,0.208vw,0.25rem)] text-[clamp(0.5625rem,0.521vw,0.625rem)] flex-wrap mb-[clamp(0.25rem,0.417vw,0.5rem)]">
                                   <template data-genre-template>
-                                      <span class="rounded-full bg-gray-50/10 px-1.5 py-0.5"></span>
+                                      <span class="bg-gray-50/10 px-[clamp(0.25rem,0.313vw,0.375rem)] py-0.5 rounded-full"></span>
                                   </template>
                               </div>
-                              <div class="flex items-center gap-1">
-                                  <span class="icon-[clarity--eye-line] size-4 shrink-0" aria-hidden="true"></span>
-                                  <span data-views class="text-xs"></span>
+                              <div class="flex gap-1 items-center">
+                                  <span class="icon-[clarity--eye-line] size-[clamp(0.75rem,0.834vw,1rem)] shrink-0"></span>
+                                  <span data-views class="text-[clamp(0.625rem,0.625vw,0.75rem)]"></span>
                               </div>
                           </div>
                       </div>
                   </template>
 
-                  <div class="mt-1 flex items-center justify-end gap-2">
+                  <div class="flex items-center justify-end gap-2 @min-[36rem]:absolute @min-[36rem]:right-0 @min-[36rem]:bottom-0">
                       <div data-work-dots class="flex gap-1" role="group" aria-label="Creator work pages"></div>
                       <template data-work-dot-template>
-                          <button type="button" class="group flex size-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span class="h-1 w-3 rounded-full bg-gray-50/20 group-aria-pressed:bg-gold"></span></button>
+                          <button type="button" class="h-[clamp(0.125rem,0.208vw,0.25rem)] w-[clamp(0.5rem,0.625vw,0.75rem)] bg-gray-50/10 rounded-full aria-pressed:bg-gold"></button>
                       </template>
-                      <button data-next-works type="button" aria-label="Next creator works" class="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/70 transition hover:bg-gold/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold disabled:cursor-default disabled:opacity-40">
-                          <span class="icon-[basil--arrow-right-outline] size-6 text-gold" aria-hidden="true"></span>
+                      <button data-next-works type="button" aria-label="Next creator works" class="flex shrink-0 justify-center items-center size-[clamp(1.75rem,2.084vw,2.5rem)] rounded-full border border-gold/70 disabled:cursor-default disabled:opacity-40">
+                          <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.46vw,1.75rem)] text-gold"></span>
                       </button>
                   </div>
               </div>
+
           </div>
-      </article>
+      </div>
     </template>
 
     <script type="module" src="/src/workbench.ts"></script>

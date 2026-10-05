@@ -91,7 +91,7 @@ function initCarousel(root: HTMLElement, template: HTMLTemplateElement, slides: 
     dot.setAttribute('role', 'tab')
     dot.setAttribute('aria-label', `Go to ${s.title}`)
     dot.className =
-      'h-1.5 w-6 rounded-full bg-white/20 transition-all duration-300 hover:bg-white/40 aria-selected:w-8 aria-selected:bg-gold'
+      'h-1.5 w-6 lg:h-0.75 lg:w-4 2xl:h-1.5 2xl:w-6 rounded-full bg-white/20 transition-all duration-300 hover:bg-white/40 aria-selected:w-8 aria-selected:lg:w-6 aria-selected:2xl:w-8 aria-selected:bg-gold'
     dot.addEventListener('click', () => goTo(i))
     dotsEl.append(dot)
     return dot

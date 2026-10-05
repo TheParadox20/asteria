@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>landing</title>
   </head>
-  <body class="text-white my-10">
+  <body class="text-white my-10 lg:my-5 2xl:my-10">
     <!-- carousel -->
     <section
       id="hero-carousel"
-      class="mt-7"
+      class="mt-7 lg:mt-4 2xl:mt-7"
       aria-roledescription="carousel"
       aria-label="Trending series"
     >
@@ -28,17 +28,17 @@
           data-prev
           type="button"
           aria-label="Previous slide"
-          class="absolute top-1/2 left-[calc(5%-1.375rem)] z-20 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
+          class="absolute top-1/2 left-[calc(5%-1.375rem)] z-20 hidden size-11 lg:size-8 2xl:size-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
         >
-          <span class="icon-[codicon--chevron-left] size-5"></span>
+          <span class="icon-[codicon--chevron-left] size-5 lg:size-4 2xl:size-5"></span>
         </button>
         <button
           data-next
           type="button"
           aria-label="Next slide"
-          class="absolute top-1/2 right-[calc(5%-1.375rem)] z-20 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
+          class="absolute top-1/2 right-[calc(5%-1.375rem)] z-20 hidden size-11 lg:size-8 2xl:size-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
         >
-          <span class="icon-[codicon--chevron-right] size-5"></span>
+          <span class="icon-[codicon--chevron-right] size-5 lg:size-4 2xl:size-5"></span>
         </button>
 
         <!-- dots stay fixed over the active slide while the track moves underneath -->
@@ -55,7 +55,7 @@
     <template id="slide-template">
       <article
         aria-roledescription="slide"
-        class="group relative h-110 shrink-0 basis-full cursor-pointer snap-center overflow-hidden rounded-2xl border border-white/10 opacity-40 transition-all duration-500 ease-out scale-y-90 data-active:cursor-default data-active:opacity-100 data-active:scale-y-100 md:h-180"
+        class="group relative h-110 md:h-180 lg:h-100 2xl:h-180 shrink-0 basis-full cursor-pointer snap-center overflow-hidden rounded-2xl border border-white/10 opacity-40 transition-all duration-500 ease-out scale-y-90 data-active:cursor-default data-active:opacity-100 data-active:scale-y-100"
       >
         <!-- layer 1: full-bleed artwork -->
         <img data-img alt="" class="absolute inset-0 h-full w-full object-cover object-right" />
@@ -66,62 +66,66 @@
         <!-- layer 3: copy (hidden on the peeking slides) -->
         <div
           data-content
-          class="relative z-10 flex h-full max-w-md flex-col justify-end p-8 pb-24 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:justify-center md:p-12 md:pb-24"
+          class="relative z-10 flex h-full max-w-md lg:max-w-sm 2xl:max-w-md flex-col justify-end p-8 pb-24 opacity-0 transition-opacity duration-500 group-data-active:opacity-100 md:justify-center md:p-12 md:pb-24"
         >
-          <p data-eyebrow class="text-xs font-semibold tracking-wider text-gold uppercase"></p>
-          <h2 data-title class="mt-3 font-display text-5xl leading-[1.05] md:text-6xl"></h2>
-          <p data-tagline class="mt-4 max-w-xs text-sm leading-relaxed text-muted md:text-base"></p>
+          <p data-eyebrow class="text-xs lg:text-[0.5rem] 2xl:text-xs font-semibold tracking-wider text-gold uppercase"></p>
+          <h2 data-title class="mt-3 font-display text-5xl leading-[1.05] md:text-6xl lg:text-5xl 2xl:text-6xl"></h2>
+          <p data-tagline class="mt-4 max-w-xs text-sm leading-relaxed text-muted md:text-base lg:text-sm 2xl:text-base"></p>
 
           <div class="mt-6 flex items-center gap-5">
             <a
               data-link
               href="#"
-              class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-6 py-3 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110"
+              class="flex shrink-0 items-center justify-center lg:text-xs 2xl:text-base whitespace-nowrap rounded-lg lg:rounded-md 2xl:rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-6 py-3 lg:px-3 lg:py-2 2xl:px-6 2xl:py-3 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110"
             >
-              <span class="mr-2 icon-[at-icons--play] size-5"></span>
+              <span class="mr-2 icon-[at-icons--play] size-5 lg:size-4 2xl:size-5"></span>
               <span>Read Now</span>
             </a>
             <button
               type="button"
               aria-label="Add to library"
-              class="flex size-11 items-center justify-center rounded-full border border-white/40 transition hover:border-white hover:bg-white/10"
+              class="flex size-11 lg:size-8 2xl:size-11 items-center justify-center rounded-full border border-white/40 transition hover:border-white hover:bg-white/10"
             >
-              <span class="icon-[codicon--add] size-5"></span>
+              <span class="icon-[codicon--add] size-5 lg:size-4 2xl:size-5"></span>
             </button>
           </div>
         </div>
       </article>
     </template>
     
-    <section class="mx-10">
+    <section class="mx:2 md:mx-10 lg:mx-7 2xl:mx-10">
         <!-- sponsored content -->
         <aside class="mt-7 overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
-            <div class="grid min-h-36 md:grid-cols-[1.5fr_1fr] relative">
-                <div class="flex flex-col justify-center px-6 py-7 sm:px-8">
-                <p class="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
-                <span class="mt-1 text-[0.68rem] uppercase tracking-widest text-white/45">Promoted</span>
-                <h2 class="mt-2 text-lg font-semibold sm:text-xl">Nightforge - limited spring collectibles for devoted readers</h2>
-                <p class="mt-1 text-sm text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
-                <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs capitalize font-semibold transition hover:border-gold hover:text-gold">Learn more <span class="icon-[basil--arrow-right-outline] w-5 h-5"/></a>
+            <div class="grid md:grid-cols-[1.5fr_1fr] relative">
+                <div class="flex flex-col justify-center px-6 py-7 lg:px-4 lg:py-5 2xl:px-6 2xl:py-7 sm:px-8">
+                    <p class="text-[0.68rem] lg:text-[0.58rem] 2xl:text-[0.68rem] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
+                    <span class="mt-1 text-[0.68rem] lg:text-[0.58rem] 2xl:text-[0.68rem] uppercase tracking-widest text-white/45">Promoted</span>
+                    <h2 class="mt-2 text-lg lg:text-base 2xl:text-lg font-semibold sm:text-xl">Nightforge - limited spring collectibles for devoted readers</h2>
+                    <p class="mt-1 text-sm lg:text-xs 2xl:text-sm text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
+                    <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs lg:text-[0.65rem] 2xl:text-xs capitalize font-semibold transition hover:border-gold hover:text-gold">
+                        Learn more <span class="icon-[basil--arrow-right-outline] size-5 lg:size-4 2xl:size-5"/>
+                    </a>
                 </div>
                 <!-- <div class="relative min-h-32 overflow-hidden bg-linear-to-br from-violet-950 via-purple-800/70 to-fuchsia-950"> -->
-                <img class="h-52 w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                <img class="h-52 lg:h-44 2xl:h-52 w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
                 <div class="absolute -right-10 -top-24 size-72 rounded-full bg-violet-400/20 blur-3xl"></div>
-                <div class="absolute bottom-5 right-6 flex gap-1.5"><span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span></div>
+                <div class="absolute bottom-5 right-6 flex gap-1.5">
+                    <span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span>
+                </div>
                 </div>
             </div>
         </aside>
 
         <!-- Asteria originals & creator spotlight -->
-        <section class="mt-10 flex gap-10">
+        <section class="mt-10 flex flex-col lg:flex-row gap-10">
             <!-- Asteria originals -->
             <div>
                 <div class="flex justify-between">
                     <div class="flex gap-5">
-                        <span class="text-4xl text-gold">✦</span>
-                        <div class="space-y-2">
-                            <h2 class="text-4xl font-display">Asteria Originals</h2>
-                            <p class="text-sm text-gold">Original stories. Fresh voices. Infinite worlds.</p>
+                        <span class="text-lg md:text-4xl lg:text-2xl 2xl:text-4xl text-gold">✦</span>
+                        <div class="md:space-y-2">
+                            <h2 class="text-2xl md:text-4xl lg:text-4xl 2xl:text-4xl font-display">Asteria Originals</h2>
+                            <p class="text-sm text-gold hidden md:block">Original stories. Fresh voices. Infinite worlds.</p>
                         </div>
                     </div>
                     <button class="text-xs font-semibold capitalize flex items-center gap-1 text-gold transition hover:text-gold/70">
@@ -129,18 +133,38 @@
                         <span class="icon-[basil--arrow-right-outline] w-6 h-6">
                     </button>
                 </div>
+                <p class="text-sm text-gold block md:hidden mt-2">Original stories. Fresh voices. Infinite worlds.</p>
 
-                <div class="flex mt-7 gap-2">
-                    <div class="border border-gold/20 w-[39vw] min-h-96 rounded-lg p-2">
+                <div class="flex flex-col lg:flex-row mt-7 gap-2">
+                    <div class="border border-gold/20 md:w-[37.55vw] min-h-96 rounded-lg p-2">
                         <div class="flex gap-7">
-                            <img class="rounded-xl w-60" src="/assets/last-bloom-fixed.png" alt="">
+                            <div class="x">
+                                <img class="rounded-xl w-52 md:w-60" src="/assets/last-bloom-fixed.png" alt="">
+                                <div class="flex md:hidden gap-3 mt-4">
+                                    <a
+                                        data-link
+                                        href="#"
+                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-3 py-2 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-sm"
+                                    >
+                                        <span class="mr-2 icon-[at-icons--play] size-3"></span>
+                                        <span>Read Now</span>
+                                    </a>
+                                    <button class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40 text-gold">
+                                        <span class="icon-[circum--bookmark] size-6"></span>
+                                    </button>
+                                    <button class="flex items-center justify-center w-10 h-10 rounded-full border border-gold/40 text-gold">
+                                        <span class="icon-[stash--list-add-light] size-6"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            
                             <div class="flex flex-col">
-                                <div class="w-2/3 space-y-3">
+                                <div class="md:w-2/3 space-y-3">
                                     <p class="text-[0.625rem] uppercase font-bold text-gold rounded-full bg-gold/10 border border-gold/40 w-fit px-2 py-1">asteria originals</p>
-                                    <p class="text-4xl font-display">The Last Bloom</p>
+                                    <p class="text-xl md:text-4xl lg:text2xl 2xl:text-4xl font-display">The Last Bloom</p>
                                     <p class="text-sm text-gold/70">Some flowers only bloom once - and some stories are worth waiting for </p>
                                     
-                                    <div class="flex gap-3">
+                                    <div class="flex gap-3 flex-wrap">
                                         <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1">Romace</p>
                                         <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1">Fantasy</p>
                                         <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1">Drama</p>
@@ -153,7 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex gap-3 mt-auto">
+                                <div class="hidden md:flex gap-3 mt-auto">
                                     <a
                                         data-link
                                         href="#"
@@ -186,7 +210,7 @@
                     </div>
                     
                     <!-- Originals Spotlight -->
-                    <div id="originals-spotlight" class="border border-gold/40 w-[20vw] min-h-96 rounded-lg p-2 space-y-3">
+                    <div id="originals-spotlight" class="border border-gold/40 md:w-[20vw] min-h-96 rounded-lg p-2 space-y-3">
                         <h5 class="flex items-center gap-2">
                             <span class="text-xl text-gold">✦</span>
                             <span class="text-g font-semibold font-display">Originals Spotlight</span>
@@ -219,7 +243,7 @@
             </div>
 
             <!-- creator spotlight -->
-            <div data-creator-spotlight="tatsuki-fujimoto" class="w-[40vw]"></div>
+            <div data-creator-spotlight="tatsuki-fujimoto" class="md:w-[40vw]"></div>
         </section>
 
         <!-- Latest Updates & Weekly Standouts -->
@@ -480,6 +504,7 @@
             <div data-creator-spotlight="tatsuki-fujimoto" class="w-[40vw]"></div>
          </section>
     </section>
+    
     <!-- shared creator spotlight template -->
     <template id="creator-spotlight-template">
       <div class="border border-gold/40 w-full h-full min-h-96 rounded-lg p-5 relative bg-ink">

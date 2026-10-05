@@ -1,5 +1,4 @@
 import './main'
-import './workbench.css'
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
