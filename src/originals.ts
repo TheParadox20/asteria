@@ -171,49 +171,22 @@ function synchronizeState() {
     : 'My library')
 }
 
-function createCard(item: Series): HTMLElement {
-  const card = document.createElement('article')
-  card.className = 'series-card'
+const cardTemplate = document.querySelector<HTMLTemplateElement>('#original-series-card-template')!
 
-  const poster = document.createElement('button')
-  poster.type = 'button'
-  poster.className = 'series-poster'
-  poster.dataset.openSeries = item.id
-  poster.setAttribute('aria-label', `Explore series: ${item.title}`)
-  const image = document.createElement('img')
+function createCard(item: Series): HTMLElement {
+  const card = cardTemplate.content.firstElementChild!.cloneNode(true) as HTMLElement
+  const image = card.querySelector<HTMLImageElement>('[data-img]')!
   image.src = imagePath(item)
   image.alt = item.title
-  image.width = 400
-  image.height = 600
-  image.loading = 'lazy'
-  image.decoding = 'async'
-  const action = document.createElement('span')
-  action.className = 'poster-action'
-  action.innerHTML = '<span class="icon-[ph--book-open]" aria-hidden="true"></span><span>Explore series</span>'
-  poster.append(image, action)
 
-  const copy = document.createElement('div')
-  copy.className = 'series-card-copy'
-  const name = document.createElement('button')
-  name.type = 'button'
-  name.className = 'series-name'
-  name.dataset.openSeries = item.id
-  name.textContent = item.title
-  const genres = document.createElement('p')
-  genres.className = 'series-genre'
-  genres.textContent = item.genres.slice(0, 2).join(' · ')
-  const stats = document.createElement('div')
-  stats.className = 'series-stats'
-  const chapters = document.createElement('span')
-  chapters.textContent = `${item.chapters} chapters`
-  const like = document.createElement('button')
-  like.type = 'button'
-  like.className = 'like-button'
-  like.dataset.likeSeries = item.id
-  like.innerHTML = '<span class="icon-[ph--heart]" aria-hidden="true"></span><span data-like-count></span>'
-  stats.append(chapters, like)
-  copy.append(name, genres, stats)
-  card.append(poster, copy)
+  card.querySelectorAll<HTMLButtonElement>('[data-open-series]').forEach((button) => {
+    button.dataset.openSeries = item.id
+  })
+  card.querySelector('[data-open-series]')!.setAttribute('aria-label', `Explore series: ${item.title}`)
+  setText('[data-title]', item.title, card)
+  setText('[data-genres]', item.genres.slice(0, 2).join(' · '), card)
+  setText('[data-chapters]', `${item.chapters} chapters`, card)
+  card.querySelector<HTMLButtonElement>('[data-like-series]')!.dataset.likeSeries = item.id
   return card
 }
 
@@ -349,11 +322,10 @@ const heroDescriptions: Record<string, string> = {
   ashes: 'A city built on secrets. A survivor with no past. Some memories are better left buried.',
   villain: 'He knows how this story ends. This time, the villain is writing his own fate.',
 }
+const heroDotTemplate = document.querySelector<HTMLTemplateElement>('#original-hero-dot-template')!
 let currentSlide = 0
 const dots = heroSlides.map((item, index) => {
-  const button = document.createElement('button')
-  button.type = 'button'
-  button.className = 'hero-dot'
+  const button = heroDotTemplate.content.firstElementChild!.cloneNode(true) as HTMLButtonElement
   button.setAttribute('aria-label', `Show ${item.title}`)
   button.addEventListener('click', () => showHero(index))
   button.addEventListener('keydown', (event) => {

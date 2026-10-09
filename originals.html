@@ -9,137 +9,194 @@
     <link rel="preload" as="image" href="/assets/originals/between-two-suns.webp" fetchpriority="high" />
     <title>Asteria Originals | Original stories. Infinite worlds.</title>
   </head>
-  <body class="originals-page">
-    <a class="originals-skip-link" href="#main">Skip to stories</a>
+  <body class="originals-page [--originals-gutter:clamp(1.25rem,4.8vw,6rem)] min-w-[320px] overflow-x-clip text-[#f4f2ed] antialiased [&_[hidden]]:hidden! [&.dialog-open]:overflow-hidden">
+    <a class="py-3 px-4 [-webkit-tap-highlight-color:transparent] no-underline touch-manipulation fixed top-4 left-4 z-5 -translate-y-[200%] rounded-lg bg-gold text-ink focus:translate-y-0" href="#main">Skip to stories</a>
 
     <main id="main">
-      <section class="originals-hero" data-hero aria-roledescription="carousel" aria-label="Featured originals">
-        <div class="hero-artwork" aria-hidden="true">
-          <img data-hero-image src="/assets/originals/between-two-suns.webp" alt="" width="1200" height="1298" fetchpriority="high" />
+      <!-- featured originals -->
+      <section class="relative isolate touch-pan-y" data-hero aria-roledescription="carousel" aria-label="Featured originals">
+        <!-- hero artwork -->
+        <div class="absolute top-0 right-0 -bottom-16 left-[25%] -z-1 overflow-hidden after:content-[''] after:absolute after:inset-0 after:[background:linear-gradient(90deg,var(--color-ink)_0%,rgb(3_5_12/83%)_12%,rgb(3_5_12/26%)_40%,transparent_70%),linear-gradient(0deg,var(--color-ink)_0%,rgb(3_5_12/40%)_23%,transparent_70%),linear-gradient(180deg,rgb(3_5_12/20%),transparent_25%)] min-[120rem]:right-[max(0px,calc((100vw-124rem)/2))] max-lg:left-[20%] max-md:top-0 max-md:right-0 max-md:bottom-auto max-md:left-0 max-md:h-132 max-md:after:[background:linear-gradient(0deg,var(--color-ink)_0%,rgb(3_5_12/97%)_12%,rgb(3_5_12/68%)_37%,rgb(3_5_12/4%)_85%),linear-gradient(90deg,rgb(3_5_12/30%),transparent)]" aria-hidden="true">
+          <img data-hero-image src="/assets/originals/between-two-suns.webp" alt="" width="1200" height="1298" fetchpriority="high" class="size-full object-cover object-[55%_35%] max-md:object-[60%_27%]" />
         </div>
-        <div class="hero-inner page-width">
-          <div class="hero-copy">
-            <p class="originals-eyebrow"><span class="icon-[ph--sparkle-fill]" aria-hidden="true"></span> Only on Asteria</p>
-            <h2 class="hero-title" data-hero-title aria-live="polite" aria-atomic="true">Between Two Suns</h2>
-            <p class="hero-genres" data-hero-genres>Fantasy · Adventure</p>
-            <p class="hero-description" data-hero-description>Two worlds. One shared sky. A girl caught between them must decide where she belongs.</p>
-            <div class="hero-actions">
-              <button class="originals-button gold-button" type="button" data-hero-open data-open-series="between-two-suns">
-                <span class="icon-[ph--book-open]" aria-hidden="true"></span> Explore series
+        <!-- hero copy -->
+        <div class="mx-auto w-[calc(100%-var(--originals-gutter)*2)] max-w-432 relative min-h-[clamp(32rem,42vw,43rem)] flex flex-col justify-center pt-12 pb-27 max-md:justify-end max-md:min-h-148 max-md:pt-58 max-md:pb-22">
+          <div class="w-[47%] max-w-148 max-lg:w-[55%] max-md:w-full max-md:max-w-124">
+            <p class="gap-2.5 flex items-center text-gold uppercase text-[0.6875rem] font-semibold tracking-[0.19em] max-md:text-[0.625rem]"><span class="icon-[ph--sparkle-fill] size-4 inline-block shrink-0" aria-hidden="true"></span> Only on Asteria</p>
+            <h2 class="mt-5 max-w-[9em] font-normal text-[clamp(3.25rem,5.7vw,6.5rem)] leading-[1.04] font-display tracking-[-0.035em] text-balance max-lg:text-[clamp(3.25rem,6.5vw,4.75rem)] max-md:max-w-[8.5em] max-md:mt-4 max-md:text-[clamp(2.75rem,9.8vw,4rem)]" data-hero-title aria-live="polite" aria-atomic="true">Between Two Suns</h2>
+            <p class="mt-6 text-[#d1c5aa] text-[clamp(0.75rem,1vw,0.9375rem)] max-md:mt-4" data-hero-genres>Fantasy · Adventure</p>
+            <p class="max-w-116 mt-3.5 text-[#b7bbc6] text-[clamp(0.875rem,1.15vw,1.0625rem)] leading-[1.8] text-pretty max-md:mt-3 max-md:max-w-100 max-md:text-[0.875rem] max-md:leading-[1.7]" data-hero-description>Two worlds. One shared sky. A girl caught between them must decide where she belongs.</p>
+            <div class="gap-3 flex items-center mt-7 max-md:mt-5">
+              <button class="py-3 px-5 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border border-transparent rounded-lg text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] [background:linear-gradient(#f8d36d,#d89a20)] text-ink disabled:cursor-default hover:brightness-110" type="button" data-hero-open data-open-series="between-two-suns">
+                <span class="icon-[ph--book-open] size-5 inline-block shrink-0" aria-hidden="true"></span> Explore series
               </button>
-              <button class="originals-button save-icon" type="button" data-hero-save data-save-series="between-two-suns" aria-label="Save Between Two Suns to your library" aria-pressed="false">
-                <span class="icon-[ph--bookmark-simple]" aria-hidden="true"></span>
+              <button class="py-3 px-0 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border border-gold/22 rounded-lg text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] text-gold bg-ink/30 w-11.5 disabled:cursor-default aria-pressed:border-gold hover:border-gold hover:bg-gold/10 hover:text-gold" type="button" data-hero-save data-save-series="between-two-suns" aria-label="Save Between Two Suns to your library" aria-pressed="false">
+                <span class="icon-[ph--bookmark-simple] size-5 inline-block shrink-0" aria-hidden="true"></span>
               </button>
             </div>
           </div>
-          <div class="hero-bottom">
-            <div class="hero-dots" data-hero-dots role="group" aria-label="Choose a featured original"></div>
-            <div class="hero-arrows">
-              <button type="button" class="round-control" data-hero-prev aria-label="Previous featured original"><span class="icon-[ph--caret-left]" aria-hidden="true"></span></button>
-              <button type="button" class="round-control" data-hero-next aria-label="Next featured original"><span class="icon-[ph--caret-right]" aria-hidden="true"></span></button>
+          <!-- hero controls -->
+          <div class="absolute bottom-9 left-0 right-0 flex items-center justify-between max-md:bottom-2">
+            <div class="gap-2 flex items-center" data-hero-dots role="group" aria-label="Choose a featured original"></div>
+            <template id="original-hero-dot-template">
+              <button type="button" aria-pressed="false" class="p-0 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation grid items-center w-8 h-11 disabled:cursor-default after:content-[''] after:block after:w-full after:h-1 after:rounded-2xl after:bg-white/30 after:transition-[background-color] after:duration-180 after:ease-[ease] aria-pressed:w-12 aria-pressed:after:bg-gold"></button>
+            </template>
+            <div class="gap-2.5 flex items-center">
+              <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink/30 transition-[background-color,border-color,color] duration-180 ease-[ease] disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold" data-hero-prev aria-label="Previous featured original"><span class="icon-[ph--caret-left] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
+              <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink/30 transition-[background-color,border-color,color] duration-180 ease-[ease] disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold" data-hero-next aria-label="Next featured original"><span class="icon-[ph--caret-right] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="originals-section favorites-section page-width" data-shelf aria-labelledby="favorites-title">
-        <div class="shelf-heading">
+      <!-- popular originals -->
+      <section class="mx-auto w-[calc(100%-var(--originals-gutter)*2)] max-w-432 mt-2 relative max-md:mt-8" data-shelf aria-labelledby="favorites-title">
+        <div class="gap-4 flex justify-between items-center mb-6 max-md:mb-5 max-md:items-start">
           <div>
-            <h2 id="favorites-title">Reader favorites</h2>
-            <p>The stories our community keeps coming back to.</p>
+            <h2 id="favorites-title" class="font-normal text-[clamp(1.75rem,2.4vw,2.75rem)] leading-[1.2] font-display tracking-[-0.025em] max-md:text-[1.75rem]">Reader favorites</h2>
+            <p class="mt-2 text-muted text-[clamp(0.8125rem,0.95vw,0.9375rem)] leading-[1.6] max-md:max-w-88 max-md:text-[0.8125rem]">The stories our community keeps coming back to.</p>
           </div>
-          <div class="shelf-controls" data-shelf-controls>
-            <button type="button" class="round-control" data-shelf-prev aria-label="Previous reader favorites" disabled><span class="icon-[ph--caret-left]" aria-hidden="true"></span></button>
-            <button type="button" class="round-control" data-shelf-next aria-label="More reader favorites"><span class="icon-[ph--caret-right]" aria-hidden="true"></span></button>
+          <div class="gap-2.5 flex items-center max-md:gap-1" data-shelf-controls>
+            <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink/30 transition-[background-color,border-color,color] duration-180 ease-[ease] disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold max-md:w-9 max-md:h-11 max-md:border-0 max-md:border-none max-md:border-current max-md:bg-transparent" data-shelf-prev aria-label="Previous reader favorites" disabled><span class="icon-[ph--caret-left] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
+            <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink/30 transition-[background-color,border-color,color] duration-180 ease-[ease] disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold max-md:w-9 max-md:h-11 max-md:border-0 max-md:border-none max-md:border-current max-md:bg-transparent" data-shelf-next aria-label="More reader favorites"><span class="icon-[ph--caret-right] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
           </div>
         </div>
-        <div class="originals-shelf" data-popular-track tabindex="0" role="region" aria-label="Reader favorites, scroll for more stories"></div>
+        <div class="px-1 -m-1 gap-[clamp(1rem,1.65vw,2rem)] grid grid-flow-col auto-cols-[clamp(10rem,14.6vw,18rem)] overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-px-1 pt-1 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-lg:auto-cols-[clamp(10rem,21vw,13rem)] max-md:auto-cols-[clamp(9rem,40vw,14rem)]" data-popular-track tabindex="0" role="region" aria-label="Reader favorites, scroll for more stories"></div>
       </section>
 
-      <section class="originals-section page-width" id="new-releases" data-shelf aria-labelledby="new-title">
-        <div class="shelf-heading">
+      <!-- new originals -->
+      <section class="mx-auto w-[calc(100%-var(--originals-gutter)*2)] max-w-432 scroll-mt-8 mt-[clamp(3rem,5vw,6rem)]" id="new-releases" data-shelf aria-labelledby="new-title">
+        <div class="gap-4 flex justify-between items-center mb-6 max-md:mb-5 max-md:items-start">
           <div>
-            <h2 id="new-title">New &amp; noteworthy</h2>
-            <p>A new chapter is a new place to get lost.</p>
+            <h2 id="new-title" class="font-normal text-[clamp(1.75rem,2.4vw,2.75rem)] leading-[1.2] font-display tracking-[-0.025em] max-md:text-[1.75rem]">New &amp; noteworthy</h2>
+            <p class="mt-2 text-muted text-[clamp(0.8125rem,0.95vw,0.9375rem)] leading-[1.6] max-md:max-w-88 max-md:text-[0.8125rem]">A new chapter is a new place to get lost.</p>
           </div>
-          <div class="shelf-controls" data-shelf-controls>
-            <button type="button" class="round-control" data-shelf-prev aria-label="Previous new releases" disabled><span class="icon-[ph--caret-left]" aria-hidden="true"></span></button>
-            <button type="button" class="round-control" data-shelf-next aria-label="More new releases"><span class="icon-[ph--caret-right]" aria-hidden="true"></span></button>
+          <div class="gap-2.5 flex items-center max-md:gap-1" data-shelf-controls>
+            <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink/30 transition-[background-color,border-color,color] duration-180 ease-[ease] disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold max-md:w-9 max-md:h-11 max-md:border-0 max-md:border-none max-md:border-current max-md:bg-transparent" data-shelf-prev aria-label="Previous new releases" disabled><span class="icon-[ph--caret-left] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
+            <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink/30 transition-[background-color,border-color,color] duration-180 ease-[ease] disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold max-md:w-9 max-md:h-11 max-md:border-0 max-md:border-none max-md:border-current max-md:bg-transparent" data-shelf-next aria-label="More new releases"><span class="icon-[ph--caret-right] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
           </div>
         </div>
-        <div class="originals-shelf" data-new-track tabindex="0" role="region" aria-label="New releases, scroll for more stories"></div>
+        <div class="px-1 -m-1 gap-[clamp(1rem,1.65vw,2rem)] grid grid-flow-col auto-cols-[clamp(10rem,14.6vw,18rem)] overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-px-1 pt-1 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-lg:auto-cols-[clamp(10rem,21vw,13rem)] max-md:auto-cols-[clamp(9rem,40vw,14rem)]" data-new-track tabindex="0" role="region" aria-label="New releases, scroll for more stories"></div>
       </section>
 
-      <section class="originals-feature page-width" aria-labelledby="feature-title">
-        <button class="feature-artwork" data-open-series="last-bloom" type="button" aria-label="Explore The Last Bloom">
-          <img src="/assets/originals/last-bloom.webp" alt="A young woman surrounded by pink blossoms beneath a moonlit sky" width="330" height="494" loading="lazy" decoding="async" />
+      <!-- new section -->
+
+      <section class="my-10 mb-40">
+        <div class="flex mx-5">
+            <div class="relative size-110 flex items-end rounded-2xl overflow-hidden">
+                <img src="/assets/demon-faction.png" alt="" class="absolute rounded-2xl size-110 object-cover">
+                <div class="bg-white/5 gradient-blur min-h-20 relative top-0 z-20 w-full p-2">
+                    <p class="font-display text-2xl">Demon Faction</p>
+                    <div class="flex gap-2 lg:text-xs 2xl:text-sm font-semibold">
+                        <span>Thriller</span>
+                        <span class="x">.</span>
+                        <span>Drama</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+
+      <!-- featured story -->
+      <section class="mt-32 py-[clamp(1rem,2vw,2rem)] mx-auto gap-[clamp(2rem,5vw,6rem)] w-[calc(100%-var(--originals-gutter)*2)] max-w-432 grid grid-cols-2 items-center max-lg:gap-8 max-md:py-0 max-md:gap-6 max-md:grid-cols-1" aria-labelledby="feature-title">
+        <button class="[-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation relative block overflow-hidden aspect-[1.45] rounded-xl bg-[#121522] disabled:cursor-default max-md:aspect-[1.4] group/artwork" data-open-series="last-bloom" type="button" aria-label="Explore The Last Bloom">
+          <img src="/assets/originals/last-bloom.webp" alt="A young woman surrounded by pink blossoms beneath a moonlit sky" width="330" height="494" loading="lazy" decoding="async" class="size-full object-cover object-[50%_30%] transition-transform duration-350 ease-[ease] group-hover/artwork:scale-[1.035]" />
         </button>
-        <div class="feature-copy">
-          <p class="originals-eyebrow"><span class="icon-[ph--sparkle-fill]" aria-hidden="true"></span> An Asteria Original</p>
-          <h2 id="feature-title">The Last Bloom</h2>
-          <p class="feature-byline">By Mira Kade</p>
-          <p class="feature-description">Some flowers only bloom once. In a world slowly losing its color, one girl discovers a garden that remembers everything, including a love she thought she had forgotten.</p>
-          <div class="feature-genres"><span>Romance</span><span>Fantasy</span><span>Drama</span></div>
-          <div class="feature-actions">
-            <button class="originals-button gold-button" type="button" data-open-series="last-bloom"><span class="icon-[ph--book-open]" aria-hidden="true"></span> Explore series</button>
-            <button class="originals-button outline-button" type="button" data-save-series="last-bloom" aria-pressed="false"><span class="icon-[ph--bookmark-simple]" aria-hidden="true"></span><span data-save-label>Add to library</span></button>
+        <div class="py-4 max-w-136 max-md:p-0">
+          <p class="gap-2.5 flex items-center text-gold uppercase text-[0.6875rem] font-semibold tracking-[0.19em] max-md:text-[0.625rem]"><span class="icon-[ph--sparkle-fill] size-4 inline-block shrink-0" aria-hidden="true"></span> An Asteria Original</p>
+          <h2 id="feature-title" class="mt-4 font-normal text-[clamp(2.5rem,3.5vw,4rem)] leading-[1.1] font-display tracking-[-0.035em] max-md:text-[2.625rem]">The Last Bloom</h2>
+          <p class="mt-3 text-[#c9b58c] text-[0.8125rem]">By Mira Kade</p>
+          <p class="mt-5 text-[#a8adba] text-[clamp(0.875rem,1.05vw,1rem)] leading-[1.8] max-md:mt-4 max-md:max-w-140">Some flowers only bloom once. In a world slowly losing its color, one girl discovers a garden that remembers everything, including a love she thought she had forgotten.</p>
+          <div class="gap-2 flex flex-wrap mt-5"><span class="py-1 px-2.5 border border-gold/22 rounded-[2rem] text-[#c9b58c] text-[0.6875rem]">Romance</span><span class="py-1 px-2.5 border border-gold/22 rounded-[2rem] text-[#c9b58c] text-[0.6875rem]">Fantasy</span><span class="py-1 px-2.5 border border-gold/22 rounded-[2rem] text-[#c9b58c] text-[0.6875rem]">Drama</span></div>
+          <div class="gap-3 flex flex-wrap mt-7 max-lg:gap-2.5 max-md:mt-6"> 
+            <button class="py-3 px-5 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border border-transparent rounded-lg text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] [background:linear-gradient(#f8d36d,#d89a20)] text-ink disabled:cursor-default hover:brightness-110 max-lg:px-3.5 max-md:px-4" type="button" data-open-series="last-bloom"><span class="icon-[ph--book-open] size-5 inline-block shrink-0" aria-hidden="true"></span> Explore series</button>
+            <button class="py-3 px-5 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border-[1.8px] border-white/60 shadow[1px_0_7px_-3px_rgba(128,128,128,0.8),-1px_0_7px_-3px_rgba(128,128,128,0.8)] rounded-sm text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] text-gold bg-ink/30 disabled:cursor-default aria-pressed:border-gold hover:border-gold hover:bg-gold/10 hover:text-gold max-lg:px-3.5 max-md:px-4" type="button" data-save-series="last-bloom" aria-pressed="false">
+                <span class="icon-[ph--bookmark-simple] size-5 inline-block shrink-0" aria-hidden="true"></span><span data-save-label>Add to library</span></button>
           </div>
         </div>
       </section>
 
-      <section class="originals-section collection-section page-width" id="collection" aria-labelledby="collection-title">
-        <div class="collection-heading">
+      <!-- collection -->
+      <section class="mx-auto w-[calc(100%-var(--originals-gutter)*2)] max-w-432 scroll-mt-8 mt-[clamp(3rem,5vw,6rem)] pt-[clamp(2.5rem,4vw,4rem)] border-t [border-top-style:solid] border-t-white/9" id="collection" aria-labelledby="collection-title">
+        <div class="gap-6 flex justify-between items-center max-md:gap-6 max-md:flex-col max-md:items-stretch">
           <div>
-            <h2 id="collection-title" data-catalog-title>Find your next favorite</h2>
-            <p>Original stories. Fresh voices. Infinite worlds.</p>
+            <h2 id="collection-title" data-catalog-title class="font-normal text-[clamp(1.75rem,2.4vw,2.75rem)] leading-[1.2] font-display tracking-[-0.025em] max-md:text-[1.75rem]">Find your next favorite</h2>
+            <p class="mt-2 text-muted text-[clamp(0.8125rem,0.95vw,0.9375rem)] leading-[1.6] max-md:max-w-88 max-md:text-[0.8125rem]">Original stories. Fresh voices. Infinite worlds.</p>
           </div>
-          <label class="catalog-search">
-            <span class="icon-[ph--magnifying-glass]" aria-hidden="true"></span>
+          <label class="px-3.5 gap-3 flex items-center w-[clamp(13rem,22vw,20rem)] min-h-11.5 border border-white/16 rounded-lg text-muted bg-panel focus-within:border-gold focus-within:outline-px focus-within:outline-solid focus-within:outline-gold max-md:w-full">
+            <span class="icon-[ph--magnifying-glass] size-5 inline-block shrink-0" aria-hidden="true"></span>
             <span class="sr-only">Search original stories</span>
-            <input type="search" data-catalog-search placeholder="Search stories..." autocomplete="off" />
+            <input type="search" data-catalog-search placeholder="Search stories..." autocomplete="off" class="py-3 [-webkit-tap-highlight-color:transparent] min-w-0 w-full text-[#f4f2ed] bg-transparent text-[0.8125rem] outline-none placeholder:text-muted" />
           </label>
         </div>
-        <div class="collection-toolbar">
-          <div class="genre-filters" data-genre-filters role="group" aria-label="Filter stories by genre">
-            <button type="button" data-genre="All" aria-pressed="true">All stories</button>
-            <button type="button" data-genre="Fantasy" aria-pressed="false">Fantasy</button>
-            <button type="button" data-genre="Romance" aria-pressed="false">Romance</button>
-            <button type="button" data-genre="Action" aria-pressed="false">Action</button>
-            <button type="button" data-genre="Drama" aria-pressed="false">Drama</button>
+        <!-- catalog filters -->
+        <div class="my-7 gap-4 flex items-center justify-between max-md:my-5 max-md:gap-4 max-md:flex-col max-md:items-start">
+          <div class="gap-2 flex flex-wrap max-md:p-1 max-md:-m-1 max-md:flex-nowrap max-md:max-w-full max-md:overflow-x-auto max-md:[scrollbar-width:none]" data-genre-filters role="group" aria-label="Filter stories by genre">
+            <button type="button" data-genre="All" aria-pressed="true" class="py-2 px-4.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation min-h-11 border border-white/14 rounded-[2rem] text-[#b7bbc6] text-[0.75rem] transition-[border-color,color,background-color] duration-180 ease-[ease] disabled:cursor-default aria-pressed:border-gold aria-pressed:bg-gold aria-pressed:text-ink aria-pressed:font-semibold not-aria-pressed:hover:border-gold not-aria-pressed:hover:text-gold max-md:px-4 max-md:shrink-0">All stories</button>
+            <button type="button" data-genre="Fantasy" aria-pressed="false" class="py-2 px-4.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation min-h-11 border border-white/14 rounded-[2rem] text-[#b7bbc6] text-[0.75rem] transition-[border-color,color,background-color] duration-180 ease-[ease] disabled:cursor-default aria-pressed:border-gold aria-pressed:bg-gold aria-pressed:text-ink aria-pressed:font-semibold not-aria-pressed:hover:border-gold not-aria-pressed:hover:text-gold max-md:px-4 max-md:shrink-0">Fantasy</button>
+            <button type="button" data-genre="Romance" aria-pressed="false" class="py-2 px-4.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation min-h-11 border border-white/14 rounded-[2rem] text-[#b7bbc6] text-[0.75rem] transition-[border-color,color,background-color] duration-180 ease-[ease] disabled:cursor-default aria-pressed:border-gold aria-pressed:bg-gold aria-pressed:text-ink aria-pressed:font-semibold not-aria-pressed:hover:border-gold not-aria-pressed:hover:text-gold max-md:px-4 max-md:shrink-0">Romance</button>
+            <button type="button" data-genre="Action" aria-pressed="false" class="py-2 px-4.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation min-h-11 border border-white/14 rounded-[2rem] text-[#b7bbc6] text-[0.75rem] transition-[border-color,color,background-color] duration-180 ease-[ease] disabled:cursor-default aria-pressed:border-gold aria-pressed:bg-gold aria-pressed:text-ink aria-pressed:font-semibold not-aria-pressed:hover:border-gold not-aria-pressed:hover:text-gold max-md:px-4 max-md:shrink-0">Action</button>
+            <button type="button" data-genre="Drama" aria-pressed="false" class="py-2 px-4.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation min-h-11 border border-white/14 rounded-[2rem] text-[#b7bbc6] text-[0.75rem] transition-[border-color,color,background-color] duration-180 ease-[ease] disabled:cursor-default aria-pressed:border-gold aria-pressed:bg-gold aria-pressed:text-ink aria-pressed:font-semibold not-aria-pressed:hover:border-gold not-aria-pressed:hover:text-gold max-md:px-4 max-md:shrink-0">Drama</button>
           </div>
-          <p class="catalog-count" data-catalog-count aria-live="polite"></p>
+          <p class="text-muted text-[0.75rem] whitespace-nowrap" data-catalog-count aria-live="polite"></p>
         </div>
-        <div class="catalog-grid" data-catalog-grid></div>
-        <div class="catalog-empty" data-catalog-empty hidden>
-          <span class="icon-[ph--books]" aria-hidden="true"></span>
-          <h3>No stories here yet</h3>
-          <p>Try another search or save a story to start your library.</p>
-          <button type="button" class="originals-button outline-button" data-reset-filters>Browse all originals</button>
+        <div class="grid grid-cols-7 gap-y-8 gap-x-[clamp(1rem,1.65vw,2rem)] lg:max-xl:grid-cols-4 max-lg:grid-cols-4 max-md:grid-cols-3 max-md:gap-y-6 max-md:gap-x-4 max-[36rem]:grid-cols-2" data-catalog-grid></div>
+        <div class="py-16 px-4 flex flex-col items-center rounded-xl bg-panel text-center" data-catalog-empty hidden>
+          <span class="icon-[ph--books] size-10 inline-block shrink-0 mb-4 text-gold" aria-hidden="true"></span>
+          <h3 class="font-normal text-[1.75rem] leading-[normal] font-display">No stories here yet</h3>
+          <p class="mt-3 text-[0.875rem] text-muted">Try another search or save a story to start your library.</p>
+          <button type="button" class="py-3 px-5 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border border-gold/22 rounded-lg text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] text-gold bg-ink/30 mt-6 disabled:cursor-default hover:border-gold hover:bg-gold/10 hover:text-gold" data-reset-filters>Browse all originals</button>
         </div>
-        <noscript><p class="no-script-message">Enable JavaScript to browse the complete collection and save your favorite stories.</p></noscript>
+        <noscript><p class="p-4 text-muted">Enable JavaScript to browse the complete collection and save your favorite stories.</p></noscript>
       </section>
     </main>
-    
-    <dialog id="series-dialog" class="series-dialog" aria-labelledby="series-dialog-title">
-      <button type="button" class="dialog-close round-control" data-dialog-close aria-label="Close series details" autofocus><span class="icon-[ph--x]" aria-hidden="true"></span></button>
-      <div class="dialog-layout">
-        <img class="dialog-poster" data-dialog-image alt="" width="400" height="600" />
-        <div class="dialog-copy">
-          <p class="originals-eyebrow">Asteria Originals</p>
-          <h2 id="series-dialog-title"></h2>
-          <p class="dialog-creator" data-dialog-creator></p>
-          <p class="dialog-genres" data-dialog-genres></p>
-          <p class="dialog-description" data-dialog-description></p>
-          <p class="dialog-chapters" data-dialog-chapters></p>
-          <div class="dialog-actions">
-            <button type="button" class="originals-button gold-button" data-dialog-save aria-pressed="false"><span class="icon-[ph--bookmark-simple]" aria-hidden="true"></span><span data-save-label>Add to library</span></button>
-            <button type="button" class="originals-button outline-button" data-dialog-like aria-pressed="false"><span class="icon-[ph--heart]" aria-hidden="true"></span><span data-like-count></span></button>
+
+    <!-- shared series card template -->
+    <template id="original-series-card-template">
+      <article class="min-w-0 snap-start">
+        <button type="button" data-open-series class="[-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation relative block w-full aspect-[2/3] rounded-xl  bg-panel-soft text-left disabled:cursor-default group/artwork">
+            <!-- <div class="absolute size-5 top-0 left-0 bgred-400 z-10 border-white/30 border-l-2 border-t-2 rounded-tl-xl"></div> -->
+          <img data-img alt="" width="400" height="600" loading="lazy" decoding="async" class="size-full border-[0.4px] border-white/30 rounded-xl shadow-[1px_0_7px_-3px_rgba(128,128,128,0.8),-1px_0_7px_-3px_rgba(128,128,128,0.8)] inline-block object-cover transition-transform duration-350 ease-[ease] group-hover/artwork:scale-[1.035]" />
+          <span class="px-2 gap-2 absolute top-auto right-0 bottom-0 left-0 flex items-center justify-center pt-8 pb-4 text-[#f4f2ed] [background:linear-gradient(transparent,rgb(3_5_12/95%))] text-[0.75rem] font-semibold opacity-0 translate-y-1.5 transition-[opacity,translate] duration-180 ease-[ease] group-hover/artwork:translate-y-0 group-hover/artwork:opacity-100 group-focus-visible/artwork:translate-y-0 group-focus-visible/artwork:opacity-100">
+            <span class="icon-[ph--book-open] size-5 inline-block shrink-0" aria-hidden="true"></span><span>Explore series</span>
+          </span>
+        </button>
+        <div class="pt-3.5 max-md:pt-3">
+          <button type="button" data-title data-open-series class="[-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation block w-full text-[#eeedf0] text-left text-[clamp(0.8125rem,1vw,1rem)] font-semibold leading-[1.4] disabled:cursor-default hover:text-gold max-md:text-[0.8125rem]"></button>
+          <p data-genres class="mt-1.5 text-muted text-[0.75rem] leading-[1.5] max-md:text-[0.6875rem]"></p>
+          <div class="gap-1 flex items-center justify-between mt-1 text-muted text-[0.6875rem] leading-[1.5] max-md:text-[0.625rem]">
+            <span data-chapters></span>
+            <button type="button" data-like-series class="gap-[0.35rem] [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-end min-w-11 min-h-11 text-[#bdb4a4] disabled:cursor-default aria-pressed:text-gold hover:text-gold">
+              <span class="icon-[ph--heart] size-[0.9375rem] inline-block shrink-0" aria-hidden="true"></span><span data-like-count></span>
+            </button>
           </div>
-          <p class="dialog-status" data-dialog-status role="status"></p>
+        </div>
+      </article>
+    </template>
+
+    <!-- series dialog -->
+    <dialog id="series-dialog" class="p-0 m-auto fixed inset-0 w-[min(51rem,calc(100%-2rem))] max-h-[calc(100dvh-2rem)] overflow-y-auto border border-gold/22 rounded-2xl bg-panel text-[#f4f2ed] backdrop:bg-[rgb(0_2_8/85%)] backdrop:backdrop-blur-[6px]" aria-labelledby="series-dialog-title">
+      <button type="button" class="size-11 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center border border-white/20 rounded-full text-[#e0dcd2] bg-ink transition-[background-color,border-color,color] duration-180 ease-[ease] absolute top-3 right-3 z-1 disabled:cursor-default disabled:opacity-30 enabled:hover:border-gold enabled:hover:bg-gold/10 enabled:hover:text-gold" data-dialog-close aria-label="Close series details" autofocus><span class="icon-[ph--x] size-5 inline-block shrink-0" aria-hidden="true"></span></button>
+      <div class="grid grid-cols-[0.85fr_1.15fr] max-md:grid-cols-1">
+        <img class="size-full min-h-112 object-cover max-md:min-h-0 max-md:h-60 max-md:object-[center_25%]" data-dialog-image alt="" width="400" height="600" />
+        <div class="px-8 pt-14 pb-10 max-md:py-7 max-md:px-5">
+          <p class="gap-2.5 flex items-center text-gold uppercase text-[0.6875rem] font-semibold tracking-[0.19em] max-md:text-[0.625rem]">Asteria Originals</p>
+          <h2 id="series-dialog-title" class="mt-4 font-normal text-[2.5rem] leading-[1.1] font-display tracking-[-0.025em] max-md:text-[2rem]"></h2>
+          <p class="mt-3 text-[#c9b58c] text-[0.8125rem]" data-dialog-creator></p>
+          <p class="mt-6 text-gold text-[0.8125rem]" data-dialog-genres></p>
+          <p class="mt-4 text-[#b7bbc6] text-[0.875rem] leading-[1.8]" data-dialog-description></p>
+          <p class="mt-4 text-muted text-[0.8125rem]" data-dialog-chapters></p>
+          <div class="gap-2.5 flex flex-wrap mt-6">
+            <button type="button" class="py-3 px-5 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border border-transparent rounded-lg text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] [background:linear-gradient(#f8d36d,#d89a20)] text-ink disabled:cursor-default hover:brightness-110 aria-pressed:border-gold" data-dialog-save aria-pressed="false"><span class="icon-[ph--bookmark-simple] size-5 inline-block shrink-0" aria-hidden="true"></span><span data-save-label>Add to library</span></button>
+            <button type="button" class="py-3 px-5 gap-2.5 [-webkit-tap-highlight-color:transparent] cursor-pointer touch-manipulation inline-flex items-center justify-center shrink-0 min-h-11.5 border border-gold/22 rounded-lg text-[0.8125rem] font-semibold leading-[1.25] whitespace-nowrap transition-[background-color,border-color,filter] duration-180 ease-[ease] text-gold bg-ink/30 disabled:cursor-default hover:border-gold hover:bg-gold/10 hover:text-gold" data-dialog-like aria-pressed="false"><span class="icon-[ph--heart] size-5 inline-block shrink-0" aria-hidden="true"></span><span data-like-count></span></button>
+          </div>
+          <p class="mt-4 text-gold text-[0.75rem] leading-[1.5]" data-dialog-status role="status"></p>
         </div>
       </div>
     </dialog>
-    <div class="originals-toast" data-toast role="status" aria-live="polite"></div>
+    <!-- toast -->
+    <div class="py-3.5 px-5 mx-auto fixed top-auto right-4 bottom-6 left-4 z-5 w-fit max-w-[calc(100%-2rem)] border border-gold/22 rounded-[0.625rem] text-[#f4f2ed] bg-[#151923] [box-shadow:0_0.5rem_2rem_rgb(0_0_0/25%)] text-[0.8125rem] opacity-0 translate-y-2 pointer-events-none transition-[opacity,translate] duration-180 ease-[ease] data-[visible=true]:opacity-100 data-[visible=true]:translate-y-0" data-toast role="status" aria-live="polite"></div>
     <script type="module" src="/src/originals.ts"></script>
   </body>
 </html>

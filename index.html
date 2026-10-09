@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>landing</title>
   </head>
-  <body class="text-white my-10 lg:my-5 2xl:my-10">
+  <body class="text-white my-[clamp(1.25rem,2vw,2.5rem)]">
     <!-- carousel -->
     <section
       id="hero-carousel"
-      class="hero-carousel-3d mt-7 lg:mt-4 2xl:mt-7 [--hero-gutter:7%] md:[--hero-gutter:10%]"
+      class="hero-carousel-3d mt-[clamp(1rem,1.4vw,1.75rem)] [--hero-gutter:7%] md:[--hero-gutter:10%] [--hero-copy:clamp(1.25rem,2.5vw,3rem)] [--hero-control:clamp(2rem,2.3vw,2.75rem)]"
       aria-roledescription="carousel"
       aria-label="Trending series"
     >
       <!-- frame: full-bleed band; clips the peeking neighbours at the screen edges -->
-      <div class="relative overflow-hidden bg-panel py-6">
+      <div class="relative overflow-hidden bg-panel py-[clamp(1rem,1.25vw,1.5rem)]">
         <!-- Shared stage: cards overlap and rotate around the centred slide. -->
         <div
           data-track
@@ -27,17 +27,17 @@
           data-prev
           type="button"
           aria-label="Previous slide"
-          class="absolute top-1/2 left-[calc(5%-1.375rem)] z-20 hidden size-11 lg:size-8 2xl:size-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
+          class="absolute top-1/2 left-[calc(var(--hero-gutter)/2-var(--hero-control)/2)] z-20 hidden size-[var(--hero-control)] shrink-0 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
         >
-          <span class="icon-[codicon--chevron-left] size-5 lg:size-4 2xl:size-5"></span>
+          <span class="icon-[codicon--chevron-left] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
         </button>
         <button
           data-next
           type="button"
           aria-label="Next slide"
-          class="absolute top-1/2 right-[calc(5%-1.375rem)] z-20 hidden size-11 lg:size-8 2xl:size-11 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
+          class="absolute top-1/2 right-[calc(var(--hero-gutter)/2-var(--hero-control)/2)] z-20 hidden size-[var(--hero-control)] shrink-0 -translate-y-1/2 items-center justify-center rounded-full border border-gold/40 bg-black/40 text-gold backdrop-blur transition hover:border-gold hover:bg-black/60 md:flex"
         >
-          <span class="icon-[codicon--chevron-right] size-5 lg:size-4 2xl:size-5"></span>
+          <span class="icon-[codicon--chevron-right] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
         </button>
 
         <!-- Dots stay fixed over the active slide as the cards rotate. -->
@@ -45,16 +45,16 @@
           data-dots
           role="group"
           aria-label="Choose slide"
-          class="absolute bottom-14 left-[calc(7%+2rem)] z-20 flex gap-2 max-[400px]:left-[calc(7%+1.25rem)] md:bottom-16 md:left-[calc(10%+3rem)]"
+          class="absolute bottom-[clamp(2.5rem,3vw,4rem)] left-[calc(var(--hero-gutter)+var(--hero-copy)+1px)] z-20 flex gap-[clamp(0.375rem,0.5vw,0.5rem)] [&>button]:h-[clamp(0.1875rem,0.3vw,0.375rem)] [&>button]:w-[clamp(1rem,1.25vw,1.5rem)] [&>button[aria-pressed=true]]:w-[clamp(1.5rem,1.67vw,2rem)]"
         ></div>
       </div>
     </section>
-    
+
     <!-- carousel template -->
     <template id="slide-template">
       <article
         aria-roledescription="slide"
-        class="hero-carousel-slide group relative h-110 md:h-180 lg:h-100 2xl:h-180 overflow-hidden rounded-2xl border border-white/10"
+        class="hero-carousel-slide group relative min-h-[clamp(27.5rem,37.5vw,45rem)] overflow-hidden rounded-2xl border border-white/10"
       >
         <!-- layer 1: full-bleed artwork -->
         <img data-img alt="" class="absolute inset-0 h-full w-full object-cover object-right" />
@@ -65,172 +65,172 @@
         <!-- layer 3: copy (hidden on the peeking slides) -->
         <div
           data-content
-          class="hero-carousel-copy relative z-10 flex h-full max-w-md lg:max-w-sm 2xl:max-w-md flex-col justify-end p-8 pb-24 max-[400px]:px-5 md:justify-center md:p-12 md:pb-24"
+          class="hero-carousel-copy relative z-10 flex h-full min-h-[inherit] max-w-[clamp(20rem,32vw,28rem)] flex-col justify-end p-[var(--hero-copy)] pb-[clamp(5rem,6vw,6rem)] md:justify-center"
         >
-          <p data-eyebrow class="text-xs lg:text-[0.5rem] 2xl:text-xs font-semibold tracking-wider text-gold uppercase"></p>
-          <h2 data-title class="mt-3 font-display text-5xl leading-[1.05] max-[400px]:mt-2 max-[400px]:text-4xl md:text-6xl lg:text-5xl 2xl:text-6xl"></h2>
-          <p data-tagline class="mt-4 max-w-xs text-sm leading-relaxed text-muted md:text-base lg:text-sm 2xl:text-base"></p>
+          <p data-eyebrow class="text-[clamp(0.625rem,0.7vw,0.75rem)] font-semibold tracking-wider text-gold uppercase"></p>
+          <h2 data-title class="mt-[clamp(0.5rem,0.8vw,0.75rem)] font-display text-[clamp(2rem,3.2vw,3.75rem)] leading-[1.05]"></h2>
+          <p data-tagline class="mt-[clamp(0.75rem,1vw,1rem)] max-w-xs text-[clamp(0.875rem,1vw,1rem)] leading-relaxed text-muted"></p>
 
-          <div class="mt-6 flex items-center gap-5 max-[400px]:mt-4 max-[400px]:gap-3">
+          <div class="mt-[clamp(1rem,1.5vw,1.5rem)] flex flex-wrap items-center gap-[clamp(0.75rem,1.25vw,1.25rem)]">
             <a
               data-link
               href="#"
-              class="flex shrink-0 items-center justify-center lg:text-xs 2xl:text-base whitespace-nowrap rounded-lg lg:rounded-md 2xl:rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-6 py-3 lg:px-3 lg:py-2 2xl:px-6 2xl:py-3 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110"
+              class="flex shrink-0 items-center justify-center text-[clamp(0.75rem,0.9vw,1rem)] whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-[clamp(0.75rem,1.25vw,1.5rem)] py-[clamp(0.5rem,0.65vw,0.75rem)] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110"
             >
-              <span class="mr-2 icon-[at-icons--play] size-5 lg:size-4 2xl:size-5"></span>
+              <span class="mr-2 icon-[at-icons--play] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
               <span>Read Now</span>
             </a>
             <button
               type="button"
               aria-label="Add to library"
-              class="flex size-11 lg:size-8 2xl:size-11 items-center justify-center rounded-full border border-white/40 transition hover:border-white hover:bg-white/10"
+              class="flex size-[var(--hero-control)] shrink-0 items-center justify-center rounded-full border border-white/40 transition hover:border-white hover:bg-white/10"
             >
-              <span class="icon-[codicon--add] size-5 lg:size-4 2xl:size-5"></span>
+              <span class="icon-[codicon--add] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
             </button>
           </div>
         </div>
       </article>
     </template>
-    
-    <section class="mx:2 md:mx-10 lg:mx-7 2xl:mx-10">
+
+    <section class="mx-[clamp(0.5rem,2vw,2.5rem)]">
         <!-- sponsored content -->
-        <aside class="mt-7 overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
+        <aside class="mt-[clamp(1rem,1.5vw,1.75rem)] overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
             <div class="grid md:grid-cols-[1.5fr_1fr] relative">
-                <div class="flex flex-col justify-center px-6 py-7 lg:px-4 lg:py-5 2xl:px-6 2xl:py-7 sm:px-8">
-                    <p class="text-[0.68rem] lg:text-[0.58rem] 2xl:text-[0.68rem] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
-                    <span class="mt-1 text-[0.68rem] lg:text-[0.58rem] 2xl:text-[0.68rem] uppercase tracking-widest text-white/45">Promoted</span>
-                    <h2 class="mt-2 text-lg lg:text-base 2xl:text-lg font-semibold sm:text-xl">Nightforge - limited spring collectibles for devoted readers</h2>
-                    <p class="mt-1 text-sm lg:text-xs 2xl:text-sm text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
-                    <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs lg:text-[0.65rem] 2xl:text-xs capitalize font-semibold transition hover:border-gold hover:text-gold">
-                        Learn more <span class="icon-[basil--arrow-right-outline] size-5 lg:size-4 2xl:size-5"/>
+                <div class="flex flex-col justify-center px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(1.25rem,1.5vw,1.75rem)]">
+                    <p class="text-[clamp(0.625rem,0.65vw,0.68rem)] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
+                    <span class="mt-1 text-[clamp(0.625rem,0.65vw,0.68rem)] uppercase tracking-widest text-white/45">Promoted</span>
+                    <h2 class="mt-2 text-[clamp(1rem,1.2vw,1.25rem)] font-semibold">Nightforge - limited spring collectibles for devoted readers</h2>
+                    <p class="mt-1 text-[clamp(0.8125rem,0.9vw,0.875rem)] text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
+                    <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.375rem,0.5vw,0.5rem)] text-[clamp(0.625rem,0.7vw,0.75rem)] capitalize font-semibold transition hover:border-gold hover:text-gold">
+                        Learn more <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
                     </a>
                 </div>
-                <!-- <div class="relative min-h-32 overflow-hidden bg-linear-to-br from-violet-950 via-purple-800/70 to-fuchsia-950"> -->
-                <img class="h-52 lg:h-44 2xl:h-52 w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                <div class="relative min-h-[clamp(10rem,12vw,13rem)] overflow-hidden">
+                    <img class="absolute inset-0 h-full w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                </div>
                 <div class="absolute -right-10 -top-24 size-72 rounded-full bg-violet-400/20 blur-3xl"></div>
                 <div class="absolute bottom-5 right-6 flex gap-1.5">
                     <span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span>
                 </div>
-                </div>
             </div>
         </aside>
 
-        <!-- Asteria originals & creator spotlight -->
-        <section class="mt-10 flex flex-col lg:flex-row gap-10">
+        <!-- Asteria originals & creator spotlight: fluid sizes; breakpoints change layout. -->
+        <section class="mt-[clamp(1.75rem,2.1vw,2.5rem)] flex flex-col lg:flex-row gap-[clamp(1.25rem,2.1vw,2.5rem)]">
             <!-- Asteria originals -->
-            <div>
-                <div class="flex justify-between">
-                    <div class="flex gap-5">
-                        <span class="text-lg md:text-4xl lg:text-2xl 2xl:text-4xl text-gold">✦</span>
-                        <div class="md:space-y-2">
-                            <h2 class="text-2xl md:text-4xl lg:text-4xl 2xl:text-4xl font-display">Asteria Originals</h2>
-                            <p class="text-sm text-gold hidden md:block">Original stories. Fresh voices. Infinite worlds.</p>
+            <div class="min-w-0 lg:shrink-0">
+                <div class="flex flex-wrap items-start justify-between gap-2">
+                    <div class="flex items-start gap-[clamp(0.5rem,1.2vw,1.25rem)]">
+                        <span class="text-[clamp(1.125rem,2vw,2.25rem)] text-gold">✦</span>
+                        <div class="space-y-[clamp(0.25rem,0.45vw,0.5rem)]">
+                            <h2 class="text-[clamp(1.5rem,2.35vw,2.25rem)] font-display">Asteria Originals</h2>
+                            <p class="text-[clamp(0.8125rem,0.9vw,0.875rem)] text-gold hidden md:block">Original stories. Fresh voices. Infinite worlds.</p>
                         </div>
                     </div>
-                    <button class="text-xs font-semibold capitalize flex items-center gap-1 text-gold transition hover:text-gold/70">
+                    <a href="/originals.html" class="text-[clamp(0.625rem,0.7vw,0.75rem)] font-semibold capitalize flex shrink-0 items-center gap-1 text-gold transition hover:text-gold/70">
                         View all originals
-                        <span class="icon-[basil--arrow-right-outline] w-6 h-6">
-                    </button>
+                        <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.25vw,1.5rem)] shrink-0"></span>
+                    </a>
                 </div>
                 <p class="text-sm text-gold block md:hidden mt-2">Original stories. Fresh voices. Infinite worlds.</p>
 
-                <div class="flex flex-col lg:flex-row mt-7 gap-2">
-                    <div class="border border-gold/20 md:w-[37.55vw] min-h-96 rounded-lg p-2">
-                        <div class="flex gap-7">
-                            <div class="x">
-                                <img class="rounded-xl w-52 md:w-60" src="/assets/last-bloom-fixed.png" alt="">
-                                <div class="flex md:hidden gap-3 mt-4">
+                <div class="flex flex-col lg:flex-row mt-[clamp(1rem,1.5vw,1.75rem)] gap-[clamp(0.5rem,0.65vw,0.75rem)]">
+                    <div class="border border-gold/20 w-full lg:w-[37.55vw] min-w-0 min-h-[clamp(16rem,20vw,24rem)] rounded-lg p-[clamp(0.375rem,0.5vw,0.5rem)]">
+                        <div class="flex items-stretch gap-[clamp(0.5rem,1.2vw,1.75rem)]">
+                            <div class="w-[52%] max-w-[clamp(10rem,12.5vw,15rem)] shrink-0">
+                                <img class="rounded-xl w-full" src="/assets/last-bloom-fixed.png" alt="">
+                                <div class="flex md:hidden items-center gap-3 mt-5">
                                     <a
                                         data-link
                                         href="#"
-                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-3 py-2 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-sm"
+                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-sm bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-[clamp(0.5rem,0.65vw,0.75rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
                                     >
-                                        <span class="mr-2 icon-[at-icons--play] size-3"></span>
+                                        <span class="mr-[clamp(0.25rem,0.4vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.725rem,0.8vw,1rem)]"></span>
                                         <span>Read Now</span>
                                     </a>
-                                    <button class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40 text-gold">
-                                        <span class="icon-[circum--bookmark] size-6"></span>
+                                    <button class="flex items-center justify-center size-[clamp(2rem,2.1vw,2.5rem)] shrink-0 rounded-xl border border-gold/40 text-gold">
+                                        <span class="icon-[circum--bookmark] size-[clamp(1.5rem,1.25vw,1.5rem)]"></span>
                                     </button>
-                                    <button class="flex items-center justify-center w-10 h-10 rounded-full border border-gold/40 text-gold">
-                                        <span class="icon-[stash--list-add-light] size-6"></span>
+                                    <button class="flex items-center justify-center size-[clamp(2rem,2.1vw,2.5rem)] shrink-0 rounded-full border border-gold/40 text-gold">
+                                        <span class="icon-[stash--list-add-light] size-[clamp(1.5rem,1.25vw,1.5rem)]"></span>
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div class="flex flex-col">
-                                <div class="md:w-2/3 space-y-3">
-                                    <p class="text-[0.625rem] uppercase font-bold text-gold rounded-full bg-gold/10 border border-gold/40 w-fit px-2 py-1">asteria originals</p>
-                                    <p class="text-xl md:text-4xl lg:text-2xl 2xl:text-4xl font-display">The Last Bloom</p>
-                                    <p class="text-sm text-gold/70">Some flowers only bloom once - and some stories are worth waiting for </p>
-                                    
-                                    <div class="flex gap-3 flex-wrap">
-                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1">Romace</p>
-                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1">Fantasy</p>
-                                        <p class="text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1">Drama</p>
+
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="w-full md:w-2/3 lg:w-3/4 2xl:w-2/3 space-y-[clamp(0.5rem,0.65vw,0.75rem)]">
+                                    <p class="text-[0.625rem] lg:text-[0.35rem] 2xl:text-[0.625rem] uppercase font-bold text-gold rounded-full bg-gold/10 border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">asteria originals</p>
+                                    <p class="text-xl md:text-4xl lg:text-2xl 2xl:text-4xl leading-tight font-display">The Last Bloom</p>
+                                    <p class="text-sm lg:text-[0.675rem] 2xl:text-sm leading-relaxed text-gold/70">Some flowers only bloom once - and some stories are worth waiting for </p>
+
+                                    <div class="flex flex-wrap gap-[clamp(0.25rem,0.6vw,0.75rem)]">
+                                        <p class="text-[0.625rem] lg:text-[0.35rem] 2xl:text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">Romace</p>
+                                        <p class="text-[0.625rem] lg:text-[0.35rem] 2xl:text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">Fantasy</p>
+                                        <p class="text-[0.625rem] lg:text-[0.35rem] 2xl:text-[0.625rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]">Drama</p>
                                     </div>
 
-                                    <div class="flex items-center ga-1 text-xs text-gold">
-                                        <img class="w-9 h-9 rounded-full block mr-2" src="/assets/last-bloom-fixed.png" alt="">
+                                    <div class="flex flex-wrap items-center gap-1 text-xs lg:text-[0.5rem] 2xl:text-xs text-gold">
+                                        <img class="size-[clamp(1.5rem,1.9vw,2.25rem)] shrink-0 rounded-full block mr-[clamp(0.25rem,0.4vw,0.5rem)]" src="/assets/last-bloom-fixed.png" alt="">
                                         <span>By Mira Kade</span>
-                                        <span class="icon-[basil--arrow-right-outline] w-5 h-5">
+                                        <span class="icon-[basil--arrow-right-outline] size-[clamp(0.75rem,1vw,1.25rem)] shrink-0"></span>
                                     </div>
                                 </div>
 
-                                <div class="hidden md:flex gap-3 mt-auto">
+                                <div class="hidden md:flex flex-wrap items-center gap-[clamp(0.375rem,0.65vw,0.75rem)] mt-auto pt-[clamp(0.5rem,0.65vw,0.75rem)]">
                                     <a
                                         data-link
                                         href="#"
-                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-3 py-2 font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-sm"
+                                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-linear-to-b from-[#f8d36d] to-[#d89a20] px-[clamp(0.5rem,0.65vw,0.75rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
                                     >
-                                        <span class="mr-2 icon-[at-icons--play] size-3"></span>
+                                        <span class="mr-[clamp(0.25rem,0.4vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.625rem,0.8vw,0.75rem)]"></span>
                                         <span>Read Now</span>
                                     </a>
-                                    <button class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40 text-gold">
-                                        <span class="icon-[circum--bookmark] size-6"></span>
+                                    <button class="flex items-center justify-center size-[clamp(1.5rem,2.1vw,2.5rem)] shrink-0 rounded-xl border border-gold/40 text-gold">
+                                        <span class="icon-[circum--bookmark] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
                                     </button>
-                                    <button class="flex items-center justify-center w-10 h-10 rounded-full border border-gold/40 text-gold">
-                                        <span class="icon-[stash--list-add-light] size-6"></span>
+                                    <button class="flex items-center justify-center size-[clamp(1.5rem,2.1vw,2.5rem)] shrink-0 rounded-full border border-gold/40 text-gold">
+                                        <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex justify-between mt-7">
-                            <div class="text-sm text-gold flex items-center gap-5">
-                                <span>01 / 04</span>
-                                <div class="flex gap-2">
-                                    <div class="w-12 h-1 bg-gold rounded-full"></div>
-                                    <div class="w-12 h-1 bg-gray-500 rounded-full"></div>
-                                    <div class="w-12 h-1 bg-gray-500 rounded-full"></div>
-                                    <div class="w-12 h-1 bg-gray-500 rounded-full"></div>
+                        <div class="flex justify-between mt-[clamp(1rem,1.5vw,1.75rem)]">
+                            <div class="text-[clamp(0.75rem,0.8vw,0.875rem)] text-gold flex min-w-0 items-center gap-[clamp(0.75rem,1.1vw,1.25rem)]">
+                                <span class="shrink-0">01 / 04</span>
+                                <div class="flex min-w-0 gap-[clamp(0.375rem,0.45vw,0.5rem)]">
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gold rounded-full"></div>
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gray-500 rounded-full"></div>
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gray-500 rounded-full"></div>
+                                    <div class="w-[clamp(2rem,2.5vw,3rem)] h-[clamp(0.125rem,0.2vw,0.25rem)] bg-gray-500 rounded-full"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Originals Spotlight -->
-                    <div id="originals-spotlight" class="border border-gold/40 md:w-[20vw] min-h-96 rounded-lg p-2 space-y-3">
-                        <h5 class="flex items-center gap-2">
-                            <span class="text-xl text-gold">✦</span>
-                            <span class="text-g font-semibold font-display">Originals Spotlight</span>
+                    <div id="originals-spotlight" class="border border-gold/40 w-full lg:w-[20vw] min-w-0 min-h-[clamp(16rem,20vw,24rem)] rounded-lg p-[clamp(0.375rem,0.5vw,0.5rem)] space-y-[clamp(0.5rem,0.65vw,0.75rem)]">
+                        <h5 class="flex items-center gap-[clamp(0.375rem,0.45vw,0.5rem)]">
+                            <span class="text-[clamp(0.875rem,1.1vw,1.25rem)] text-gold">✦</span>
+                            <span class="text-[clamp(0.8125rem,0.85vw,1rem)] font-semibold font-display">Originals Spotlight</span>
                         </h5>
-                        
-                        <div data-originals-list class="max-h-96 overflow-y-scroll space-y-2 scrollbar-none [&::-webkit-scrollbar]:hidden"></div>
+
+                        <div data-originals-list class="max-h-[clamp(15rem,20vw,24rem)] overflow-y-auto space-y-[clamp(0.375rem,0.45vw,0.5rem)] scrollbar-none [&::-webkit-scrollbar]:hidden"></div>
                     </div>
 
                     <!-- original spotlight card template -->
                     <template id="original-spotlight-template">
-                        <div class="p-2 w-full min-h-20 flex gap-3">
-                            <img class="w-16 rounded-lg min-h-20" data-img alt="">
-                            <div class="space-y-1">
-                                <p data-featured-badge hidden class="bg-gold/10 border border-gold/40 rounded-lg px-2 py-1 text-[0.5rem] uppercase font-bold text-gold w-fit">featured</p>
-                                <p data-title class="font-display"></p>
-                                <div data-genres class="flex gap-1">
+                        <div class="p-[clamp(0.25rem,0.4vw,0.5rem)] w-full min-w-0 flex gap-[clamp(0.5rem,0.65vw,0.75rem)]">
+                            <img class="w-[clamp(2.5rem,3.35vw,4rem)] shrink-0 self-start aspect-2/3 object-cover rounded-lg" data-img alt="">
+                            <div class="min-w-0 space-y-[clamp(0.125rem,0.2vw,0.25rem)]">
+                                <p data-featured-badge hidden class="bg-gold/10 border border-gold/40 rounded-lg px-[clamp(0.15rem,0.4vw,0.5rem)] py-[clamp(0.025rem,0.2vw,0.25rem)] text-[0.625rem] lg:text-[0.35rem] 2xl:text-[0.625rem]  uppercase font-bold text-gold w-fit">featured</p>
+                                <p data-title class="font-display text-[clamp(0.8125rem,0.85vw,1rem)] leading-snug"></p>
+                                <div data-genres class="flex flex-wrap gap-[clamp(0.125rem,0.2vw,0.25rem)]">
                                     <template data-genre-template>
-                                        <p class="text-[0.525rem] font-bold text-gold rounded-full border border-gold/40 w-fit px-2 py-1"></p>
+                                        <p class="text-[0.625rem] lg:text-[0.35rem] 2xl:text-[0.625rem]  font-bold text-gold rounded-full border border-gold/40 w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-[clamp(0.125rem,0.2vw,0.25rem)]"></p>
                                     </template>
                                 </div>
-                                <div class="flex gap-1.5 text-[0.625rem] text-gold font-semibold">
+                                <div class="flex flex-wrap gap-[clamp(0.25rem,0.3vw,0.375rem)] text-[0.625rem] lg:text-[0.45rem] 2xl:text-[0.625rem]  text-gold font-semibold">
                                     <p data-chapter></p>
                                     <p>-</p>
                                     <p data-updated></p>
@@ -242,53 +242,49 @@
             </div>
 
             <!-- creator spotlight -->
-            <div data-creator-spotlight="tatsuki-fujimoto" class="md:w-[40vw]"></div>
+            <div data-creator-spotlight="tatsuki-fujimoto" class="w-full min-w-0 lg:w-auto lg:flex-1"></div>
         </section>
 
         <!-- Latest Updates & Weekly Standouts -->
-         <section class="flex mt-10 gap-10">
+        <section class="mt-[clamp(1.75rem,2.1vw,2.5rem)] grid grid-cols-1 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] gap-[clamp(1.25rem,2.1vw,2.5rem)]">
             <!-- new chapters -->
-            <section id="latest-updates">
-                <div class="flex justify-between items-end w-full">
-                    <div class="space-y-1">
-                        <p class="flex text-gold text-sm">
-                            <span class=""></span>
-                            <span class="uppercase tracking-wider">fresh drops</span>
-                        </p>
-                        <h2 class="font-display text-5xl">Latest Updates</h2>
-                        <p class="text-gray-400 text-sm mt-2">New chapters. New Worlds. Stay up to date.</p>
+            <section id="latest-updates" class="min-w-0">
+                <div class="flex flex-wrap justify-between items-end gap-2 w-full">
+                    <div class="min-w-0 space-y-1">
+                        <p class="text-gold text-[clamp(0.625rem,0.8vw,0.875rem)] uppercase tracking-wider">fresh drops</p>
+                        <h2 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Latest Updates</h2>
+                        <p class="text-gray-400 text-[clamp(0.8125rem,0.9vw,0.875rem)] mt-2">New chapters. New Worlds. Stay up to date.</p>
                     </div>
-
-                    <button class="font-semibold capitalize flex items-center text-gold transition hover:text-gold/70">
+                    <button class="font-semibold capitalize flex shrink-0 items-center text-[clamp(0.75rem,0.85vw,0.875rem)] text-gold transition hover:text-gold/70">
                         View all
-                        <span class="icon-[basil--arrow-right-outline] w-8 h-8"></span>
+                        <span class="icon-[basil--arrow-right-outline] size-[clamp(1.25rem,1.7vw,2rem)] shrink-0"></span>
                     </button>
                 </div>
 
-                <div data-updates-grid class="grid grid-cols-2 gap-3 mt-7 max-w-[60vw]"></div>
+                <div data-updates-grid class="grid grid-cols-1 sm:grid-cols-2 gap-[clamp(0.75rem,0.85vw,1rem)] mt-[clamp(1rem,1.5vw,1.75rem)]"></div>
 
                 <!-- latest update card template -->
                 <template id="latest-update-template">
-                    <div class="px-2 py-3 border border-gold/40 rounded-3xl flex gap-5">
-                        <img class="rounded-2xl w-56" data-img alt="">
-                        <div class="mt-3 space-y-1">
-                            <p data-title class="font-display text-2xl"></p>
-                            <p data-updated class="text-gray-400 mb-5 text-sm"></p>
-                            <p data-description class="text-gray-400 text-xs leading-5"></p>
-                            <div class="flex gap-3 mt-7">
+                    <div class="min-w-0 px-[clamp(0.5rem,0.6vw,0.75rem)] py-[clamp(0.75rem,0.85vw,1rem)] border border-gold/40 rounded-[clamp(1rem,1.25vw,1.5rem)] flex gap-[clamp(0.75rem,1.05vw,1.25rem)]">
+                        <img class="rounded-[clamp(0.75rem,0.85vw,1rem)] w-[clamp(5rem,8.35vw,10rem)] max-w-[34%] shrink-0 self-start aspect-[2/3] object-cover" data-img alt="">
+                        <div class="min-w-0 flex-1 flex flex-col py-[clamp(0.125rem,0.3vw,0.375rem)]">
+                            <p data-title class="font-display text-[clamp(1rem,1.25vw,1.5rem)] leading-snug"></p>
+                            <p data-updated class="text-gray-400 mt-1 mb-[clamp(0.5rem,0.8vw,1rem)] text-[clamp(0.6875rem,0.8vw,0.875rem)]"></p>
+                            <p data-description class="text-gray-400 text-[clamp(0.75rem,0.7vw,0.8125rem)] leading-relaxed"></p>
+                            <div class="flex flex-wrap items-center gap-[clamp(0.375rem,0.65vw,0.75rem)] mt-auto pt-[clamp(0.75rem,1.2vw,1.5rem)]">
                                 <a
                                     data-link
                                     href="#"
-                                    class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-semibold border border-gold/40 transition hover:brightness-110 text-sm"
+                                    class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.5rem,0.85vw,1rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] font-semibold border border-gold/40 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
                                 >
-                                    <span class="mr-2 icon-[at-icons--play] size-5 text-gold"></span>
+                                    <span class="mr-[clamp(0.25rem,0.4vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.875rem,1.05vw,1.25rem)] text-gold"></span>
                                     <span>Read</span>
                                 </a>
-                                <button type="button" aria-label="Bookmark" class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40 text-white">
-                                    <span class="icon-[circum--bookmark] size-6"></span>
+                                <button type="button" aria-label="Bookmark" class="flex shrink-0 items-center justify-center size-[clamp(1.875rem,2.1vw,2.5rem)] rounded-xl border border-gold/40 text-white">
+                                    <span class="icon-[circum--bookmark] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
                                 </button>
-                                <button type="button" aria-label="Add to list" class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40 text-white">
-                                    <span class="icon-[stash--list-add-light] size-6"></span>
+                                <button type="button" aria-label="Add to list" class="flex shrink-0 items-center justify-center size-[clamp(1.875rem,2.1vw,2.5rem)] rounded-xl border border-gold/40 text-white">
+                                    <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.25vw,1.5rem)]"></span>
                                 </button>
                             </div>
                         </div>
@@ -297,216 +293,181 @@
             </section>
 
             <!-- weekly standouts -->
-            <section id="weekly-standouts" class="max-w-[35vw] w-full space-y-5">
-                <div class="flex justify-between items-end w-full">
-                    <div class="space-y-1">
-                        <p class="flex text-gold text-sm">
-                            <span class=""></span>
-                            <span class="uppercase tracking-wider">top performers</span>
-                        </p>
-                        <h2 class="font-display text-5xl">Weekly Standouts</h2>
-                        <p class="text-gray-400 text-sm mt-2">Top performers of the week. Updated weekly.</p>
+            <section id="weekly-standouts" class="min-w-0 w-full">
+                <div class="flex flex-wrap justify-between items-end gap-2 w-full">
+                    <div class="min-w-0 space-y-1">
+                        <p class="text-gold text-[clamp(0.625rem,0.8vw,0.875rem)] uppercase tracking-wider">top performers</p>
+                        <h2 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Weekly Standouts</h2>
+                        <p class="text-gray-400 text-[clamp(0.8125rem,0.9vw,0.875rem)] mt-2">Top performers of the week. Updated weekly.</p>
                     </div>
-
-                    <button class="font-semibold capitalize flex items-center text-gold transition hover:text-gold/70">
+                    <button class="font-semibold capitalize flex shrink-0 items-center text-[clamp(0.75rem,0.85vw,0.875rem)] text-gold transition hover:text-gold/70">
                         View all
-                        <span class="icon-[basil--arrow-right-outline] w-8 h-8"></span>
+                        <span class="icon-[basil--arrow-right-outline] size-[clamp(1.25rem,1.7vw,2rem)] shrink-0"></span>
                     </button>
                 </div>
 
-                <div data-standouts-list class="space-y-5"></div>
+                <div data-standouts-list class="space-y-[clamp(0.75rem,1.05vw,1.25rem)] mt-[clamp(1rem,1.5vw,1.75rem)]"></div>
             </section>
 
             <!-- weekly standout card template -->
             <template id="weekly-standout-template">
-                <div class="border border-gold/40 rounded-3xl min-h-40 relative overflow-hidden">
-                    <div class="relative z-10 flex items-center gap-5 bg-gold/3 py-5 px-4">
-                        <p data-rank class="font-display text-4xl font-semibold text-gold"></p>
-                        <img class="rounded-2xl w-32 border-2 border-gold/40" data-img alt="">
-                        <div class="space-y-2">
-                            <div class="space-y-1 max-w-1/2">
-                                <p data-title class="font-display text-xl font-semibold"></p>
-                                <p data-description class="text-gray-300 text-[0.625rem]"></p>
-
+                <div class="border border-gold/40 rounded-[clamp(1rem,1.25vw,1.5rem)] relative overflow-hidden">
+                    <div class="relative z-10 flex items-center gap-[clamp(0.5rem,1.05vw,1.25rem)] bg-gold/3 py-[clamp(0.75rem,1.05vw,1.25rem)] px-[clamp(0.5rem,0.85vw,1rem)]">
+                        <p data-rank class="shrink-0 font-display text-[clamp(1.5rem,1.9vw,2.25rem)] font-semibold text-gold"></p>
+                        <img class="rounded-[clamp(0.75rem,0.85vw,1rem)] w-[clamp(4rem,6.65vw,8rem)] shrink-0 self-start aspect-[2/3] object-cover border-2 border-gold/40" data-img alt="">
+                        <div class="min-w-0 flex-1 space-y-[clamp(0.375rem,0.45vw,0.5rem)]">
+                            <div class="space-y-1">
+                                <p data-title class="font-display text-[clamp(1rem,1.05vw,1.25rem)] leading-snug font-semibold"></p>
+                                <p data-description class="text-gray-300 text-[clamp(0.6875rem,0.65vw,0.75rem)] leading-relaxed"></p>
                             </div>
-                            <div class="max-w-3/4">
-                                <div data-genres class="flex gap-x-1 gap-y-2 flex-wrap text-[0.525rem] text-gray-300"></div>
+                            <div>
+                                <div data-genres class="flex gap-x-1 gap-y-[clamp(0.25rem,0.4vw,0.5rem)] flex-wrap text-[clamp(0.5625rem,0.55vw,0.625rem)] text-gray-300"></div>
                                 <template data-genre-template>
-                                    <p class="font-semibold rounded-full border w-fit px-2 py-0.5"></p>
+                                    <p class="font-semibold rounded-full border w-fit px-[clamp(0.375rem,0.45vw,0.5rem)] py-0.5"></p>
                                 </template>
                             </div>
-                            <div class="flex gap-3 mt-4 items-center">
+                            <div class="flex flex-wrap gap-[clamp(0.375rem,0.65vw,0.75rem)] mt-[clamp(0.75rem,0.85vw,1rem)] items-center">
                                 <a
                                     data-link
                                     href="#"
-                                    class="flex shrink-0 items-center justify-center whitespace-nowrap bg-linear-to-b from-[#f8d36d] to-[#d89a20] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 w-7 h-7 rounded-full"
+                                    class="flex shrink-0 items-center justify-center whitespace-nowrap bg-linear-to-b from-[#f8d36d] to-[#d89a20] font-semibold text-black shadow-lg shadow-gold/10 transition hover:brightness-110 size-[clamp(1.75rem,1.7vw,2rem)] rounded-full"
                                 >
-                                    <span class="icon-[at-icons--play] size-3"></span>
+                                    <span class="icon-[at-icons--play] size-[clamp(0.75rem,0.8vw,0.875rem)]"></span>
                                 </a>
-                                <button type="button" aria-label="Bookmark" class="flex items-center justify-center w-7 h-7 rounded-xl border border-gold/40 text-white">
-                                    <span class="icon-[circum--bookmark] size-5"></span>
+                                <button type="button" aria-label="Bookmark" class="flex shrink-0 items-center justify-center size-[clamp(1.75rem,1.7vw,2rem)] rounded-xl border border-gold/40 text-white">
+                                    <span class="icon-[circum--bookmark] size-[clamp(1rem,1.05vw,1.25rem)]"></span>
                                 </button>
-                                <button type="button" aria-label="Add to list" class="flex items-center justify-center w-7 h-7 rounded-full border border-gold/40 text-white">
-                                    <span class="icon-[stash--list-add-light] size-5"></span>
+                                <button type="button" aria-label="Add to list" class="flex shrink-0 items-center justify-center size-[clamp(1.75rem,1.7vw,2rem)] rounded-full border border-gold/40 text-white">
+                                    <span class="icon-[stash--list-add-light] size-[clamp(1rem,1.05vw,1.25rem)]"></span>
                                 </button>
-
-                                <div class="flex">
-                                    <span data-chapter class="text-xs text-gray-300 border-l  pl-2 border-gold/70"></span>
-                                    <span class="icon-[ph--line-vertical] text-gold" ></span>
-                                    <span data-readers class="text-xs text-gray-300"></span>
+                                <div class="flex flex-wrap items-center gap-x-1 gap-y-0.5 text-[clamp(0.625rem,0.65vw,0.75rem)] text-gray-300">
+                                    <span data-chapter class="border-l pl-2 border-gold/70 whitespace-nowrap"></span>
+                                    <span class="icon-[ph--line-vertical] text-gold"></span>
+                                    <span data-readers></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="absolute top-0 scale-125 -right-1/4 z-0 w-full h-full flex items-center justify-center p-4">
-                        <img class="w-full h-full object-contain" src="/assets/solo_leveling_banner.png" alt="" />
-                    </div> -->
                 </div>
             </template>
-         </section>
+        </section>
 
-         <!-- sponsored content 2 -->
-        <aside class="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
-            <div class="grid min-h-36 md:grid-cols-[1.5fr_1fr] relative">
-                <div class="flex flex-col justify-center px-6 py-7 sm:px-8">
-                <p class="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
-                <span class="mt-1 text-[0.68rem] uppercase tracking-widest text-white/45">Promoted</span>
-                <h2 class="mt-2 text-lg font-semibold sm:text-xl">Nightforge - limited spring collectibles for devoted readers</h2>
-                <p class="mt-1 text-sm text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
-                <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-xs capitalize font-semibold transition hover:border-gold hover:text-gold">Learn more <span class="icon-[basil--arrow-right-outline] w-5 h-5"/></a>
+        <!-- sponsored content 2 -->
+        <aside class="mt-[clamp(1.75rem,2.1vw,2.5rem)] overflow-hidden rounded-2xl border border-white/10 bg-panel card-glow" aria-label="Sponsored spotlight">
+            <div class="grid md:grid-cols-[1.5fr_1fr] relative">
+                <div class="flex flex-col justify-center px-[clamp(1rem,1.5vw,1.5rem)] py-[clamp(1.25rem,1.5vw,1.75rem)]">
+                    <p class="text-[clamp(0.625rem,0.65vw,0.68rem)] font-bold uppercase tracking-[0.28em] text-gold">Sponsored spotlight</p>
+                    <span class="mt-1 text-[clamp(0.625rem,0.65vw,0.68rem)] uppercase tracking-widest text-white/45">Promoted</span>
+                    <h2 class="mt-2 text-[clamp(1rem,1.2vw,1.25rem)] font-semibold">Nightforge - limited spring collectibles for devoted readers</h2>
+                    <p class="mt-1 text-[clamp(0.8125rem,0.9vw,0.875rem)] text-muted">Collector editions and seasonal bundles for dedicated fans.</p>
+                    <a href="#" class="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-[clamp(0.75rem,1vw,1rem)] py-[clamp(0.375rem,0.5vw,0.5rem)] text-[clamp(0.625rem,0.7vw,0.75rem)] capitalize font-semibold transition hover:border-gold hover:text-gold">
+                        Learn more <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.1vw,1.25rem)]"></span>
+                    </a>
                 </div>
-                <!-- <div class="relative min-h-32 overflow-hidden bg-linear-to-br from-violet-950 via-purple-800/70 to-fuchsia-950"> -->
-                <img class="h-52 w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                <div class="relative min-h-[clamp(10rem,12vw,13rem)] overflow-hidden">
+                    <img class="absolute inset-0 h-full w-full object-cover" src="/assets/strip-ad-sample.jpg" alt="">
+                </div>
                 <div class="absolute -right-10 -top-24 size-72 rounded-full bg-violet-400/20 blur-3xl"></div>
-                <div class="absolute bottom-5 right-6 flex gap-1.5"><span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span></div>
+                <div class="absolute bottom-5 right-6 flex gap-1.5">
+                    <span class="size-1.5 rounded-full bg-white/25"></span><span class="h-1.5 w-8 rounded-full bg-gold"></span><span class="size-1.5 rounded-full bg-white/25"></span>
                 </div>
             </div>
         </aside>
 
         <!-- Recommended For You -->
-        <section id="recommended-for-you" class="mt-10">
-            <div class="flex items-center justify-between mb-7">
-                <div class="space-y-1">
-                    <h3 class="font-display text-5xl">Recommended For You</h3>
-                    <p class="text-gray-300 tracking-wider">Based on your likes and reading activity</p>
+        <section id="recommended-for-you" data-shelf class="mt-[clamp(1.75rem,2.5vw,2.5rem)] min-w-0">
+            <div class="flex items-center justify-between gap-[clamp(0.75rem,1.25vw,1.5rem)] mb-[clamp(1rem,1.5vw,1.75rem)]">
+                <div class="min-w-0 flex-1 space-y-1">
+                    <h3 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Recommended For You</h3>
+                    <p class="text-[clamp(0.8125rem,0.9vw,1rem)] text-gray-300 tracking-wide">Based on your likes and reading activity</p>
                 </div>
-                
-                <div class="flex gap-2 ml-auto">
-                    <button class="flex items-center justify-center w-12 h-12 rounded-full border border-gold/20 textgold">
-                        <span class="icon-[codicon--chevron-left] size-7"></span>
+
+                <div data-shelf-controls class="hidden:hidden flex shrink-0 gap-[clamp(0.375rem,0.6vw,0.75rem)]">
+                    <button data-shelf-prev type="button" aria-label="Previous recommendations" class="flex items-center justify-center size-[clamp(2rem,2.5vw,3rem)] rounded-full border border-gold/40 text-gold transition hover:bg-gold/10 disabled:cursor-default disabled:opacity-35">
+                        <span class="icon-[codicon--chevron-left] size-[clamp(1rem,1.5vw,1.75rem)]"></span>
                     </button>
-                    <button class="flex items-center justify-center w-12 h-12 rounded-full border border-gold/40 text-gold ml-2">
-                        <span class="icon-[codicon--chevron-right] size-7"></span>
+                    <button data-shelf-next type="button" aria-label="Next recommendations" class="flex items-center justify-center size-[clamp(2rem,2.5vw,3rem)] rounded-full border border-gold/40 text-gold transition hover:bg-gold/10 disabled:cursor-default disabled:opacity-35">
+                        <span class="icon-[codicon--chevron-right] size-[clamp(1rem,1.5vw,1.75rem)]"></span>
                     </button>
                 </div>
             </div>
 
-            <div data-recommendations-list class="flex gap-3"></div>
+            <div data-recommendations-list data-shelf-track aria-label="Recommended titles" class="grid grid-flow-col auto-cols-[clamp(11rem,58vw,18rem)] lg:flex lg:gap-3 gap-[clamp(0.75rem,1vw,1rem)] overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
 
-            <!-- recommendation card template -->
             <template id="recommendation-template">
-                <div class="max-w-96 p-2 border border-gold/40 rounded-2xl space-y-3 relative group">
+                <article class="min-w-0 snap-start p-[clamp(0.375rem,0.5vw,0.5rem)] border border-gold/40 rounded-2xl space-y-[clamp(0.5rem,0.65vw,0.75rem)] relative group overflow-hidden">
                     <div class="relative">
-                        <img data-img class="w-full h-96 object-cover rounded-2xl" alt="">
-                        <div data-new class="bg-black absolute top-2 right-2 rounded-full hidden">
-                            <span class="block bg-gold/50 text-white font-bold py-1 px-3 rounded-full text-xs uppercase">new</span>
+                        <img data-img class="w-full h-[clamp(16rem,22vw,24rem)] object-cover rounded-xl" alt="" loading="lazy">
+                        <div data-new class="bg-black absolute top-[clamp(0.375rem,0.5vw,0.5rem)] right-[clamp(0.375rem,0.5vw,0.5rem)] rounded-full hidden">
+                            <span class="block bg-gold/50 text-white font-bold py-1 px-[clamp(0.5rem,0.65vw,0.75rem)] rounded-full text-[clamp(0.625rem,0.65vw,0.75rem)] uppercase">new</span>
                         </div>
                     </div>
-                    <p data-title class="font-semibold"></p>
-                    <p data-chapter class="text-sm text-gray-300 font-semibold"></p>
-                    <div class="absolute bg-black/30 w-full h-full top-0 left-0 hidden group-hover:block"></div>
-                </div>
+                    <p data-title class="font-semibold text-[clamp(0.875rem,1vw,1rem)] leading-snug"></p>
+                    <p data-chapter class="text-[clamp(0.75rem,0.8vw,0.875rem)] text-gray-300 font-semibold"></p>
+                    <div class="pointer-events-none absolute bg-black/30 inset-0 hidden group-hover:block"></div>
+                </article>
             </template>
-
-            <!-- <div class="max-w-96 p-3 border border-gold/40 rounded-2xl space-y-3">
-                <div class="relative">
-                    <img class="w-full h-96 object-cover rounded-2xl" src="/assets/apothecary.png" alt="">
-                    <div class="bg-black absolute top-2 right-2 rounded-full">
-                        <span class="block bg-gold/50 text-white font-bold py-1 px-3 rounded-full text-xs uppercase">new</span>
-                    </div>
-                </div>
-                <p class="font-semibold">The Apothecary Diaries</p>
-                <p class="text-gray-300 text-xs tracking-wider leading-5">Because you liked <br> Kusuria no Hitorigoto</p>
-                <div class="flex gap-3 text-gold">
-                    <a
-                        data-link
-                        href="#"
-                        class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 font-semibold border border-gold/40 transition hover:brightness-110 text-sm"
-                    >
-                        <span class="mr-2 icon-[at-icons--play] size-5"></span>
-                        <span>Read</span>
-                    </a>
-                    <button class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40">
-                        <span class="icon-[circum--bookmark] size-6"></span>
-                    </button>
-                    <button class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40">
-                        <span class="icon-[stash--list-add-light] size-6"></span>
-                    </button>
-                </div>
-            </div> -->
         </section>
 
         <!-- Continue Reading & creator spotlight -->
-         <section class="flex gap-10 mt-10">
-            <!-- continue reading -->
-            <section id="continue-reading" class="flex-1">
-                <div class="flex items-center justify-between mb-7">
-                    <div class="space-y-1">
-                        <h3 class="font-display text-5xl">Continue Reading</h3>
-                        <p class="text-gray-300 tracking-wider">Pick up where you left off</p>
+        <section class="flex flex-col lg:flex-row gap-[clamp(1.25rem,2.1vw,2.5rem)] mt-[clamp(1.75rem,2.5vw,2.5rem)]">
+            <section id="continue-reading" data-shelf class="w-full min-w-0 lg:w-auto lg:flex-1">
+                <div class="flex flex-wrap items-center justify-between gap-[clamp(0.5rem,0.8vw,1rem)] mb-[clamp(1rem,1.5vw,1.75rem)]">
+                    <div class="min-w-0 space-y-1">
+                        <h3 class="font-display text-[clamp(1.5rem,2.35vw,2.25rem)] leading-tight">Continue Reading</h3>
+                        <p class="text-[clamp(0.8125rem,0.9vw,1rem)] text-gray-300 tracking-wide">Pick up where you left off</p>
                     </div>
 
-                    <div class="rounded-full px-4 py-2 border border-gold h-fit flex gap-2 text-gold font-semibold text-xs items-center justify-center">
+                    <a href="#" class="rounded-full px-[clamp(0.625rem,0.85vw,1rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] border border-gold h-fit flex shrink-0 gap-[clamp(0.375rem,0.45vw,0.5rem)] text-gold font-semibold text-[clamp(0.625rem,0.7vw,0.75rem)] items-center justify-center">
                         <span>View Library</span>
-                        <span class="icon-[ant-design--right-outlined] size-4"></span>
-                    </div>
+                        <span class="icon-[ant-design--right-outlined] size-[clamp(0.75rem,0.85vw,1rem)] shrink-0"></span>
+                    </a>
                 </div>
 
-                <div data-reading-list class="flex gap-3"></div>
+                <div data-reading-list data-shelf-track aria-label="Continue reading titles" class="grid grid-flow-col auto-cols-[clamp(12rem,65vw,18rem)] md:auto-cols-[minmax(11rem,1fr)] gap-[clamp(0.75rem,1vw,1rem)] overflow-x-auto overscroll-x-contain snap-x snap-mandatory pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
 
-                <!-- continue reading card template -->
                 <template id="continue-reading-template">
-                    <div class="max-w-96 p-3 border border-gold/40 rounded-2xl space-y-3">
+                    <article class="min-w-0 snap-start p-[clamp(0.5rem,0.65vw,0.75rem)] border border-gold/40 rounded-2xl space-y-[clamp(0.5rem,0.65vw,0.75rem)]">
                         <div class="relative">
-                            <img class="w-full h-96 object-cover rounded-2xl" data-img alt="">
-                            <div data-new-chapter class="bg-black absolute top-2 left-2 rounded-full hidden">
-                                <span class="block bg-gold/50 text-white font-bold py-1 px-3 rounded-full text-xs">New Chapter</span>
+                            <img class="w-full h-[clamp(14rem,20vw,24rem)] object-cover rounded-xl" data-img alt="" loading="lazy">
+                            <div data-new-chapter class="bg-black absolute top-[clamp(0.375rem,0.5vw,0.5rem)] left-[clamp(0.375rem,0.5vw,0.5rem)] rounded-full hidden">
+                                <span class="block bg-gold/50 text-white font-bold py-1 px-[clamp(0.5rem,0.65vw,0.75rem)] rounded-full text-[clamp(0.625rem,0.65vw,0.75rem)]">New Chapter</span>
                             </div>
                         </div>
-                        <div class="flex gap-3 items-center">
+                        <div class="flex gap-[clamp(0.5rem,0.65vw,0.75rem)] items-center">
                             <div data-progress role="progressbar" aria-valuemin="0" aria-valuemax="100" class="flex-1 bg-gray-50/10 rounded-full h-fit">
-                                <div data-progress-fill class="h-2 bg-gold rounded-full"></div>
+                                <div data-progress-fill class="h-[clamp(0.375rem,0.45vw,0.5rem)] bg-gold rounded-full"></div>
                             </div>
-                            <p data-progress-label class="text-sm"></p>
+                            <p data-progress-label class="text-[clamp(0.75rem,0.8vw,0.875rem)]"></p>
                         </div>
-                        <p data-title class="font-semibold"></p>
-                        <p data-chapter class="text-gray-300 text-xs tracking-wider leading-5"></p>
-                        <p class="flex gap-2 items-center text-gold text-xs"><span class="icon-[akar-icons--clock] size-4"></span><span data-updated></span></p>
-                        <div class="flex gap-3 text-gold">
+                        <p data-title class="font-semibold text-[clamp(0.875rem,1vw,1rem)] leading-snug"></p>
+                        <p data-chapter class="text-gray-300 text-[clamp(0.6875rem,0.7vw,0.75rem)] tracking-wide leading-relaxed"></p>
+                        <p class="flex gap-[clamp(0.375rem,0.45vw,0.5rem)] items-center text-gold text-[clamp(0.6875rem,0.7vw,0.75rem)]"><span class="icon-[akar-icons--clock] size-[clamp(0.75rem,0.85vw,1rem)] shrink-0"></span><span data-updated></span></p>
+                        <div class="flex flex-wrap gap-[clamp(0.5rem,0.65vw,0.75rem)] text-gold">
                             <a
                                 data-link
                                 href="#"
-                                class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-4 py-2 border border-gold/40 transition hover:brightness-110 text-sm"
+                                class="flex shrink-0 items-center justify-center whitespace-nowrap rounded-lg px-[clamp(0.5rem,0.85vw,1rem)] py-[clamp(0.375rem,0.45vw,0.5rem)] border border-gold/40 transition hover:brightness-110 text-[clamp(0.75rem,0.8vw,0.875rem)]"
                             >
-                                <span class="mr-2 icon-[at-icons--play] size-5"></span>
+                                <span class="mr-[clamp(0.375rem,0.45vw,0.5rem)] icon-[at-icons--play] size-[clamp(0.875rem,1.05vw,1.25rem)]"></span>
                                 <span>Continue</span>
                             </a>
-                            <button type="button" aria-label="More options" class="flex items-center justify-center w-10 h-10 rounded-xl border border-gold/40">
-                                <span class="icon-[ant-design--ellipsis-outlined] size-6"></span>
+                            <button type="button" aria-label="More options" class="flex shrink-0 items-center justify-center size-[clamp(2rem,2.1vw,2.5rem)] rounded-xl border border-gold/40">
+                                <span class="icon-[ant-design--ellipsis-outlined] size-[clamp(1.125rem,1.25vw,1.5rem)]"></span>
                             </button>
                         </div>
-                    </div>
+                    </article>
                 </template>
             </section>
 
-             <!-- creator spotlight -->
-            <div data-creator-spotlight="tatsuki-fujimoto" class="w-[40vw]"></div>
-         </section>
+            <div data-creator-spotlight="tatsuki-fujimoto" class="w-full min-w-0 lg:w-[40%] lg:shrink-0"></div>
+        </section>
+
     </section>
-    
+
     <!-- shared creator spotlight template -->
     <template id="creator-spotlight-template">
-      <div class="border border-gold/40 w-full h-full min-h-96 rounded-lg p-5 relative bg-ink">
+      <div class="border border-gold/40 w-full h-full min-h-[clamp(20rem,20vw,24rem)] rounded-lg p-[clamp(0.75rem,1.05vw,1.25rem)] relative bg-ink">
           <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit]" aria-hidden="true">
               <div class="absolute top-0 right-0 w-2/3">
                   <img data-creator-image class="block w-full h-auto" alt="">
@@ -515,57 +476,57 @@
               </div>
           </div>
           <div class="relative z-10">
-              <div class="flex items-center gap-3 mb-5">
-                  <span class="text-4xl text-gold">✦</span>
-                  <p class="text-xs text-gold tracking-[0.2rem] uppercase">creator spotlight</p>
+              <div class="flex items-center gap-[clamp(0.5rem,0.625vw,0.75rem)] mb-[clamp(0.75rem,1.05vw,1.25rem)]">
+                  <span class="text-[clamp(1.5rem,1.875vw,2.25rem)] text-gold">✦</span>
+                  <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] text-gold tracking-[clamp(0.12rem,0.167vw,0.2rem)] uppercase">creator spotlight</p>
               </div>
-              <p data-creator-name class="text-5xl tracking-wide font-semibold font-display mb-3"></p>
-              <p class="mb-4"><span data-tagline></span> <span data-tagline-highlight class="text-gold"></span></p>
-              <p data-bio class="text-xs text-gray-300 leading-5 max-w-1/2 mb-7"></p>
-              <div class="flex mb-7">
-                  <div class="pr-8 border-r border-gold/40 space-y-1">
-                      <p data-work-count class="text-2xl font-display text-gold"></p>
-                      <p class="text-xs tracking-[0.2rem] uppercase text-gray-300">works</p>
+              <p data-creator-name class="text-[clamp(1.875rem,2.5vw,3rem)] tracking-wide font-semibold font-display mb-[clamp(0.5rem,0.625vw,0.75rem)]"></p>
+              <p class="text-[clamp(0.75rem,calc(0.5rem_+_0.417vw),1rem)] mb-[clamp(0.75rem,0.834vw,1rem)]"><span data-tagline></span> <span data-tagline-highlight class="text-gold"></span></p>
+              <p data-bio class="text-xs text-gray-300 leading-relaxed max-w-2/3 2xl:max-w-1/2 mb-[clamp(1rem,1.46vw,1.75rem)]"></p>
+              <div class="flex mb-[clamp(1rem,1.46vw,1.75rem)]">
+                  <div class="pr-[clamp(0.5rem,0.9vw,1.125rem)] border-r border-gold/40 space-y-1">
+                      <p data-work-count class="text-[clamp(1.25rem,1.25vw,1.5rem)] font-display text-gold"></p>
+                      <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-[clamp(0.04rem,0.067vw,0.08rem)] uppercase text-gray-300">works</p>
                   </div>
-                  <div class="px-8 border-r border-gold/40 space-y-1">
-                      <p data-followers class="text-2xl font-display text-gold"></p>
-                      <p class="text-xs tracking-[0.2rem] uppercase text-gray-300">followers</p>
+                  <div class="px-[clamp(0.5rem,0.9vw,1.125rem)] border-r border-gold/40 space-y-1">
+                      <p data-followers class="text-[clamp(1.25rem,1.25vw,1.5rem)] font-display text-gold"></p>
+                      <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-[clamp(0.04rem,0.067vw,0.08rem)] uppercase text-gray-300">followers</p>
                   </div>
-                  <div class="px-8  space-y-1">
-                      <p data-average-views class="text-2xl font-display text-gold"></p>
-                      <p class="text-xs tracking-[0.2rem] uppercase text-gray-300">avg. views</p>
+                  <div class="px-[clamp(0.5rem,0.9vw,1.125rem)] space-y-1">
+                      <p data-average-views class="text-[clamp(1.25rem,1.25vw,1.5rem)] font-display text-gold"></p>
+                      <p class="text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-[clamp(0.04rem,0.067vw,0.08rem)] uppercase text-gray-300">avg. views</p>
                   </div>
               </div>
 
-              <div class="flex gap-5 mb-7">
-                  <button type="button" class="flex gap-2 items-center rounded-full px-5 py-3 text-sm text-gold border border-gold/70">
-                      <span class="icon-[basil--user-plus-outline] size-5"></span>
+              <div class="flex flex-wrap gap-[clamp(0.5rem,1.05vw,1.25rem)] mb-[clamp(1rem,1.46vw,1.75rem)]">
+                  <button type="button" class="flex gap-[clamp(0.375rem,0.417vw,0.5rem)] items-center rounded-full px-[clamp(0.75rem,1.05vw,1.25rem)] py-[clamp(0.5rem,0.625vw,0.75rem)] text-[clamp(0.75rem,0.73vw,0.875rem)] text-gold border border-gold/70">
+                      <span class="icon-[basil--user-plus-outline] size-[clamp(1rem,1.05vw,1.25rem)] shrink-0"></span>
                       <span>Follow Creator</span>
                   </button>
-                  <button type="button" class="flex gap-2 items-center rounded-full px-5 py-3 text-sm text-gold border border-gold/70">
+                  <button type="button" class="flex gap-[clamp(0.375rem,0.417vw,0.5rem)] items-center rounded-full px-[clamp(0.75rem,1.05vw,1.25rem)] py-[clamp(0.5rem,0.625vw,0.75rem)] text-[clamp(0.75rem,0.73vw,0.875rem)] text-gold border border-gold/70">
                       <span>View Portfolio</span>
-                      <span class="icon-[basil--arrow-right-outline] size-5"></span>
+                      <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.05vw,1.25rem)] shrink-0"></span>
                   </button>
               </div>
 
               <div class="relative @container">
                   <!-- Leave room for the skew and, on wider panels, the bottom-right controls. -->
-                  <div data-works class="grid min-w-0 grid-cols-3 gap-4 px-4 pb-4 @min-[36rem]:mr-28"></div>
+                  <div data-works class="grid min-w-0 grid-cols-3 gap-[clamp(0.5rem,0.834vw,1rem)] px-[clamp(0.75rem,0.834vw,1rem)] pb-[clamp(0.5rem,0.834vw,1rem)] @min-[36rem]:mr-28"></div>
                   <template data-work-template>
                       <div class="min-w-0 -skew-x-6 border border-gold/70 rounded-xl overflow-hidden bg-ink">
                           <div class="aspect-square">
                               <img class="w-[calc(100%+2rem)] max-w-none -ml-4 h-full skew-x-6 object-cover" data-img alt="">
                           </div>
-                          <div class="skew-x-6 px-3 py-2.5">
-                              <p data-title class="uppercase text-xs tracking-wide mb-2"></p>
-                              <div data-genres class="flex gap-1 text-[0.625rem] flex-wrap mb-2">
+                          <div class="skew-x-6 px-[clamp(0.375rem,0.5vw,0.625rem)] py-[clamp(0.5rem,0.521vw,0.625rem)]">
+                              <p data-title class="uppercase text-[clamp(0.625rem,0.625vw,0.75rem)] tracking-wide break-words mb-[clamp(0.25rem,0.417vw,0.5rem)]"></p>
+                              <div data-genres class="flex gap-[clamp(0.125rem,0.208vw,0.25rem)] text-[clamp(0.5625rem,0.521vw,0.625rem)] flex-wrap mb-[clamp(0.25rem,0.417vw,0.5rem)]">
                                   <template data-genre-template>
-                                      <span class="bg-gray-50/10 px-1.5 py-0.5 rounded-full"></span>
+                                      <span class="bg-gray-50/10 px-[clamp(0.25rem,0.313vw,0.375rem)] py-0.5 rounded-full"></span>
                                   </template>
                               </div>
                               <div class="flex gap-1 items-center">
-                                  <span class="icon-[clarity--eye-line] size-4"></span>
-                                  <span data-views class="text-xs"></span>
+                                  <span class="icon-[clarity--eye-line] size-[clamp(0.75rem,0.834vw,1rem)] shrink-0"></span>
+                                  <span data-views class="text-[clamp(0.625rem,0.625vw,0.75rem)]"></span>
                               </div>
                           </div>
                       </div>
@@ -574,10 +535,10 @@
                   <div class="flex items-center justify-end gap-2 @min-[36rem]:absolute @min-[36rem]:right-0 @min-[36rem]:bottom-0">
                       <div data-work-dots class="flex gap-1" role="group" aria-label="Creator work pages"></div>
                       <template data-work-dot-template>
-                          <button type="button" class="h-1 w-3 bg-gray-50/10 rounded-full aria-pressed:bg-gold"></button>
+                          <button type="button" class="h-[clamp(0.125rem,0.208vw,0.25rem)] w-[clamp(0.5rem,0.625vw,0.75rem)] bg-gray-50/10 rounded-full aria-pressed:bg-gold"></button>
                       </template>
-                      <button data-next-works type="button" aria-label="Next creator works" class="flex shrink-0 justify-center items-center size-10 rounded-full border border-gold/70 disabled:cursor-default disabled:opacity-40">
-                          <span class="icon-[basil--arrow-right-outline] size-7 text-gold"></span>
+                      <button data-next-works type="button" aria-label="Next creator works" class="flex shrink-0 justify-center items-center size-[clamp(1.75rem,2.084vw,2.5rem)] rounded-full border border-gold/70 disabled:cursor-default disabled:opacity-40">
+                          <span class="icon-[basil--arrow-right-outline] size-[clamp(1rem,1.46vw,1.75rem)] text-gold"></span>
                       </button>
                   </div>
               </div>

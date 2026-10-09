@@ -1,166 +1,187 @@
-/* Workbench-only layout; shared content and the original page keep their styles. */
-body.workbench {
-  min-width: 0;
-  margin: 0;
-  overflow-x: visible;
-}
-
+/* Shared tokens, Tailwind, and icons come from style.css, as on the index page. */
 .workbench {
-  --page-gutter: clamp(1rem, 3vw, 2.5rem);
-  overflow-wrap: anywhere;
+  --shelf-gutter: clamp(1rem, 2.5vw, 3rem);
+  --shelf-gap: clamp(0.75rem, 1.3vw, 1.25rem);
 }
 
-.workbench .page-shell {
-  max-width: 100rem;
-  margin-inline: auto;
-  padding: 1.5rem var(--page-gutter) 4rem;
+.shelf-heading {
+  margin-inline: var(--shelf-gutter);
+  margin-bottom: 0.625rem;
 }
 
-.workbench .section-space { margin-top: clamp(2.5rem, 4vw, 4rem); }
-
-.workbench .section-heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: 0.75rem 1.25rem;
+.shelf-arrow {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  color: rgb(255 255 255 / 0.8);
+  cursor: pointer;
 }
 
-.workbench .section-title {
-  font-size: clamp(1.875rem, 2.6vw, 2.75rem);
-  line-height: 1.12;
-  text-wrap: balance;
+.shelf-arrow:hover:not(:disabled) {
+  color: var(--color-gold);
+  background: rgb(255 255 255 / 0.08);
 }
 
-@layer components {
-  .workbench .icon-button,
-  .workbench .gold-button,
-  .workbench .outline-button,
-  .workbench .text-action {
-    display: inline-flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 2.75rem;
-    max-width: 100%;
-    cursor: pointer;
-    transition: background-color 180ms, border-color 180ms, color 180ms;
-  }
-
-  .workbench .icon-button {
-    width: 2.75rem;
-    height: 2.75rem;
-    border: 1px solid color-mix(in srgb, var(--color-gold) 40%, transparent);
-    color: var(--color-gold);
-  }
-
-  .workbench .gold-button {
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.625rem;
-    background: linear-gradient(#f8d36d, #d89a20);
-    color: var(--color-ink);
-    font-weight: 600;
-  }
-
-  .workbench .outline-button {
-    padding: 0.625rem 1rem;
-    border: 1px solid color-mix(in srgb, var(--color-gold) 40%, transparent);
-    border-radius: 999px;
-    color: var(--color-gold);
-  }
-
-  .workbench .text-action { color: var(--color-gold); font-size: 0.8125rem; font-weight: 600; }
-
-  .workbench .genre-badge {
-    display: inline-block;
-    max-width: 100%;
-    border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
-    border-radius: 999px;
-    padding: 0.2rem 0.45rem;
-    font-size: 0.625rem;
-    line-height: 1.4;
-  }
+.shelf-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
 }
 
-.workbench button:disabled { cursor: default; opacity: 0.35; }
-.workbench [data-shelf-controls][hidden] { display: none; }
-.workbench .originals-list { scrollbar-width: thin; scrollbar-color: #705829 transparent; }
-
-@media (hover: hover) {
-  .workbench .icon-button:not(:disabled):hover,
-  .workbench .outline-button:hover {
-    background-color: color-mix(in srgb, var(--color-gold) 12%, transparent);
-    border-color: var(--color-gold);
-  }
-  .workbench .gold-button:hover { filter: brightness(1.08); }
-  .workbench .text-action:hover { color: #f8d36d; }
-}
-
-.workbench .hero-carousel {
-  --hero-gutter: max(5%, calc((100% - 95rem) / 2));
-  --hero-inset: clamp(1.25rem, 4vw, 3rem);
-  padding-top: clamp(1rem, 2vw, 2rem);
-}
-
-.workbench .hero-frame { padding-block: 1rem; }
-.workbench .hero-track { padding-inline: var(--hero-gutter); scrollbar-width: none; }
-.workbench .hero-track::-webkit-scrollbar { display: none; }
-.workbench .hero-slide { min-height: 28rem; }
-.workbench .hero-copy { min-height: inherit; padding: 2rem var(--hero-inset) 5.5rem; max-width: 34rem; }
-.workbench .hero-title { font-size: clamp(2.25rem, 4.5vw, 4.5rem); text-wrap: balance; }
-.workbench .hero-dots { bottom: 2rem; left: calc(var(--hero-gutter) + var(--hero-inset)); }
-.workbench .hero-prev { left: calc(var(--hero-gutter) / 2 - 1.375rem); }
-.workbench .hero-next { right: calc(var(--hero-gutter) / 2 - 1.375rem); }
-
-/* Keep the visible dot small while providing a 44px-tall touch target. */
-.workbench .hero-dots button {
-  height: 2.75rem;
-  border-block: 1.1875rem solid transparent;
-  background-clip: padding-box;
-  border-radius: 0;
-}
-
-.workbench .shelf {
+.shelf-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: clamp(12rem, 70vw, 17rem);
-  gap: 1rem;
+  gap: var(--shelf-gap);
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: 0.125rem;
-  padding: 0.125rem 0.125rem 0.75rem;
-  scrollbar-width: thin;
-  scrollbar-color: #705829 transparent;
+  scroll-padding-inline: var(--shelf-gutter);
+  scrollbar-width: none;
+  padding: 0.25rem var(--shelf-gutter) 0.5rem;
 }
 
-.workbench .skip-link {
-  position: fixed;
-  left: 1rem;
-  top: 1rem;
-  z-index: 50;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  background: var(--color-gold);
-  color: var(--color-ink);
-  transform: translateY(-200%);
+.shelf-track::-webkit-scrollbar {
+  display: none;
 }
-.workbench .skip-link:focus { transform: translateY(0); }
 
-@media (min-width: 48rem) {
-  .workbench .hero-carousel { --hero-gutter: max(7%, calc((100% - 95rem) / 2)); }
-  .workbench .hero-slide { min-height: clamp(28rem, 65svh, 38rem); }
-  .workbench .hero-copy { min-height: inherit; padding-block: 3rem 5rem; }
-  .workbench .recommendations-shelf { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .workbench .reading-shelf { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.shelf-track:focus-visible {
+  outline-offset: -2px;
+}
+
+.shelf-track--ranked {
+  grid-auto-columns: clamp(9.25rem, 13vw, 12rem);
+}
+
+.shelf-track--featured {
+  grid-auto-columns: clamp(18rem, 27.5vw, 25rem);
+}
+
+.manga-card {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-panel-soft);
+  border-radius: 0.625rem;
+}
+
+/* An inset edge stays visible on both light and dark cover art. */
+.manga-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.manga-card-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ranked-card {
+  aspect-ratio: 2 / 3;
+}
+
+.ranked-card-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(145deg, rgb(0 0 0 / 0.5), transparent 36%),
+    linear-gradient(to top, rgb(3 5 12 / 0.98), rgb(3 5 12 / 0.75) 16%, transparent 48%);
+}
+
+.ranked-card-number {
+  position: absolute;
+  top: 0.375rem;
+  left: 0.75rem;
+  font-size: clamp(2.5rem, 3.3vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  color: white;
+  /* Fade the glyph itself, leaving the underlying artwork visible. */
+  background: linear-gradient(180deg, #fff 12%, rgb(255 255 255 / 0.88) 42%, rgb(255 255 255 / 0.12) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.12));
+}
+
+.ranked-card-copy {
+  padding: 2rem 0.75rem 0.875rem;
+  text-wrap: balance;
+}
+
+.featured-card {
+  aspect-ratio: 4 / 5;
+  border-radius: 1rem;
+}
+
+/* A web approximation of the reference's frosted material. The mask fades
+   the blur into the sharp artwork instead of leaving a hard panel edge. */
+.featured-card-glass {
+  position: absolute;
+  inset: 42% 0 0;
+  background: linear-gradient(to bottom, rgb(100 107 130 / 0), rgb(100 107 130 / 0.22));
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.2) 25%, #000 65%);
+  mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.2) 25%, #000 65%);
+}
+
+.featured-card-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgb(3 5 12 / 0.08) 52%, rgb(3 5 12 / 0.42) 76%, rgb(3 5 12 / 0.68) 100%);
+}
+
+.featured-card-copy {
+  padding: clamp(1rem, 1.6vw, 1.5rem);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.12);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .manga-card-art {
+    transition: transform 350ms ease;
+  }
+
+  .manga-card:hover .manga-card-art {
+    transform: scale(1.025);
+  }
+}
+
+@media (max-width: 639px) {
+  .shelf-track--ranked {
+    grid-auto-columns: 40vw;
+  }
+
+  .shelf-track--featured {
+    grid-auto-columns: 80vw;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .featured-card-glass {
+    background: linear-gradient(to bottom, transparent, rgb(12 16 26 / 0.92));
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .featured-card-glass {
+    background: linear-gradient(to bottom, transparent, var(--color-panel-soft) 45%);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:has(body.workbench) { scroll-behavior: auto; }
-  .workbench *, .workbench *::before, .workbench *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0s !important;
-    animation-duration: 0s !important;
+  html {
+    scroll-behavior: auto;
   }
 }
